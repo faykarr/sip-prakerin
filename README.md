@@ -4,7 +4,7 @@
 Repository ini berisi proyek SIP-Prakerin (Sistem Informasi Prakerin) yang dikembangkan untuk mempermudah proses manajemen kegiatan magang SMK di UPT Komputer, kampus STMIK Widya Pratama. Sistem ini bertujuan untuk meningkatkan efisiensi dalam mengelola informasi dan memfasilitasi koordinasi antara SMK dan UPT Komputer dalam pelaksanaan kegiatan prakerin.
 <br>
 <br>
-<h4> Teknologi yang digunakan: </h4>
+## Teknologi yang digunakan:
 <ul>
   <li> Bahasa Pemrograman : PHP </li>
   <li> Framework          : Codeigniter 4 </li>
@@ -13,8 +13,8 @@ Repository ini berisi proyek SIP-Prakerin (Sistem Informasi Prakerin) yang dikem
   <li> Template           : Mazer Admin Dashboard </li>
 </ul>
 <hr>
-<h2>Sedang dalam pengembangan.</h2>
-=======
+## Sedang dalam pengembangan.
+<hr>
 # CodeIgniter 4 Application Starter
 
 ## What is CodeIgniter?
@@ -77,4 +77,3 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - json (enabled by default - don't turn it off)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
 - [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
->>>>>>> 783e8fe (Initial project commit)
