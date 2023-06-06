@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # SIP-Prakerin
 <b>Sistem Informasi Prakerin</b>.
 <br>
