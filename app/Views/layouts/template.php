@@ -11,6 +11,9 @@
     <link rel="shortcut icon" href="/assets/compiled/png/logo-upt.png" type="image/x-icon" />
     <link rel="stylesheet" href="/assets/compiled/css/app.css" />
     <link rel="stylesheet" href="/assets/compiled/css/app-dark.css" />
+    <link rel="stylesheet" href="/assets/compiled/css/iconly.css" />
+
+
 
     <script>
         document.body.style.zoom = "100%";
@@ -59,18 +62,15 @@
                                         <h6 class="dropdown-header">Hello, John!</h6>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
+                                        <a class="dropdown-item" href="/profile"><i
+                                                class="icon-mid bi bi-person me-2"></i> My
                                             Profile</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
-                                            Settings</a>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider" />
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#"><i
+                                        <a class="dropdown-item" href="/logout"><i
                                                 class="icon-mid bi bi-box-arrow-left me-2"></i>
                                             Logout</a>
                                     </li>

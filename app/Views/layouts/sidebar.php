@@ -119,21 +119,11 @@
 
                 <li class="sidebar-title">Account</li>
 
-                <li class="sidebar-item has-sub">
-                    <a href="#" class="sidebar-link">
+                <li class="sidebar-item">
+                    <a href="/listUsers" class="sidebar-link">
                         <i class="bi bi-people-fill"></i>
                         <span>Users</span>
                     </a>
-
-                    <ul class="submenu">
-                        <li class="submenu-item">
-                            <a href="/users" class="submenu-link">List Users</a>
-                        </li>
-
-                        <li class="submenu-item">
-                            <a href="/roles" class="submenu-link">Users Roles</a>
-                        </li>
-                    </ul>
                 </li>
 
             </ul>

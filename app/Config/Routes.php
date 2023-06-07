@@ -29,8 +29,26 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Admin::dashboard');
-$routes->get('/login', 'Auth::login');
+// if is logged in
+if (session()->get('isLoggedIn')) {
+    // if is admin
+    if (session()->get('level') == 'admin') {
+        $routes->addRedirect('/', '/dashboard');
+        $routes->addRedirect('/login', '/dashboard');
+        $routes->get('/dashboard', 'Admin::dashboard');
+        $routes->get('/logout', 'Auth::logout');
+    } else {
+        $routes->get('/dashboard', 'Admin::dashboard');
+        $routes->get('/logout', 'Auth::logout');
+    }
+} else {
+    // if is not logged in
+    $routes->addRedirect('/', '/login');
+    $routes->addRedirect('/logout', '/login');
+    $routes->addRedirect('/dashboard', '/login');
+    $routes->get('/login', 'Auth::login');
+    $routes->post('/login/process', 'Auth::loginProcess');
+}
 
 /*
  * --------------------------------------------------------------------
