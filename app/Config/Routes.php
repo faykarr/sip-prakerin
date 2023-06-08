@@ -37,6 +37,7 @@ if (session()->get('isLoggedIn')) {
         $routes->addRedirect('/login', '/dashboard');
         $routes->get('/dashboard', 'Admin::dashboard');
         $routes->get('/logout', 'Auth::logout');
+        $routes->get('/master-data/asisten', 'Admin::listAsisten');
     } else {
         $routes->get('/dashboard', 'Admin::dashboard');
         $routes->get('/logout', 'Auth::logout');

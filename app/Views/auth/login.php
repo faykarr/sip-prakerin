@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme=dark>
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - Mazer Admin Dashboard</title>
+    <title>Login - SIP-Prakerin</title>
 
     <link rel="shortcut icon" href="/assets/compiled/png/logo-upt.png" type="image/x-icon" />
     <link rel="stylesheet" href="/assets/compiled/css/app.css" />

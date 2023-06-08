@@ -1,0 +1,69 @@
+<!-- Extends layout template from layouts/template -->
+<?= $this->extend('layouts/template'); ?>
+
+<!-- Start Content -->
+<?= $this->section('body'); ?>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Daftar Asisten</h3>
+                <p class="text-subtitle text-muted">
+                    <!-- Fitur untuk mengelola daftar asisten terdaftar -->
+                    Mengelola daftar asisten yang terdaftar di UPT Komputer STMIK Widya Pratama Pekalongan.
+                </p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/master-data/asisten">Master Data</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Daftar Asisten
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="card">
+            <div class="card-header">
+                <div class="row justify-content-between">
+                    <h4 class="card-title col-lg-4">List Asisten Terdaftar</h4>
+                    <a href="#" class="btn btn-success col-lg-2 align-items-center">
+                        <i class="bi bi-plus-circle-fill"></i>
+                        <!-- <i class="bi bi-plus-lg"></i> -->
+                        <span>Tambah Data</span>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped" id="table1">
+                    <thead>
+                        <tr>
+                            <th>NIM</th>
+                            <th>Nama Asisten</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>21.230.0194</td>
+                            <td>Nasyath Faykar</td>
+                            <td>
+                                <span class="badge bg-success">Active</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- End Content -->
+<?= $this->endSection(); ?>

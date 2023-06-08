@@ -121,4 +121,4 @@
 
 
 <!-- End Content -->
-<?= $this->endSection('body'); ?>
+<?= $this->endSection(); ?>
