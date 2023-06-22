@@ -63,7 +63,20 @@
                                 <span class="badge bg-success">Active</span>
                             </td>
                             <td>
-                                <span class="badge bg-success">Active</span>
+                                <div class="btn-group">
+                                    <!-- Show -->
+                                    <a href="#" class="btn icon btn-sm btn-primary">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <!-- Edit -->
+                                    <a href="#" class="btn icon btn-sm btn-warning text-white">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <!-- Delete -->
+                                    <a href="#" class="btn icon btn-sm btn-danger">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

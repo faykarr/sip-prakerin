@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset=" UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
         <?= $title; ?> - SIP-Prakerin
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/assets/compiled/css/app.css" />
     <link rel="stylesheet" href="/assets/compiled/css/app-dark.css" />
     <link rel="stylesheet" href="/assets/compiled/css/iconly.css" />
+    <link rel="stylesheet" href="/assets/extensions/flatpickr/flatpickr.min.css" />
 
 
 
@@ -120,6 +121,10 @@
 
     <script src="/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
     <script src="/assets/static/js/pages/simple-datatables.js"></script>
+
+
+    <script src="/assets/extensions/flatpickr/flatpickr.min.js"></script>
+    <script src="/assets/static/js/pages/date-picker.js"></script>
 </body>
 
 </html>

@@ -43,6 +43,7 @@
                             <th>NIM</th>
                             <th>Nama Asisten</th>
                             <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,6 +53,14 @@
                             <td>Nasyath Faykar</td>
                             <td>
                                 <span class="badge bg-success">Active</span>
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <!-- Show -->
+                                    <a href="#" class="btn icon btn-sm btn-primary">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

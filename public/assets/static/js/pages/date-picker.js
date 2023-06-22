@@ -1,10 +1,11 @@
 
-flatpickr('.flatpickr-no-config', {
-    enableTime: true,
-    dateFormat: "Y-m-d H:i", 
+flatpickr('.flatpickr-birth', {
+    minDate: "2002-01",
+    maxDate: "2010-12",
+    defaultDate: "2004-01-01"
 })
-flatpickr('.flatpickr-always-open', {
-    inline: true
+flatpickr('.flatpickr-start', {
+    defaultDate: "today"
 })
 flatpickr('.flatpickr-range', {
     dateFormat: "F j, Y", 

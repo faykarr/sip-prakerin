@@ -50,7 +50,6 @@ class UserFilter implements FilterInterface
     {
         // Check if user level is admin
         if (session()->get('level') == 'user') {
-            // Redirect to admin dashboard
             return redirect()->to('/dashboard');
         }
     }
