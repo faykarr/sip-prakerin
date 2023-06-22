@@ -10,13 +10,8 @@
     <link rel="stylesheet" href="/assets/compiled/css/app.css" />
     <link rel="stylesheet" href="/assets/compiled/css/app-dark.css" />
     <link rel="stylesheet" href="/assets/compiled/css/auth.css" />
+    <link rel="stylesheet" href="/assets/extensions/sweetalert2/sweetalert2.min.css" />
 
-    <script>
-    // Make the screen zoom is 67% when the page is loaded and the screen is less than 1440px
-    if (window.innerWidth < 1440) {
-        document.body.style.zoom = "67%";
-    }
-    </script>
 </head>
 
 <body>
@@ -37,18 +32,30 @@
                     <form action="/login/process" method="post">
                         <?= csrf_field() ?>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="Username"
-                                name="username" />
+                            <?php $isInvalidUser = (session()->getFlashdata('username')) ? 'is-invalid' : '' ?>
+                            <input type="text" class="form-control form-control-xl <?= $isInvalidUser ?>"
+                                placeholder="Username" name="username" value="<?= old('username') ?>" />
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
+                            <?php if (session()->getFlashdata('username')): ?>
+                                <div class="invalid-feedback">
+                                    <?= session()->getFlashdata('username') ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" placeholder="Password"
-                                name="password" />
+                            <?php $isInvalidPass = (session()->getFlashdata('password')) ? 'is-invalid' : '' ?>
+                            <input type="password" class="form-control form-control-xl <?= $isInvalidPass ?>"
+                                placeholder="Password" name="password" />
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
+                            <?php if (session()->getFlashdata('password')): ?>
+                                <div class="invalid-feedback">
+                                    <?= session()->getFlashdata('password') ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
                         <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5" type="submit">
                             Log in
@@ -67,6 +74,9 @@
             </div>
         </div>
     </div>
+
+    <script src="assets/extensions/sweetalert2/sweetalert2.min.js"></script>
+    <script src="assets/static/js/pages/sweetalert2.js"></script>
 </body>
 
 </html>

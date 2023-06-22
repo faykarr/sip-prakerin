@@ -20,46 +20,75 @@ class Auth extends BaseController
         // Get MD5 password from form
         $password = md5($this->request->getPost('password'));
 
+        // Validation rules
+        $valid = $this->validate([
+            'username' => [
+                'label' => 'Username',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} is required'
+                ]
+            ],
+            'password' => [
+                'label' => 'Password',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} is required'
+                ]
+            ]
+        ]);
+
+        // Validation instance
+        $validation = \Config\Services::validation();
+
         // Create instance of UserModel
         $userModel = new UserModel();
 
         // Get data from database
         $user = $userModel->where('username', $username)->first();
 
-        // Check if user exist
-        if ($user) {
-            // Check password
-            if ($password == $user['password']) {
-                // Create session
-                $data = [
-                    'id_user' => $user['id_user'],
-                    'username' => $user['username'],
-                    'first_name' => $user['first_name'],
-                    'last_name' => $user['last_name'],
-                    'level' => $user['level'],
-                    'isLoggedIn' => true,
-                ];
+        // Check if validation fails
+        if (!$valid) {
+            $errorMessage = [
+                'username' => $validation->getError('username'),
+                'password' => $validation->getError('password')
+            ];
+            session()->setFlashdata($errorMessage);
+            return redirect()->to('/login');
+        } else {
+            // Check if user exist
+            if ($user) {
+                // Check password
+                if ($password == $user['password']) {
+                    // Create session
+                    $data = [
+                        'id_user' => $user['id_user'],
+                        'username' => $user['username'],
+                        'first_name' => $user['first_name'],
+                        'last_name' => $user['last_name'],
+                        'level' => $user['level']
+                    ];
 
-                // Set session
-                session()->set($data);
+                    // Set session
+                    session()->set($data);
 
-                // Redirect to dashboard
-                return redirect()->to('/dashboard');
+                    // Redirect to dashboard
+                    return redirect()->to('/dashboard');
+                } else {
+                    // Set flashdata
+                    session()->setFlashdata('password', 'Password is wrong');
+
+                    // Redirect to login page
+                    return redirect()->to('/login')->withInput();
+                }
             } else {
                 // Set flashdata
-                session()->setFlashdata('error', 'Password is wrong');
+                session()->setFlashdata('username', 'Username is not registered');
 
                 // Redirect to login page
-                return redirect()->to('/login');
+                return redirect()->to('/login')->withInput();
             }
-        } else {
-            // Set flashdata
-            session()->setFlashdata('error', 'Username is not registered');
-
-            // Redirect to login page
-            return redirect()->to('/login');
         }
-
     }
 
     // logout method

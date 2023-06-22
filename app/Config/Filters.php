@@ -2,13 +2,14 @@
 
 namespace Config;
 
+use App\Filters\AdminFilter;
+use App\Filters\UserFilter;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
-use App\Filters\LoginFilter;
 
 class Filters extends BaseConfig
 {
@@ -22,7 +23,8 @@ class Filters extends BaseConfig
         'honeypot' => Honeypot::class,
         'invalidchars' => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
-        'isLoggedIn' => LoginFilter::class,
+        'adminfilter' => AdminFilter::class,
+        'userfilter' => UserFilter::class,
     ];
 
     /**
@@ -33,16 +35,44 @@ class Filters extends BaseConfig
         'before' => [
             // 'honeypot',
             'csrf',
-            // 'isLoggedIn' => [
-            //     'except' => [
-            //         '/',
-            //         'login',
-            //         'login/process',
-            //     ]
-            // ],
             // 'invalidchars',
+            'adminfilter' => [
+                'except' => [
+                    '/',
+                    'login',
+                    'login/*'
+                ]
+            ],
+            'userfilter' => [
+                'except' => [
+                    '/',
+                    'login',
+                    'login/*'
+                ]
+            ],
         ],
         'after' => [
+            'adminfilter' => [
+                'except' => [
+                    'dashboard',
+                    'master-data',
+                    'master-data/*',
+                    'input-data',
+                    'input-data/*',
+                    'cetak-data',
+                    'cetak-data/*',
+                    'listUsers',
+                    'logout'
+                ]
+            ],
+            'userfilter' => [
+                'except' => [
+                    'dashboard',
+                    'input-data',
+                    'input-data/*',
+                    'logout'
+                ]
+            ],
             'toolbar',
             // 'honeypot',
             // 'secureheaders',

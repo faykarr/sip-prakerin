@@ -6,7 +6,7 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class LoginFilter implements FilterInterface
+class UserFilter implements FilterInterface
 {
     /**
      * Do whatever processing this filter needs to do.
@@ -25,12 +25,11 @@ class LoginFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        // if is logged in
-        if (session()->get('isLoggedIn')) {
-            // if is admin
-            return redirect()->to('/dashboard');
-        } else {
-            // if is not logged in
+        // Check if user level is empty
+        if (session()->get('level') == '') {
+            // Set error message
+            session()->setFlashdata('error', 'You need to login first');
+            // Redirect to login page
             return redirect()->to('/login');
         }
     }
@@ -49,6 +48,10 @@ class LoginFilter implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        //
+        // Check if user level is admin
+        if (session()->get('level') == 'user') {
+            // Redirect to admin dashboard
+            return redirect()->to('/dashboard');
+        }
     }
 }

@@ -33,17 +33,13 @@
             <div class="card-header">
                 <div class="row justify-content-between">
                     <h4 class="card-title col-lg-4">List Asisten Terdaftar</h4>
-                    <a href="#" class="btn btn-success col-lg-2 align-items-center">
-                        <i class="bi bi-plus-circle-fill"></i>
-                        <!-- <i class="bi bi-plus-lg"></i> -->
-                        <span>Tambah Data</span>
-                    </a>
                 </div>
             </div>
             <div class="card-body">
                 <table class="table table-striped" id="table1">
                     <thead>
                         <tr>
+                            <th>No.</th>
                             <th>NIM</th>
                             <th>Nama Asisten</th>
                             <th>Status</th>
@@ -51,6 +47,7 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td>1</td>
                             <td>21.230.0194</td>
                             <td>Nasyath Faykar</td>
                             <td>

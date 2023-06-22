@@ -6,11 +6,13 @@ use App\Controllers\BaseController;
 
 class Admin extends BaseController
 {
-    public function dashboard()
+
+    // Method daftar smk
+    public function listSmk()
     {
-        // go to view admin/dashboard.php
+        // go to view admin/master-data/smk/index.php
         $data = [
-            'title' => 'Dashboard',
+            'title' => 'Daftar SMK',
             // Get first_name from session
             'first_name' => session()->get('first_name'),
             // Get last_name from session
@@ -18,7 +20,23 @@ class Admin extends BaseController
             // Get level from session
             'level' => session()->get('level')
         ];
-        return view('admin/dashboard', $data);
+        return view('admin/master-data/smk/index', $data);
+    }
+
+    // Method daftar anak prakerin
+    public function listPrakerin()
+    {
+        // go to view admin/master-data/anak-prakerin/index.php
+        $data = [
+            'title' => 'Daftar Anak Prakerin',
+            // Get first_name from session
+            'first_name' => session()->get('first_name'),
+            // Get last_name from session
+            'last_name' => session()->get('last_name'),
+            // Get level from session
+            'level' => session()->get('level')
+        ];
+        return view('admin/master-data/prakerin/index', $data);
     }
 
     // Method daftar asisten

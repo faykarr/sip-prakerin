@@ -11,8 +11,8 @@ $routes = Services::routes();
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
-$routes->setDefaultMethod('index');
+$routes->setDefaultController('Auth');
+$routes->setDefaultMethod('login');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
@@ -30,26 +30,15 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 // if is logged in
-if (session()->get('isLoggedIn')) {
-    // if is admin
-    if (session()->get('level') == 'admin') {
-        $routes->addRedirect('/', '/dashboard');
-        $routes->addRedirect('/login', '/dashboard');
-        $routes->get('/dashboard', 'Admin::dashboard');
-        $routes->get('/logout', 'Auth::logout');
-        $routes->get('/master-data/asisten', 'Admin::listAsisten');
-    } else {
-        $routes->get('/dashboard', 'Admin::dashboard');
-        $routes->get('/logout', 'Auth::logout');
-    }
-} else {
-    // if is not logged in
-    $routes->addRedirect('/', '/login');
-    $routes->addRedirect('/logout', '/login');
-    $routes->addRedirect('/dashboard', '/login');
-    $routes->get('/login', 'Auth::login');
-    $routes->post('/login/process', 'Auth::loginProcess');
-}
+// if is admin
+$routes->get('/', 'Auth::login');
+$routes->get('/login', 'Auth::login');
+$routes->post('/login/process', 'Auth::loginProcess');
+$routes->get('/logout', 'Auth::logout');
+$routes->get('/dashboard', 'Dashboard::index');
+$routes->get('/master-data/asisten', 'Admin::listAsisten');
+$routes->get('/master-data/smk', 'Admin::listSmk');
+$routes->get('/master-data/prakerin', 'Admin::listPrakerin');
 
 /*
  * --------------------------------------------------------------------
