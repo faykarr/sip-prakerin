@@ -44,6 +44,7 @@ $routes->get('/logout', 'Auth::logout');
 $routes->get('/dashboard', 'Dashboard::index');
 $routes->get('/master-data/asisten', 'Admin::listAsisten');
 $routes->get('/master-data/smk', 'Admin::listSmk');
+$routes->post('/master-data/smk/addSMK', 'Admin::addSMK');
 $routes->get('/master-data/prakerin', 'Admin::listPrakerin');
 
 /*

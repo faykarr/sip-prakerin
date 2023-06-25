@@ -28,7 +28,7 @@ class AdminFilter implements FilterInterface
         // Check if user level is empty
         if (session()->get('level') == '') {
             // Set error message
-            session()->setFlashdata('error', 'You need to login first');
+            session()->setFlashdata('warning', 'You need to login first');
             // Redirect to login page
             return redirect()->to('/login');
         }

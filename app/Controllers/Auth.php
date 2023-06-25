@@ -54,6 +54,7 @@ class Auth extends BaseController
                 'password' => $validation->getError('password')
             ];
             session()->setFlashdata($errorMessage);
+            session()->setFlashdata('error', 'Login failed!');
             return redirect()->to('/login');
         } else {
             // Check if user exist
@@ -72,11 +73,15 @@ class Auth extends BaseController
                     // Set session
                     session()->set($data);
 
+                    // Set flash data success login
+                    session()->setFlashdata('success', 'Login successfully!');
+
                     // Redirect to dashboard
                     return redirect()->to('/dashboard');
                 } else {
                     // Set flashdata
                     session()->setFlashdata('password', 'Password is wrong');
+                    session()->setFlashdata('error', 'Login failed!');
 
                     // Redirect to login page
                     return redirect()->to('/login')->withInput();
@@ -84,6 +89,7 @@ class Auth extends BaseController
             } else {
                 // Set flashdata
                 session()->setFlashdata('username', 'Username is not registered');
+                session()->setFlashdata('error', 'Login failed!');
 
                 // Redirect to login page
                 return redirect()->to('/login')->withInput();

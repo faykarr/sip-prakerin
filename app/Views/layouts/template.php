@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/assets/compiled/css/app-dark.css" />
     <link rel="stylesheet" href="/assets/compiled/css/iconly.css" />
     <link rel="stylesheet" href="/assets/extensions/flatpickr/flatpickr.min.css" />
+    <link rel="stylesheet" href="/assets/extensions/sweetalert2/sweetalert2.min.css">
 
 
 
@@ -114,6 +115,7 @@
             <!-- End Footer -->
         </div>
     </div>
+    <script src="/assets/extensions/jquery/jquery.min.js"></script>
     <script src="/assets/static/js/components/dark.js"></script>
     <script src="/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
@@ -125,6 +127,32 @@
 
     <script src="/assets/extensions/flatpickr/flatpickr.min.js"></script>
     <script src="/assets/static/js/pages/date-picker.js"></script>
+
+    <script src="/assets/extensions/sweetalert2/sweetalert2.min.js"></script>
+
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        $(function () {
+            <?php if (session()->has('success')): ?>
+                Toast.fire({
+                    icon: 'success',
+                    title: '<?= session()->getFlashdata('success') ?>'
+                })
+            <?php endif; ?>
+        })
+    </script>
+
 </body>
 
 </html>

@@ -34,7 +34,7 @@ class Filters extends BaseConfig
     public array $globals = [
         'before' => [
             // 'honeypot',
-            'csrf',
+            // 'csrf',
             // 'invalidchars',
             'adminfilter' => [
                 'except' => [
@@ -57,6 +57,7 @@ class Filters extends BaseConfig
                     'dashboard',
                     'master-data',
                     'master-data/*',
+                    'master-data/*/*',
                     'input-data',
                     'input-data/*',
                     'cetak-data',

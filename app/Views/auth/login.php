@@ -75,8 +75,38 @@
         </div>
     </div>
 
+    <script src="/assets/extensions/jquery/jquery.min.js"></script>
     <script src="assets/extensions/sweetalert2/sweetalert2.min.js"></script>
-    <script src="assets/static/js/pages/sweetalert2.js"></script>
+
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        $(function () {
+            <?php if (session()->has('error')): ?>
+                Toast.fire({
+                    icon: 'error',
+                    title: '<?= session()->getFlashdata('error') ?>'
+                })
+            <?php endif; ?>
+
+            <?php if (session()->has('warning')): ?>
+                Toast.fire({
+                    icon: 'warning',
+                    title: '<?= session()->getFlashdata('warning') ?>'
+                })
+            <?php endif; ?>
+        })
+    </script>
 </body>
 
 </html>

@@ -56,8 +56,8 @@
                                     <i data-feather="x"></i>
                                 </button>
                             </div>
-                            <form class="form">
-                                <div class="modal-body">
+                            <div class="modal-body">
+                                <form class="form" method="post" action="/master-data/smk/addSMK">
                                     <!-- Form Tambah Siswa -->
                                     <div class="row">
                                         <div class="col-md-6 col-12">
@@ -136,17 +136,17 @@
                                         </div>
                                     </div>
                                     <!-- Form Tambah Siswa -->
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                        <i class="bx bx-x d-block d-sm-none"></i>
-                                        <span class="d-none d-sm-block">Close</span>
-                                    </button>
-                                    <button type="submit" class="btn btn-primary ms-1" data-bs-dismiss="modal">
-                                        <i class="bx bx-check d-block d-sm-none"></i>
-                                        <span class="d-none d-sm-block">Tambah</span>
-                                    </button>
-                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Close</span>
+                                </button>
+                                <button type="submit" class="btn btn-primary ms-1" data-bs-dismiss="modal">
+                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Tambah</span>
+                                </button>
+                            </div>
                             </form>
                         </div>
                     </div>
@@ -166,33 +166,46 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>12345678</td>
-                            <td>SMK Negeri 2 Pekalongan</td>
-                            <td>
-                                <?= random_int(0, 10) ?>
-                            </td>
-                            <td>
-                                <span class="badge bg-success">Active</span>
-                            </td>
-                            <td>
-                                <div class="btn-group">
-                                    <!-- Show -->
-                                    <a href="#" class="btn icon btn-sm btn-primary">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </a>
-                                    <!-- Edit -->
-                                    <a href="#" class="btn icon btn-sm btn-warning text-white">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <!-- Delete -->
-                                    <a href="#" class="btn icon btn-sm btn-danger">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                        <?php $no = 0;
+                        foreach ($smk as $key => $row): ?>
+                            <tr>
+                                <td>
+                                    <?= ++$no ?>
+                                </td>
+                                <td>
+                                    <?= $row['npsn'] ?>
+                                </td>
+                                <td>
+                                    <?= $row['nama_sekolah'] ?>
+                                </td>
+                                <td>
+                                    <?= random_int(0, 10) ?>
+                                </td>
+                                <td>
+                                    <?php if ($row['status_aktif'] == 'Aktif'): ?>
+                                        <span class="badge bg-success">Aktif</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-danger">Tidak Aktif</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <!-- Show -->
+                                        <a href="#" class="btn icon btn-sm btn-primary">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <!-- Edit -->
+                                        <a href="#" class="btn icon btn-sm btn-warning text-white">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <!-- Delete -->
+                                        <a href="#" class="btn icon btn-sm btn-danger">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
