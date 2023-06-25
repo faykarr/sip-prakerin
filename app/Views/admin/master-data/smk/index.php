@@ -35,17 +35,130 @@
             <div class="card-header">
                 <div class="row justify-content-between">
                     <h4 class="card-title col-lg-4">List SMK Terdaftar</h4>
-                    <a href="#" class="btn btn-success col-lg-2 align-items-center">
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#tambahSMKModal"
+                        class="btn btn-success col-lg-2 align-items-center">
                         <i class="fa-solid fa-file-circle-plus"></i>
                         <span class="ms-1">Tambah Data</span>
-                    </a>
+                    </button>
                 </div>
+                <!-- Modal -->
+                <div class="modal fade text-left" id="tambahSMKModal" tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <h5 class="modal-title white" id="myModalLabel1">
+                                    <i class="fa-solid fa-file-circle-plus me-3 fs-6"></i>
+                                    Tambah data SMK
+                                </h5>
+                                <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <i data-feather="x"></i>
+                                </button>
+                            </div>
+                            <form class="form">
+                                <div class="modal-body">
+                                    <!-- Form Tambah Siswa -->
+                                    <div class="row">
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="npsn">
+                                                    <i class="fa-solid fa-file-circle-check me-1"></i>
+                                                    NPSN
+                                                </label>
+                                                <input type="text" pattern="[0-9]{8}" id="npsn" class="form-control"
+                                                    placeholder="NPSN" name="npsn">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="nama_sekolah">
+                                                    <i class="fa-solid fa-pen me-1"></i>
+                                                    Nama Sekolah
+                                                </label>
+                                                <input type="text" id="nama_sekolah" class="form-control"
+                                                    placeholder="Nama Sekolah" name="nama_sekolah">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="status_sekolah">
+                                                    <i class="fa-solid fa-school me-1"></i>
+                                                    Status Sekolah
+                                                </label>
+                                                <select name="status_sekolah" id="status_sekolah" class="form-select">
+                                                    <option value="Negeri">Negeri</option>
+                                                    <option value="Swasta">Swasta</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="pembimbing_prakerin">
+                                                    <i class="fa-solid fa-user me-1"></i>
+                                                    Nama Pembimbing Prakerin
+                                                </label>
+                                                <input type="text" id="pembimbing_prakerin" class="form-control"
+                                                    placeholder="Nama Pembimbing Prakerin" name="pembimbing_prakerin">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="no_hp_pembimbing">
+                                                    <i class="fa-solid fa-phone me-1"></i>
+                                                    No HP Pembimbing Prakerin
+                                                </label>
+                                                <input type="text" pattern="[0-9]{12}" id="no_hp_pembimbing"
+                                                    class="form-control" placeholder="No HP Pembimbing Prakerin"
+                                                    name="no_hp_pembimbing">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="jurusan_terdaftar">
+                                                    <i class="fa-solid fa-book me-1"></i>
+                                                    Jurusan Terdaftar Prakerin
+                                                </label>
+                                                <input type="text" id="jurusan_terdaftar" class="form-control"
+                                                    placeholder="Jurusan yang terdaftar prakerin di UPTKOMP"
+                                                    name="jurusan_terdaftar">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <textarea class="form-control" placeholder="Ketik alamat lengkap disini"
+                                                    id="floatingTextarea" name="alamat_sekolah"></textarea>
+                                                <label for="floatingTextarea">
+                                                    <i class="fa-solid fa-house-chimney me-1"></i>
+                                                    Alamat Lengkap Sekolah
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Form Tambah Siswa -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block">Close</span>
+                                    </button>
+                                    <button type="submit" class="btn btn-primary ms-1" data-bs-dismiss="modal">
+                                        <i class="bx bx-check d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block">Tambah</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
             </div>
             <div class="card-body">
                 <table class="table table-striped" id="table1">
                     <thead>
                         <tr>
                             <th>No.</th>
+                            <th>NPSN</th>
                             <th>Nama Sekolah</th>
                             <th>Jumlah Siswa Terdaftar</th>
                             <th>Status Prakerin</th>
@@ -55,6 +168,7 @@
                     <tbody>
                         <tr>
                             <td>1</td>
+                            <td>12345678</td>
                             <td>SMK Negeri 2 Pekalongan</td>
                             <td>
                                 <?= random_int(0, 10) ?>

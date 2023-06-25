@@ -52,7 +52,6 @@
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center">
                                         <div class="stats-icon purple mb-2">
-                                            <!-- <i class="iconly-boldShow"></i> -->
                                             <i class="fa-solid fa-school"></i>
                                         </div>
                                     </div>
@@ -74,12 +73,11 @@
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center">
                                         <div class="stats-icon blue mb-2">
-                                            <!-- <i class="iconly-boldProfile"></i> -->
                                             <i class="fa-solid fa-user-group"></i>
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center">
-                                        <h6 class="text-muted font-semibold">Jumlah Anak Prakerin Aktif</h6>
+                                        <h6 class="text-muted font-semibold">Jumlah Siswa Prakerin Aktif</h6>
                                         <h6 class="font-extrabold mb-0">
                                             <?= random_int(0, 30) ?>
                                         </h6>
@@ -94,12 +92,11 @@
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center">
                                         <div class="stats-icon green mb-2">
-                                            <!-- <i class="iconly-boldAdd-User"></i> -->
                                             <i class="fa-solid fa-user-graduate"></i>
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center">
-                                        <h6 class="text-muted font-semibold">Total Anak Prakerin</h6>
+                                        <h6 class="text-muted font-semibold">Total Siswa Prakerin</h6>
                                         <h6 class="font-extrabold mb-0">
                                             <?= random_int(0, 70) ?>
                                         </h6>
@@ -114,7 +111,6 @@
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center">
                                         <div class="stats-icon red mb-2">
-                                            <!-- <i class="iconly-boldBookmark"></i> -->
                                             <i class="fa-solid fa-user-tie"></i>
                                         </div>
                                     </div>
