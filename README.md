@@ -35,13 +35,15 @@ The user guide corresponding to the latest version of the framework can be found
 
 ## Installation
 
-Run `composer install` to start this project.
+Go to project destination & run `composer install` in terminal to start this project.
 
 ## Setup
 
 Copy `env` to `.env` and tailor for your app, specifically the baseURL
 and any database settings. <br>
-`Change the database name in .env to db_sip-prakerin`
+`Change the configuration in .env to :` <br>
+` 1. app.BaseURL = 'domain-name'` <br>
+` 2. database.name = 'db_sip-prakerin`
 
 ## Server Requirements
 
