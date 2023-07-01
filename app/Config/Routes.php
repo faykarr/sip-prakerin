@@ -45,6 +45,8 @@ $routes->get('/dashboard', 'Dashboard::index');
 $routes->get('/master-data/asisten', 'Admin::listAsisten');
 $routes->get('/master-data/smk', 'Admin::listSmk');
 $routes->post('/master-data/smk/addSMK', 'Admin::addSMK');
+$routes->get('/master-data/smk/deleteSMK/(:segment)', 'Admin::deleteSMK/$1');
+$routes->get('/master-data/smk/showSMK/(:segment)', 'Admin::showSMK/$1');
 $routes->get('/master-data/prakerin', 'Admin::listPrakerin');
 
 /*

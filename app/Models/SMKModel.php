@@ -11,4 +11,10 @@ class SMKModel extends Model
     protected $returnType = 'array';
     protected $protectFields = true;
     protected $allowedFields = ['npsn', 'nama_sekolah', 'status_sekolah', 'pembimbing_prakerin', 'no_hp_pembimbing', 'jurusan_terdaftar', 'alamat_sekolah', 'status_aktif'];
+
+    // get count smk data
+    public function getCountSMK()
+    {
+        return $this->countAll();
+    }
 }

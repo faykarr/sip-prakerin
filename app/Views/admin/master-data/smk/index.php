@@ -66,8 +66,14 @@
                                                     <i class="fa-solid fa-file-circle-check me-1"></i>
                                                     NPSN
                                                 </label>
-                                                <input type="text" pattern="[0-9]{8}" id="npsn" class="form-control"
-                                                    placeholder="NPSN" name="npsn">
+                                                <?php $isInvalidNPSN = (session()->getFlashdata('npsn')) ? 'is-invalid' : '' ?>
+                                                <input type="text" id="npsn" class="form-control <?= $isInvalidNPSN ?>"
+                                                    placeholder="NPSN" name="npsn" value="<?= old('npsn') ?>">
+                                                <?php if (session()->getFlashdata('npsn')): ?>
+                                                    <div class="invalid-feedback">
+                                                        <?= session()->getFlashdata('npsn') ?>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
@@ -76,8 +82,16 @@
                                                     <i class="fa-solid fa-pen me-1"></i>
                                                     Nama Sekolah
                                                 </label>
-                                                <input type="text" id="nama_sekolah" class="form-control"
-                                                    placeholder="Nama Sekolah" name="nama_sekolah">
+                                                <?php $isInvalidNama = (session()->getFlashdata('nama_sekolah')) ? 'is-invalid' : '' ?>
+                                                <input type="text" id="nama_sekolah"
+                                                    class="form-control <?= $isInvalidNama ?>"
+                                                    placeholder="Nama Sekolah" name="nama_sekolah"
+                                                    value="<?= old('nama_sekolah') ?>">
+                                                <?php if (session()->getFlashdata('nama_sekolah')): ?>
+                                                    <div class="invalid-feedback">
+                                                        <?= session()->getFlashdata('nama_sekolah') ?>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
@@ -98,8 +112,16 @@
                                                     <i class="fa-solid fa-user me-1"></i>
                                                     Nama Pembimbing Prakerin
                                                 </label>
-                                                <input type="text" id="pembimbing_prakerin" class="form-control"
-                                                    placeholder="Nama Pembimbing Prakerin" name="pembimbing_prakerin">
+                                                <?php $isInvalidPembimbing = (session()->getFlashdata('pembimbing_prakerin')) ? 'is-invalid' : '' ?>
+                                                <input type="text" id="pembimbing_prakerin"
+                                                    class="form-control <?= $isInvalidPembimbing ?>"
+                                                    placeholder="Nama Pembimbing Prakerin" name="pembimbing_prakerin"
+                                                    value="<?= old('pembimbing_prakerin') ?>">
+                                                <?php if (session()->getFlashdata('pembimbing_prakerin')): ?>
+                                                    <div class="invalid-feedback">
+                                                        <?= session()->getFlashdata('pembimbing_prakerin') ?>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
@@ -108,9 +130,16 @@
                                                     <i class="fa-solid fa-phone me-1"></i>
                                                     No HP Pembimbing Prakerin
                                                 </label>
-                                                <input type="text" pattern="[0-9]{12}" id="no_hp_pembimbing"
-                                                    class="form-control" placeholder="No HP Pembimbing Prakerin"
-                                                    name="no_hp_pembimbing">
+                                                <?php $isInvalidNoHP = (session()->getFlashdata('no_hp_pembimbing')) ? 'is-invalid' : '' ?>
+                                                <input type="text" id="no_hp_pembimbing"
+                                                    class="form-control <?= $isInvalidNoHP ?>"
+                                                    placeholder="No HP Pembimbing Prakerin" name="no_hp_pembimbing"
+                                                    value="<?= old('no_hp_pembimbing') ?>">
+                                                <?php if (session()->getFlashdata('no_hp_pembimbing')): ?>
+                                                    <div class="invalid-feedback">
+                                                        <?= session()->getFlashdata('no_hp_pembimbing') ?>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
@@ -119,15 +148,29 @@
                                                     <i class="fa-solid fa-book me-1"></i>
                                                     Jurusan Terdaftar Prakerin
                                                 </label>
-                                                <input type="text" id="jurusan_terdaftar" class="form-control"
+                                                <?php $isInvalidJurusan = (session()->getFlashdata('jurusan_terdaftar')) ? 'is-invalid' : '' ?>
+                                                <input type="text" id="jurusan_terdaftar"
+                                                    class="form-control <?= $isInvalidJurusan ?>"
                                                     placeholder="Jurusan yang terdaftar prakerin di UPTKOMP"
-                                                    name="jurusan_terdaftar">
+                                                    name="jurusan_terdaftar" value="<?= old('jurusan_terdaftar') ?>">
+                                                <?php if (session()->getFlashdata('jurusan_terdaftar')): ?>
+                                                    <div class="invalid-feedback">
+                                                        <?= session()->getFlashdata('jurusan_terdaftar') ?>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-floating">
-                                                <textarea class="form-control" placeholder="Ketik alamat lengkap disini"
-                                                    id="floatingTextarea" name="alamat_sekolah"></textarea>
+                                                <?php $isInvalidAlamat = (session()->getFlashdata('alamat_sekolah')) ? 'is-invalid' : '' ?>
+                                                <textarea class="form-control <?= $isInvalidAlamat ?>"
+                                                    placeholder="Ketik alamat lengkap disini" id="floatingTextarea"
+                                                    name="alamat_sekolah"><?= old('alamat_sekolah') ?></textarea>
+                                                <?php if (session()->getFlashdata('alamat_sekolah')): ?>
+                                                    <div class="invalid-feedback">
+                                                        <?= session()->getFlashdata('alamat_sekolah') ?>
+                                                    </div>
+                                                <?php endif; ?>
                                                 <label for="floatingTextarea">
                                                     <i class="fa-solid fa-house-chimney me-1"></i>
                                                     Alamat Lengkap Sekolah
@@ -154,7 +197,7 @@
                 <!-- Modal -->
             </div>
             <div class="card-body">
-                <table class="table table-striped" id="table1">
+                <table class="table table-striped table-hover" id="table1">
                     <thead>
                         <tr>
                             <th>No.</th>
@@ -191,7 +234,8 @@
                                 <td>
                                     <div class="btn-group">
                                         <!-- Show -->
-                                        <a href="#" class="btn icon btn-sm btn-primary">
+                                        <a href="/master-data/smk/showSMK/<?= $row['npsn'] ?>"
+                                            class="btn icon btn-sm btn-primary">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
                                         <!-- Edit -->
@@ -199,7 +243,8 @@
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                         <!-- Delete -->
-                                        <a href="#" class="btn icon btn-sm btn-danger">
+                                        <a href="/master-data/smk/deleteSMK/<?= $row['npsn'] ?>"
+                                            class="btn icon btn-sm btn-danger delete">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
                                     </div>
@@ -213,8 +258,6 @@
     </section>
 
 </div>
-
-
 
 <!-- End Content -->
 <?= $this->endSection(); ?>

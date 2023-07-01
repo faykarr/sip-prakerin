@@ -49,10 +49,11 @@ class Admin extends BaseController
         $valid = $this->validate([
             'npsn' => [
                 'label' => 'NPSN',
-                'rules' => 'required|is_unique[tb_smk.npsn]',
+                'rules' => 'required|is_unique[tb_smk.npsn]|regex_match[/^[0-9]{8}$/]',
                 'errors' => [
                     'required' => '{field} tidak boleh kosong',
-                    'is_unique' => '{field} sudah terdaftar'
+                    'is_unique' => '{field} sudah terdaftar',
+                    'regex_match' => '{field} harus berupa angka dan berjumlah 8 karakter'
                 ]
             ],
             'nama_sekolah' => [
@@ -139,7 +140,53 @@ class Admin extends BaseController
         }
     }
 
+    // Method show smk
+    public function showSMK($id)
+    {
+        // Get smk from model
+        $smk = $this->smkModel->find($id);
 
+        // Get first_name from session
+        $first_name = session()->get('first_name');
+
+        // Get last_name from session
+        $last_name = session()->get('last_name');
+
+        // Get level from session
+        $level = session()->get('level');
+
+        // If smk not found
+        if (!$smk) {
+            // Set flashdata error
+            session()->setFlashdata('error', 'Data tidak ditemukan.');
+
+            // Redirect to list smk
+            return redirect()->to('/master-data/smk');
+        }
+
+        // go to view admin/master-data/smk/show.php
+        $data = [
+            'title' => 'Detail SMK',
+            'smk' => $smk,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'level' => $level
+        ];
+        return view('admin/master-data/smk/show', $data);
+    }
+
+    // Method delete smk
+    public function deleteSMK($id)
+    {
+        // Delete data from database
+        $this->smkModel->delete($id);
+
+        // Set flashdata success
+        session()->setFlashdata('success', 'Data successfully deleted.');
+
+        // Redirect to list smk
+        return redirect()->to('/master-data/smk');
+    }
 
 
     // Method daftar anak prakerin

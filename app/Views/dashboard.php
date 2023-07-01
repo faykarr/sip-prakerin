@@ -60,7 +60,7 @@
                                             Jumlah SMK Terdaftar
                                         </h6>
                                         <h6 class="font-extrabold mb-0">
-                                            <?= random_int(0, 25) ?>
+                                            <?= $count_smk ?>
                                         </h6>
                                     </div>
                                 </div>

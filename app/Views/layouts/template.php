@@ -20,6 +20,7 @@
 
 
     <script src="https://kit.fontawesome.com/712e5f8866.js" crossorigin="anonymous"></script>
+    <script src="/assets/extensions/jquery/jquery.min.js"></script>
     <script>
         document.body.style.zoom = "70%";
     </script>
@@ -115,7 +116,7 @@
             <!-- End Footer -->
         </div>
     </div>
-    <script src="/assets/extensions/jquery/jquery.min.js"></script>
+
     <script src="/assets/static/js/components/dark.js"></script>
     <script src="/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
@@ -131,6 +132,32 @@
     <script src="/assets/extensions/sweetalert2/sweetalert2.min.js"></script>
 
     <script>
+
+        const Swal2 = Swal.mixin({
+            customClass: {
+                input: 'form-control'
+            }
+        })
+
+        $('.delete').on('click', function () {
+            var getURL = $(this).attr('href');
+            Swal2.fire({
+                icon: "warning",
+                title: "Are you sure want to delete this data?",
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonColor: '#B31312',
+                confirmButtonText: 'Yes',
+                cancelButtonColor: '#3085d6',
+                cancelButtonText: 'No'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    window.location.href = getURL;
+                }
+            })
+            return false;
+        });
+
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -150,7 +177,13 @@
                     title: '<?= session()->getFlashdata('success') ?>'
                 })
             <?php endif; ?>
-        })
+            <?php if (session()->has('error')): ?>
+                Toast.fire({
+                    icon: 'error',
+                    title: '<?= session()->getFlashdata('error') ?>'
+                })
+            <?php endif; ?>
+        });
     </script>
 
 </body>
