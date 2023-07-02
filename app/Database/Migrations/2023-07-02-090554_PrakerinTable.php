@@ -92,7 +92,7 @@ class PrakerinTable extends Migration
         // Menambahkan 10 data pada tabel prakerin menggunakan faker dengan npsn diambil dari tb_smk
         $faker = \Faker\Factory::create('id_ID');
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 200; $i++) {
             $data = [
                 'nisn' => $faker->unique()->randomNumber(8),
                 'npsn' => $faker->randomElement($this->db->table('tb_smk')->select('npsn')->get()->getResultArray()),
