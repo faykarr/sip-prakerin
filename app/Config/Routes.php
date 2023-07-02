@@ -49,6 +49,8 @@ $routes->get('/master-data/smk/deleteSMK/(:segment)', 'Admin::deleteSMK/$1');
 $routes->get('/master-data/smk/showSMK/(:segment)', 'Admin::showSMK/$1');
 $routes->post('/master-data/smk/updateSMK', 'Admin::updateSMK');
 $routes->get('/master-data/prakerin', 'Admin::listPrakerin');
+$routes->post('/master-data/prakerin/addPrakerin', 'Admin::addPrakerin');
+$routes->get('/master-data/prakerin/deletePrakerin/(:segment)', 'Admin::deletePrakerin/$1');
 
 /*
  * --------------------------------------------------------------------

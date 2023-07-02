@@ -12,7 +12,7 @@
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form class="form">
+            <form class="form" method="post" action="/master-data/prakerin/addPrakerin">
                 <div class="modal-body">
                     <!-- Form Tambah Siswa -->
                     <div class="row">
@@ -22,8 +22,7 @@
                                     <i class="fa-solid fa-file-circle-check me-1"></i>
                                     NISN
                                 </label>
-                                <input type="text" pattern="[0-9]{10}" id="nisn" class="form-control" placeholder="NISN"
-                                    name="nisn">
+                                <input type="text" id="nisn" class="form-control" placeholder="NISN" name="nisn">
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
@@ -74,8 +73,8 @@
                                     <i class="fa-solid fa-phone me-1"></i>
                                     No HP Siswa
                                 </label>
-                                <input type="text" pattern="[0-9]{12}" id="no_hp" class="form-control"
-                                    placeholder="No HP" name="no_hp_siswa">
+                                <input type="text" id="no_hp" class="form-control" placeholder="No HP"
+                                    name="no_hp_siswa">
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
@@ -86,10 +85,9 @@
                                 </label>
                                 <select name="asal_sekolah" id="asal_sekolah" class="form-select">
                                     <option value="">-- Pilih asal sekolah --</option>
-                                    <option value="SMK Negeri 2 Pekalongan">SMK Negeri 2 Pekalongan
-                                    </option>
-                                    <option value="SMK Negeri 3 Pekalongan">SMK Negeri 3 Pekalongan
-                                    </option>
+                                    <?php foreach ($sekolah as $s): ?>
+                                        <option value="<?= $s['npsn'] ?>"><?= $s['nama_sekolah'] ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>

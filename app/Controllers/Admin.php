@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\PrakerinModel;
 use App\Models\SMKModel;
 
 class Admin extends BaseController
@@ -12,6 +13,8 @@ class Admin extends BaseController
     {
         // Model smk
         $this->smkModel = new SMKModel();
+        // Model prakerin
+        $this->prakerinModel = new PrakerinModel();
     }
 
     // Method daftar smk
@@ -271,13 +274,207 @@ class Admin extends BaseController
             // Get last_name from session
             'last_name' => session()->get('last_name'),
             // Get level from session
-            'level' => session()->get('level')
+            'level' => session()->get('level'),
+            // Get SMK data from database
+            'sekolah' => $this->smkModel->findAll(),
+            // Get data from database
+            'prakerin' => $this->prakerinModel->join('tb_smk', 'tb_smk.npsn = tb_prakerin.npsn')->findAll()
         ];
         return view('admin/master-data/prakerin/index', $data);
     }
 
-    // Method tambah siswa prakerin
+    // Method tambah siswa prakerin with validation
+    public function addPrakerin()
+    {
+        // Get input from form
+        $nisn = $this->request->getPost('nisn');
+        $nama = $this->request->getPost('nama_siswa');
+        $jenis_kelamin = $this->request->getPost('jenis_kelamin');
+        $tempat_lahir = $this->request->getPost('tempat_lahir');
+        $tanggal_lahir = $this->request->getPost('tanggal_lahir');
+        $no_hp_siswa = $this->request->getPost('no_hp_siswa');
+        $asal_sekolah = $this->request->getPost('asal_sekolah');
+        $kelas = $this->request->getPost('kelas');
+        $jurusan = $this->request->getPost('jurusan');
+        $tanggal_mulai = $this->request->getPost('tanggal_mulai');
+        $tanggal_pencabutan = $this->request->getPost('tanggal_pencabutan');
+        $tahun_ajaran = $this->request->getPost('tahun_ajaran');
+        $nama_orang_tua = $this->request->getPost('nama_orang_tua');
+        $no_hp_orang_tua = $this->request->getPost('no_hp_orang_tua');
+        $alamat = $this->request->getPost('alamat');
+        // Validation Service
+        $validation = \Config\Services::validation();
 
+        // Validation rules
+        $valid = $this->validate([
+            'nisn' => [
+                'label' => 'NISN',
+                'rules' => 'required|numeric|is_unique[tb_prakerin.nisn]',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong',
+                    'numeric' => '{field} harus berupa angka',
+                    'is_unique' => '{field} sudah terdaftar'
+                ]
+            ],
+            'nama_siswa' => [
+                'label' => 'Nama Siswa',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+            'jenis_kelamin' => [
+                'label' => 'Jenis Kelamin',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+            'tempat_lahir' => [
+                'label' => 'Tempat Lahir',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+            'tanggal_lahir' => [
+                'label' => 'Tanggal Lahir',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+            'no_hp_siswa' => [
+                'label' => 'No. HP Siswa',
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong',
+                    'numeric' => '{field} harus berupa angka'
+                ]
+            ],
+            'asal_sekolah' => [
+                'label' => 'Asal Sekolah',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+            'kelas' => [
+                'label' => 'Kelas',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+            'jurusan' => [
+                'label' => 'Jurusan',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+            'tanggal_mulai' => [
+                'label' => 'Tanggal Mulai',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+            'tanggal_pencabutan' => [
+                'label' => 'Tanggal Pencabutan',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+            'tahun_ajaran' => [
+                'label' => 'Tahun Ajaran',
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong',
+                    'numeric' => '{field} harus berupa angka'
+                ]
+            ],
+            'nama_orang_tua' => [
+                'label' => 'Nama Orang Tua',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+            'no_hp_orang_tua' => [
+                'label' => 'No. HP Orang Tua',
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong',
+                    'numeric' => '{field} harus berupa angka'
+                ]
+            ],
+            'alamat' => [
+                'label' => 'Alamat',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ]
+        ]);
+
+        // If validation is false then go back to add prakerin page
+        if (!$valid) {
+            $errorMessage = [
+                'nisn' => $validation->getError('nisn'),
+                'nama_siswa' => $validation->getError('nama_siswa'),
+                'jenis_kelamin' => $validation->getError('jenis_kelamin'),
+                'tempat_lahir' => $validation->getError('tempat_lahir'),
+                'tanggal_lahir' => $validation->getError('tanggal_lahir'),
+                'no_hp_siswa' => $validation->getError('no_hp_siswa'),
+                'asal_sekolah' => $validation->getError('asal_sekolah'),
+                'kelas' => $validation->getError('kelas'),
+                'jurusan' => $validation->getError('jurusan'),
+                'tanggal_mulai' => $validation->getError('tanggal_mulai'),
+                'tanggal_pencabutan' => $validation->getError('tanggal_pencabutan'),
+                'tahun_ajaran' => $validation->getError('tahun_ajaran'),
+                'nama_orang_tua' => $validation->getError('nama_orang_tua'),
+                'no_hp_orang_tua' => $validation->getError('no_hp_orang_tua'),
+                'alamat' => $validation->getError('alamat'),
+                'error' => 'Data gagal ditambahkan'
+            ];
+            session()->setFlashdata($errorMessage);
+            dd($errorMessage);
+            return redirect()->to('/master-data/prakerin/')->withInput();
+        } else {
+            // If validation is true then save data to database
+            $data = [
+                'nisn' => $nisn,
+                'nama_siswa' => $nama,
+                'jenis_kelamin' => $jenis_kelamin,
+                'tempat_lahir' => $tempat_lahir,
+                'tanggal_lahir' => $tanggal_lahir,
+                'no_hp_siswa' => $no_hp_siswa,
+                'npsn' => $asal_sekolah,
+                'kelas' => $kelas,
+                'jurusan' => $jurusan,
+                'periode_awal' => $tanggal_mulai,
+                'periode_akhir' => $tanggal_pencabutan,
+                'tahun_ajaran' => $tahun_ajaran,
+                'nama_orang_tua' => $nama_orang_tua,
+                'no_hp_orang_tua' => $no_hp_orang_tua,
+                'alamat_siswa' => $alamat
+            ];
+            $this->prakerinModel->insert($data);
+            session()->setFlashdata('success', 'Data berhasil ditambahkan');
+            return redirect()->to('/master-data/prakerin');
+        }
+
+    }
+
+    // Method delete prakerin
+    public function deletePrakerin($id)
+    {
+        $this->prakerinModel->delete($id);
+        session()->setFlashdata('success', 'Data berhasil dihapus');
+        return redirect()->to('/master-data/prakerin');
+    }
 
     // Method daftar asisten
     public function listAsisten()

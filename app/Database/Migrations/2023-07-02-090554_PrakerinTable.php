@@ -21,7 +21,7 @@ class PrakerinTable extends Migration
             ],
             'npsn' => [
                 'type' => 'INT',
-                'constraint' => 11,
+                'constraint' => 8,
             ],
             'nama_siswa' => [
                 'type' => 'VARCHAR',
@@ -79,6 +79,16 @@ class PrakerinTable extends Migration
                 'default' => 'Aktif',
             ],
         ]);
+
+        // Menambahkan primary key
+        $this->forge->addKey('id_prakerin', true);
+
+        // Menambahkan index npsn
+        $this->forge->addForeignKey('npsn', 'tb_smk', 'npsn', 'CASCADE', 'CASCADE');
+
+        // Membuat tabel prakerin
+        $this->forge->createTable('tb_prakerin');
+
     }
 
     public function down()
