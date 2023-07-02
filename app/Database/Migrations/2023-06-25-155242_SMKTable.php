@@ -66,6 +66,7 @@ class SMKTable extends Migration
             'alamat_sekolah' => 'Jl. Raya',
             'status_aktif' => 'Aktif',
         ]);
+
     }
 
     public function down()

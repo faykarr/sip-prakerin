@@ -34,6 +34,12 @@
     <!-- Include Modal Tambah -->
     <?= $this->include('/admin/master-data/prakerin/modalTambah') ?>
     <!-- Include Modal Tambah -->
+    <!-- Include Modal Tambah -->
+    <?= $this->include('/admin/master-data/prakerin/modalEdit') ?>
+    <!-- Include Modal Tambah -->
+    <!-- Include Modal Tambah -->
+    <?= $this->include('/admin/master-data/prakerin/modalShow') ?>
+    <!-- Include Modal Tambah -->
 
     <section class="section">
         <div class="card">
@@ -55,6 +61,7 @@
                             <th>NISN</th>
                             <th>Nama Siswa</th>
                             <th>Asal Sekolah</th>
+                            <th>Jurusan</th>
                             <th>Tanggal Pencabutan</th>
                             <th>Status</th>
                             <th>Aksi</th>
@@ -77,23 +84,56 @@
                                     <?= $value['nama_sekolah'] ?>
                                 </td>
                                 <td>
+                                    <?= $value['jurusan'] ?>
+                                </td>
+                                <td>
                                     <?= $value['periode_akhir'] ?>
                                 </td>
                                 <td>
                                     <?php if ($value['status_prakerin'] == 'Aktif'): ?>
                                         <span class="badge bg-success">Aktif</span>
                                     <?php else: ?>
-                                        <span class="badge bg-danger">Tidak Aktif</span>
+                                        <span class="badge bg-danger">Pencabutan</span>
                                     <?php endif; ?>
                                 </td>
                                 <td>
                                     <div class="btn-group">
                                         <!-- Show -->
-                                        <a href="#" class="btn icon btn-sm btn-primary showPrakerin">
+                                        <a href="#" class="btn icon btn-sm btn-primary showPrakerin"
+                                            data-nisn="<?= $value['npsn'] ?>" data-nama-siswa="<?= $value['nama_siswa'] ?>"
+                                            data-jenis-kelamin="<?= $value['jenis_kelamin'] ?>"
+                                            data-tempat-lahir="<?= $value['tempat_lahir'] ?>"
+                                            data-tanggal-lahir="<?= $value['tanggal_lahir'] ?>"
+                                            data-nohp-siswa="<?= $value['no_hp_siswa'] ?>"
+                                            data-asal-sekolah="<?= $value['nama_sekolah'] ?>"
+                                            data-kelas="<?= $value['kelas'] ?>" data-jurusan="<?= $value['jurusan'] ?>"
+                                            data-tanggal-mulai="<?= $value['periode_awal'] ?>"
+                                            data-tanggal-pencabutan="<?= $value['periode_akhir'] ?>"
+                                            data-tahun-ajaran="<?= $value['tahun_ajaran'] ?>"
+                                            data-nama-ortu="<?= $value['nama_orang_tua'] ?>"
+                                            data-nohp-ortu="<?= $value['no_hp_orang_tua'] ?>"
+                                            data-alamat="<?= $value['alamat_siswa'] ?>"
+                                            data-aktif="<?= $value['status_prakerin'] ?>"
+                                            data-id="<?= $value['id_prakerin'] ?>">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
                                         <!-- Edit -->
-                                        <a href="#" class="btn icon btn-sm btn-warning text-white editPrakerin">
+                                        <a href="#" class="btn icon btn-sm btn-warning text-white edit"
+                                            data-nisn="<?= $value['npsn'] ?>" data-nama-siswa="<?= $value['nama_siswa'] ?>"
+                                            data-jenis-kelamin="<?= $value['jenis_kelamin'] ?>"
+                                            data-tempat-lahir="<?= $value['tempat_lahir'] ?>"
+                                            data-tanggal-lahir="<?= $value['tanggal_lahir'] ?>"
+                                            data-nohp-siswa="<?= $value['no_hp_siswa'] ?>"
+                                            data-asal-sekolah="<?= $value['npsn'] ?>" data-kelas="<?= $value['kelas'] ?>"
+                                            data-jurusan="<?= $value['jurusan'] ?>"
+                                            data-tanggal-mulai="<?= $value['periode_awal'] ?>"
+                                            data-tanggal-pencabutan="<?= $value['periode_akhir'] ?>"
+                                            data-tahun-ajaran="<?= $value['tahun_ajaran'] ?>"
+                                            data-nama-ortu="<?= $value['nama_orang_tua'] ?>"
+                                            data-nohp-ortu="<?= $value['no_hp_orang_tua'] ?>"
+                                            data-alamat="<?= $value['alamat_siswa'] ?>"
+                                            data-aktif="<?= $value['status_prakerin'] ?>"
+                                            data-id="<?= $value['id_prakerin'] ?>">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                         <!-- Delete -->
@@ -112,6 +152,108 @@
     </section>
 
 </div>
+
+<script>
+    $(document).ready(function () {
+        // Event delegation for edit button
+        $(document).on('click', '.edit', function () {
+            // Get data from button edit
+            const id = $(this).data('id');
+            const nisn = $(this).data('nisn');
+            const namaSiswa = $(this).data('nama-siswa');
+            const jenisKelamin = $(this).data('jenis-kelamin');
+            const tempatLahir = $(this).data('tempat-lahir');
+            const tanggalLahir = $(this).data('tanggal-lahir');
+            const noHPSiswa = $(this).data('nohp-siswa');
+            const asalSekolah = $(this).data('asal-sekolah');
+            const kelas = $(this).data('kelas');
+            const jurusan = $(this).data('jurusan');
+            const tanggalMulai = $(this).data('tanggal-mulai');
+            const tanggalPencabutan = $(this).data('tanggal-pencabutan');
+            const tahunAjaran = $(this).data('tahun-ajaran');
+            const namaOrtu = $(this).data('nama-ortu');
+            const noHPOrtu = $(this).data('nohp-ortu');
+            const alamat = $(this).data('alamat');
+            const aktif = $(this).data('aktif');
+
+
+            // Set data to Form Edit
+            $('.id_prakerin').val(id);
+            $('.nisn').val(nisn);
+            $('.nama_siswa').val(namaSiswa);
+            $('.jenis_kelamin').val(jenisKelamin).change();
+            $('.tempat_lahir').val(tempatLahir);
+            $('.tanggal_lahir').val(tanggalLahir);
+            $('.no_hp_siswa').val(noHPSiswa);
+            $('.asal_sekolah').val(asalSekolah).change();
+            $('.kelas').val(kelas);
+            $('.jurusan').val(jurusan).change();
+            $('.tanggal_mulai').val(tanggalMulai);
+            $('.tanggal_pencabutan').val(tanggalPencabutan);
+            $('.tahun_ajaran').val(tahunAjaran);
+            $('.nama_orang_tua').val(namaOrtu);
+            $('.no_hp_orang_tua').val(noHPOrtu);
+            $('.alamat').val(alamat);
+            $('.status_prakerin').val(aktif).change();
+
+
+            // Call Modal Edit
+            $('#editSiswaModal').modal('show');
+        });
+
+        // Event delegation for show button
+        $(document).on('click', '.showPrakerin', function () {
+            // Get data from button show
+            const id = $(this).data('id');
+            const nisn = $(this).data('nisn');
+            const namaSiswa = $(this).data('nama-siswa');
+            const jenisKelamin = $(this).data('jenis-kelamin');
+            const tempatLahir = $(this).data('tempat-lahir');
+            const tanggalLahir = $(this).data('tanggal-lahir');
+            const noHPSiswa = $(this).data('nohp-siswa');
+            const asalSekolah = $(this).data('asal-sekolah');
+            const kelas = $(this).data('kelas');
+            const jurusan = $(this).data('jurusan');
+            const tanggalMulai = $(this).data('tanggal-mulai');
+            const tanggalPencabutan = $(this).data('tanggal-pencabutan');
+            const tahunAjaran = $(this).data('tahun-ajaran');
+            const namaOrtu = $(this).data('nama-ortu');
+            const noHPOrtu = $(this).data('nohp-ortu');
+            const alamat = $(this).data('alamat');
+            const aktif = $(this).data('aktif');
+
+            // Set data to Show
+            $('.id_prakerin').html(id);
+            $('.nisn').html(nisn);
+            $('.nama_siswa').html(namaSiswa);
+            $('.jekel').html(jenisKelamin);
+            $('.tempat_lahir').html(tempatLahir);
+            $('.tanggal_lahir').html(tanggalLahir);
+            $('.no_hp_siswa').html(noHPSiswa);
+            $('.asal').html(asalSekolah);
+            $('.kelas').html(kelas);
+            $('.keahlian').html(jurusan);
+            $('.tanggal_mulai').html(tanggalMulai);
+            $('.tanggal_pencabutan').html(tanggalPencabutan);
+            $('.tahun_ajaran').html(tahunAjaran);
+            $('.nama_orang_tua').html(namaOrtu);
+            $('.no_hp_orang_tua').html(noHPOrtu);
+            $('.alamat').html(alamat);
+
+
+            if (aktif == 'Aktif') {
+                $('.aktif').html('<span class="badge bg-success">Aktif</span>');
+            } else {
+                $('.aktif').html('<span class="badge bg-danger">Pencabutan</span>');
+            }
+
+            // Call Modal Show
+            $('#showSiswaModal').modal('show');
+        });
+    });
+
+</script>
+
 
 <!-- End Content -->
 <?= $this->endSection(); ?>

@@ -15,6 +15,11 @@ class UserTable extends Migration
                 'constraint' => 11,
                 'auto_increment' => true,
             ],
+            'id_asisten' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => true,
+            ],
             'username' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,

@@ -75,7 +75,7 @@ class PrakerinTable extends Migration
             ],
             'status_prakerin' => [
                 'type' => 'ENUM',
-                'constraint' => ['Aktif', 'Tidak Aktif'],
+                'constraint' => ['Aktif', 'Pencabutan'],
                 'default' => 'Aktif',
             ],
         ]);

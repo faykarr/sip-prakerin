@@ -1,10 +1,10 @@
-<div class="modal fade text-left modal-borderless" id="showSMKModal" tabindex="-1" role="dialog"
+<div class="modal fade text-left modal-borderless" id="showSiswaModal" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
-                    Detail Sekolah
+                    Detail Siswa
                 </h5>
                 <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -22,10 +22,10 @@
                         <img class="card-img-top img-fluid rounded" src="/assets/compiled/jpg/school.jpg"
                             alt="Card image cap" style="height: 20rem">
                         <div class="card-body">
-                            <h4 class="card-title nama">
+                            <h4 class="card-title nama_siswa">
                             </h4>
                             <p class="text-muted">
-                                Detail praktik kerja industri sekolah - <span class="nama"></span>
+                                Detail siswa praktik kerja industri sekolah - <span class="asal"></span>
                             </p>
                             <hr>
                             <div class="row justify-content-start">
@@ -35,25 +35,157 @@
                                             <tr>
                                                 <td></td>
                                                 <td>
-                                                    NPSN
+                                                    NISN
                                                 </td>
                                                 <td>
                                                     <strong>:</strong>
                                                 </td>
                                                 <td>
-                                                    <strong class="npsn">
+                                                    <strong class="nisn">
                                                     </strong>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td></td>
                                                 <td>
-                                                    Nama Sekolah
+                                                    Nama Siswa
                                                 </td>
                                                 <td>
                                                     <strong>:</strong>
                                                 </td>
-                                                <td class="nama">
+                                                <td class="nama_siswa">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    Jenis Kelamin
+                                                </td>
+                                                <td>
+                                                    <strong>:</strong>
+                                                </td>
+                                                <td class="jekel">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    Tempat Lahir
+                                                </td>
+                                                <td>
+                                                    <strong>:</strong>
+                                                </td>
+                                                <td class="tempat_lahir">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    Tanggal Lahir
+                                                </td>
+                                                <td>
+                                                    <strong>:</strong>
+                                                </td>
+                                                <td class="tanggal_lahir">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    No HP Siswa
+                                                </td>
+                                                <td>
+                                                    <strong>:</strong>
+                                                </td>
+                                                <td class="no_hp_siswa">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    Asal Sekolah
+                                                </td>
+                                                <td>
+                                                    <strong>:</strong>
+                                                </td>
+                                                <td class="asal">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    Kelas
+                                                </td>
+                                                <td>
+                                                    <strong>:</strong>
+                                                </td>
+                                                <td class="kelas">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    Jurusan Terdaftar
+                                                </td>
+                                                <td>
+                                                    <strong>:</strong>
+                                                </td>
+                                                <td class="keahlian">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    Tanggal Mulai Prakerin
+                                                </td>
+                                                <td>
+                                                    <strong>:</strong>
+                                                </td>
+                                                <td class="tanggal_mulai">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    Tanggal Pencabutan Prakerin
+                                                </td>
+                                                <td>
+                                                    <strong>:</strong>
+                                                </td>
+                                                <td class="tanggal_pencabutan">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    Tahun Ajaran
+                                                </td>
+                                                <td>
+                                                    <strong>:</strong>
+                                                </td>
+                                                <td class="tahun_ajaran">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    Nama Orang Tua
+                                                </td>
+                                                <td>
+                                                    <strong>:</strong>
+                                                </td>
+                                                <td class="nama_orang_tua">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    No HP Orang Tua
+                                                </td>
+                                                <td>
+                                                    <strong>:</strong>
+                                                </td>
+                                                <td class="no_hp_orang_tua">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -65,64 +197,6 @@
                                                     <strong>:</strong>
                                                 </td>
                                                 <td class="alamat">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td>
-                                                    Status Sekolah
-                                                </td>
-                                                <td>
-                                                    <strong>:</strong>
-                                                </td>
-                                                <td class="sekolah">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td>
-                                                    Pembimbing Prakerin
-                                                </td>
-                                                <td>
-                                                    <strong>:</strong>
-                                                </td>
-                                                <td class="pembimbing">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td>
-                                                    No. Telepon Pembimbing
-                                                </td>
-                                                <td>
-                                                    <strong>:</strong>
-                                                </td>
-                                                <td class="nohp">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td>
-                                                    Jurusan Terdaftar
-                                                </td>
-                                                <td>
-                                                    <strong>:</strong>
-                                                </td>
-                                                <td class="jurusan">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td>
-                                                    Jumlah Siswa Prakerin Terdaftar
-                                                </td>
-                                                <td>
-                                                    <strong>:</strong>
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-primary">
-                                                        <span class="siswa"></span> Siswa
-                                                    </span>
                                                 </td>
                                             </tr>
                                             <tr>

@@ -79,7 +79,7 @@
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center">
                                         <h6 class="text-muted font-semibold">Jumlah Siswa Prakerin Aktif</h6>
                                         <h6 class="font-extrabold mb-0">
-                                            <?= random_int(0, 30) ?>
+                                            <?= $count_prakerin_aktif ?>
                                         </h6>
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center">
                                         <h6 class="text-muted font-semibold">Total Siswa Prakerin</h6>
                                         <h6 class="font-extrabold mb-0">
-                                            <?= random_int(0, 70) ?>
+                                            <?= $count_prakerin ?>
                                         </h6>
                                     </div>
                                 </div>

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\PrakerinModel;
 use App\Models\SMKModel;
 
 class Dashboard extends BaseController
@@ -10,6 +11,7 @@ class Dashboard extends BaseController
     public function index()
     {
         $smkModel = new SMKModel();
+        $prakerinModel = new PrakerinModel();
 
         // go to view admin/dashboard.php
         $data = [
@@ -21,7 +23,11 @@ class Dashboard extends BaseController
             // Get level from session
             'level' => session()->get('level'),
             // Get count smk data
-            'count_smk' => $smkModel->getCountSMK()
+            'count_smk' => $smkModel->getCountSMK(),
+            // Get count siswa prakerin
+            'count_prakerin' => $prakerinModel->countAll(),
+            // Get count siswa prakerin aktif
+            'count_prakerin_aktif' => $prakerinModel->where('status_prakerin', 'Aktif')->countAllResults(),
         ];
         return view('dashboard', $data);
     }

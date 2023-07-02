@@ -113,6 +113,19 @@
                                 <?php endif; ?>
                             </div>
                         </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="status">
+                                    Status Aktif
+                                </label>
+                                <select name="status_aktif" id="status" class="form-select aktif">
+                                    <option value="Aktif">Aktif</option>
+                                    <option value="Tidak Aktif">Tidak Aktif</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="col-12">
                             <div class="form-floating">
                                 <?php $isInvalidAlamat = (session()->getFlashdata('alamat_sekolah')) ? 'is-invalid' : '' ?>

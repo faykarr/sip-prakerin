@@ -12,16 +12,6 @@ class PrakerinModel extends Model
     protected $returnType = 'array';
     protected $protectFields = true;
     protected $allowedFields = ['id_prakerin', 'nisn', 'npsn', 'nama_siswa', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'alamat_siswa', 'kelas', 'jurusan', 'no_hp_siswa', 'tahun_ajaran', 'nama_orang_tua', 'no_hp_orang_tua', 'periode_awal', 'periode_akhir', 'status_prakerin'];
-
-    public function getPrakerin($id_prakerin = false)
-    {
-        if ($id_prakerin == false) {
-            return $this->findAll();
-        }
-
-        return $this->where(['id_prakerin' => $id_prakerin])->first();
-    }
-
     // Join table smk to get school name
     public function getPrakerinJoin($id_prakerin = false)
     {

@@ -77,7 +77,7 @@
                                     <?= $row['nama_sekolah'] ?>
                                 </td>
                                 <td>
-                                    <?= random_int(0, 10) ?>
+                                    <?= $row['prakerin_count'] ?> Siswa
                                 </td>
                                 <td>
                                     <?php if ($row['status_aktif'] == 'Aktif'): ?>
@@ -96,7 +96,8 @@
                                             data-nohp="<?= $row['no_hp_pembimbing'] ?>"
                                             data-jurusan="<?= $row['jurusan_terdaftar'] ?>"
                                             data-alamat="<?= $row['alamat_sekolah'] ?>"
-                                            data-aktif="<?= $row['status_aktif'] ?>">
+                                            data-aktif="<?= $row['status_aktif'] ?>"
+                                            data-siswa="<?= $row['prakerin_count'] ?>">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
                                         <!-- Edit -->
@@ -106,7 +107,8 @@
                                             data-pembimbing="<?= $row['pembimbing_prakerin'] ?>"
                                             data-nohp="<?= $row['no_hp_pembimbing'] ?>"
                                             data-jurusan="<?= $row['jurusan_terdaftar'] ?>"
-                                            data-alamat="<?= $row['alamat_sekolah'] ?>">
+                                            data-alamat="<?= $row['alamat_sekolah'] ?>"
+                                            data-aktif="<?= $row['status_aktif'] ?>">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                         <!-- Delete -->
@@ -138,6 +140,7 @@
             const nohp = $(this).data('nohp');
             const jurusan = $(this).data('jurusan');
             const alamat = $(this).data('alamat');
+            const aktif = $(this).data('aktif');
 
             // Set data to Form Edit
             $('.npsn').val(npsn);
@@ -147,6 +150,7 @@
             $('.nohp').val(nohp);
             $('.jurusan').val(jurusan);
             $('.alamat').val(alamat);
+            $('.aktif').val(aktif).change();
 
             // Call Modal Edit
             $('#editSMKModal').modal('show');
@@ -163,6 +167,7 @@
             const jurusan = $(this).data('jurusan');
             const alamat = $(this).data('alamat');
             const aktif = $(this).data('aktif');
+            const siswa = $(this).data('siswa');
 
             // Set data to Show
             $('.npsn').text(npsn);
@@ -172,6 +177,7 @@
             $('.nohp').text(nohp);
             $('.jurusan').text(jurusan);
             $('.alamat').text(alamat);
+            $('.siswa').text(siswa);
 
             if (aktif == 'Aktif') {
                 $('.aktif').html('<span class="badge bg-success">Aktif</span>');

@@ -35,8 +35,6 @@ $routes->set404Override(function ($message = null) {
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-// if is logged in
-// if is admin
 $routes->get('/', 'Auth::login');
 $routes->get('/login', 'Auth::login');
 $routes->post('/login/process', 'Auth::loginProcess');
@@ -51,6 +49,8 @@ $routes->post('/master-data/smk/updateSMK', 'Admin::updateSMK');
 $routes->get('/master-data/prakerin', 'Admin::listPrakerin');
 $routes->post('/master-data/prakerin/addPrakerin', 'Admin::addPrakerin');
 $routes->get('/master-data/prakerin/deletePrakerin/(:segment)', 'Admin::deletePrakerin/$1');
+$routes->get('/master-data/prakerin/showPrakerin/(:segment)', 'Admin::showPrakerin/$1');
+$routes->post('/master-data/prakerin/updatePrakerin', 'Admin::updatePrakerin');
 
 /*
  * --------------------------------------------------------------------
