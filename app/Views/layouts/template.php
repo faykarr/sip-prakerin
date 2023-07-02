@@ -136,7 +136,7 @@
             }
         })
 
-        $('.delete').on('click', function () {
+        $(document).on('click', '.delete', function () {
             var getURL = $(this).attr('href');
             Swal2.fire({
                 icon: "warning",

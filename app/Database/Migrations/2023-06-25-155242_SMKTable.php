@@ -11,10 +11,8 @@ class SMKTable extends Migration
         // Make field for table smk
         $this->forge->addField([
             'npsn' => [
-                'type' => 'VARCHAR',
+                'type' => 'INT',
                 'constraint' => 8,
-                // not null
-                'null' => false,
             ],
             'nama_sekolah' => [
                 'type' => 'VARCHAR',

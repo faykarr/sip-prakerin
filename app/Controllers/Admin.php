@@ -246,9 +246,6 @@ class Admin extends BaseController
         }
     }
 
-
-
-
     // Method delete smk
     public function deleteSMK($id)
     {
@@ -278,6 +275,9 @@ class Admin extends BaseController
         ];
         return view('admin/master-data/prakerin/index', $data);
     }
+
+    // Method tambah siswa prakerin
+
 
     // Method daftar asisten
     public function listAsisten()

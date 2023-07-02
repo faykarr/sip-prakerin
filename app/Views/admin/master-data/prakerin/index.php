@@ -73,12 +73,12 @@
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
-                                                <label for="nama_lengkap">
+                                                <label for="nama_siswa">
                                                     <i class="fa-solid fa-pen me-1"></i>
-                                                    Nama Lengkap
+                                                    Nama Siswa
                                                 </label>
                                                 <input type="text" id="nama_lengkap" class="form-control"
-                                                    placeholder="Nama Lengkap" name="nama_lengkap">
+                                                    placeholder="Nama Siswa" name="nama_siswa">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
@@ -87,7 +87,7 @@
                                                     <i class="fa-solid fa-venus-mars me-1"></i>
                                                     Jenis Kelamin
                                                 </label>
-                                                <select name="jekel" id="jekel" class="form-select">
+                                                <select name="jenis_kelamin" id="jekel" class="form-select">
                                                     <option value="Laki-laki">Laki-laki</option>
                                                     <option value="Perempuan">Perempuan</option>
                                                 </select>
@@ -116,6 +116,16 @@
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
+                                                <label for="no_hp">
+                                                    <i class="fa-solid fa-phone me-1"></i>
+                                                    No HP Siswa
+                                                </label>
+                                                <input type="text" pattern="[0-9]{12}" id="no_hp" class="form-control"
+                                                    placeholder="No HP" name="no_hp_siswa">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
                                                 <label for="asal_sekolah">
                                                     <i class="fa-solid fa-school me-1"></i>
                                                     Asal Sekolah
@@ -129,6 +139,36 @@
                                                 </select>
                                             </div>
                                         </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="kelas">
+                                                    <i class="fa-solid fa-phone me-1"></i>
+                                                    Kelas
+                                                </label>
+                                                <input type="text" id="kelas" class="form-control" placeholder="Kelas"
+                                                    name="kelas">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="jurusan">
+                                                    <i class="fa-solid fa-school me-1"></i>
+                                                    Jurusan
+                                                </label>
+                                                <select name="jurusan" id="jurusan" class="form-select">
+                                                    <option value="">-- Pilih Jurusan --</option>
+                                                    <option value="TKJ">Teknik Komputer & Jaringan
+                                                    </option>
+                                                    <option value="RPL">Rekayasa Perangkat Lunak
+                                                    </option>
+                                                    <option value="MM">Multimedia
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="tanggal_mulai">
@@ -152,23 +192,44 @@
                                                     name="tanggal_pencabutan">
                                             </div>
                                         </div>
+
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
-                                                <label for="no_hp">
+                                                <label for="tahun_ajaran">
                                                     <i class="fa-solid fa-phone me-1"></i>
-                                                    No HP
+                                                    Tahun Ajaran
                                                 </label>
-                                                <input type="text" pattern="[0-9]{12}" id="no_hp" class="form-control"
-                                                    placeholder="No HP" name="no_hp">
+                                                <input type="text" id="tahun_ajaran" class="form-control"
+                                                    placeholder="Tahun Ajaran" name="tahun_ajaran">
                                             </div>
                                         </div>
+
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
-                                                <label for="status">
-                                                    <i class="fa-solid fa-circle-check me-1"></i>
-                                                    Status
+                                                <label for="nama_orang_tua">
+                                                    <i class="fa-solid fa-phone me-1"></i>
+                                                    Nama Orang Tua
                                                 </label>
-                                                <select name="status" id="status" class="form-select" disabled>
+                                                <input type="text" id="nama_orang_tua" class="form-control"
+                                                    placeholder="Nama orang tua" name="nama_orang_tua">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="no_hp_orang_tua">
+                                                    <i class="fa-solid fa-phone me-1"></i>
+                                                    No HP Orang Tua
+                                                </label>
+                                                <input type="text" id="no_hp_orang_tua" class="form-control"
+                                                    placeholder="No HP orang tua" name="no_hp_orang_tua">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <select name="status_prakerin" id="status" class="form-select" disabled
+                                                    hidden>
                                                     <option value="Active">Active</option>
                                                     <option value="Pencabutan">Pencabutan</option>
                                                 </select>

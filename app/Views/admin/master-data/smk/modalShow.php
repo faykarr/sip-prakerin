@@ -75,7 +75,7 @@
                                                 <td>
                                                     <strong>:</strong>
                                                 </td>
-                                                <td class="status">
+                                                <td class="sekolah">
                                                 </td>
                                             </tr>
                                             <tr>

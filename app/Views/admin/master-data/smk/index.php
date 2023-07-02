@@ -91,7 +91,7 @@
                                         <!-- Show -->
                                         <a href="#" class="btn icon btn-sm btn-primary showSMK"
                                             data-npsn="<?= $row['npsn'] ?>" data-nama="<?= $row['nama_sekolah'] ?>"
-                                            data-status="<?= $row['status_sekolah'] ?>"
+                                            data-sekolah="<?= $row['status_sekolah'] ?>"
                                             data-pembimbing="<?= $row['pembimbing_prakerin'] ?>"
                                             data-nohp="<?= $row['no_hp_pembimbing'] ?>"
                                             data-jurusan="<?= $row['jurusan_terdaftar'] ?>"
@@ -126,61 +126,65 @@
 
 </div>
 
-<!-- Script edit modal -->
 <script>
     $(document).ready(function () {
-        // Get data edit smk
-        $('.edit').on('click', function () {
+        // Event delegation for edit button
+        $(document).on('click', '.edit', function () {
             // Get data from button edit
-            const npsn = $(this).data('npsn')
-            const nama = $(this).data('nama')
-            const status = $(this).data('status')
-            const pembimbing = $(this).data('pembimbing')
-            const nohp = $(this).data('nohp')
-            const jurusan = $(this).data('jurusan')
-            const alamat = $(this).data('alamat')
+            const npsn = $(this).data('npsn');
+            const nama = $(this).data('nama');
+            const status = $(this).data('status');
+            const pembimbing = $(this).data('pembimbing');
+            const nohp = $(this).data('nohp');
+            const jurusan = $(this).data('jurusan');
+            const alamat = $(this).data('alamat');
+
             // Set data to Form Edit
-            $('.npsn').val(npsn)
-            $('.nama').val(nama)
-            $('.status').val(status).change()
-            $('.pembimbing').val(pembimbing)
-            $('.nohp').val(nohp)
-            $('.jurusan').val(jurusan)
-            $('.alamat').val(alamat)
+            $('.npsn').val(npsn);
+            $('.nama').val(nama);
+            $('.status').val(status).change();
+            $('.pembimbing').val(pembimbing);
+            $('.nohp').val(nohp);
+            $('.jurusan').val(jurusan);
+            $('.alamat').val(alamat);
+
             // Call Modal Edit
-            $('#editSMKModal').modal('show')
+            $('#editSMKModal').modal('show');
         });
 
-        $('.showSMK').on('click', function () {
+        // Event delegation for show button
+        $(document).on('click', '.showSMK', function () {
             // Get data from button show
-            const npsn = $(this).data('npsn')
-            const nama = $(this).data('nama')
-            const status = $(this).data('status')
-            const pembimbing = $(this).data('pembimbing')
-            const nohp = $(this).data('nohp')
-            const jurusan = $(this).data('jurusan')
-            const alamat = $(this).data('alamat')
-            const aktif = $(this).data('aktif')
+            const npsn = $(this).data('npsn');
+            const nama = $(this).data('nama');
+            const sekolah = $(this).data('sekolah');
+            const pembimbing = $(this).data('pembimbing');
+            const nohp = $(this).data('nohp');
+            const jurusan = $(this).data('jurusan');
+            const alamat = $(this).data('alamat');
+            const aktif = $(this).data('aktif');
+
             // Set data to Show
-            $('.npsn').text(npsn)
-            $('.nama').text(nama)
-            $('.status').text(status)
-            $('.pembimbing').text(pembimbing)
-            $('.nohp').text(nohp)
-            $('.jurusan').text(jurusan)
-            $('.alamat').text(alamat)
+            $('.npsn').text(npsn);
+            $('.nama').text(nama);
+            $('.sekolah').text(sekolah);
+            $('.pembimbing').text(pembimbing);
+            $('.nohp').text(nohp);
+            $('.jurusan').text(jurusan);
+            $('.alamat').text(alamat);
+
             if (aktif == 'Aktif') {
-                $('.aktif').html('<span class="badge bg-success">Aktif</span>')
+                $('.aktif').html('<span class="badge bg-success">Aktif</span>');
             } else {
-                $('.aktif').html('<span class="badge bg-danger">Tidak Aktif</span>')
+                $('.aktif').html('<span class="badge bg-danger">Tidak Aktif</span>');
             }
 
             // Call Modal Show
-            $('#showSMKModal').modal('show')
+            $('#showSMKModal').modal('show');
         });
-    })
+    });
+
 </script>
-<!-- Script edit modal -->
 
 <!-- End Content -->
 <?= $this->endSection(); ?>
