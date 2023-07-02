@@ -21,9 +21,6 @@
 
     <script src="https://kit.fontawesome.com/712e5f8866.js" crossorigin="anonymous"></script>
     <script src="/assets/extensions/jquery/jquery.min.js"></script>
-    <script>
-        document.body.style.zoom = "70%";
-    </script>
 </head>
 
 <body>
