@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\AsistenModel;
 use App\Models\PrakerinModel;
 use App\Models\SMKModel;
 
@@ -12,6 +13,7 @@ class Dashboard extends BaseController
     {
         $smkModel = new SMKModel();
         $prakerinModel = new PrakerinModel();
+        $asistenModel = new AsistenModel();
 
         // go to view admin/dashboard.php
         $data = [
@@ -28,6 +30,8 @@ class Dashboard extends BaseController
             'count_prakerin' => $prakerinModel->countAll(),
             // Get count siswa prakerin aktif
             'count_prakerin_aktif' => $prakerinModel->where('status_prakerin', 'Aktif')->countAllResults(),
+            // Get count asisten
+            'count_asisten' => $asistenModel->countAll(),
         ];
         return view('dashboard', $data);
     }

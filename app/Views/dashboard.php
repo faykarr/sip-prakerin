@@ -117,7 +117,7 @@
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center">
                                         <h6 class="text-muted font-semibold">Total Asisten Dosen</h6>
                                         <h6 class="font-extrabold mb-0">
-                                            <?= random_int(0, 31) ?>
+                                            <?= $count_asisten ?>
                                         </h6>
                                     </div>
                                 </div>

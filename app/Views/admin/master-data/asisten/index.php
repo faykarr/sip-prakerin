@@ -28,6 +28,9 @@
         </div>
     </div>
 
+    <!-- Include modalshow -->
+    <?= $this->include('/admin/master-data/asisten/modalShow') ?>
+
     <section class="section">
         <div class="card">
             <div class="card-header">
@@ -47,22 +50,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>21.230.0194</td>
-                            <td>Nasyath Faykar</td>
-                            <td>
-                                <span class="badge bg-success">Active</span>
-                            </td>
-                            <td>
-                                <div class="btn-group">
-                                    <!-- Show -->
-                                    <a href="#" class="btn icon btn-sm btn-primary">
+                        <!-- show data from database with foreach -->
+                        <?php $i = 1; ?>
+                        <?php foreach ($asisten as $a): ?>
+                            <tr>
+                                <td>
+                                    <?= $i++; ?>
+                                </td>
+                                <td>
+                                    <?= $a['nim']; ?>
+                                </td>
+                                <td>
+                                    <?= $a['nama_asisten']; ?>
+                                </td>
+                                <td>
+                                    <?php if ($a['status'] == 'Aktif'): ?>
+                                        <span class="badge bg-success">Aktif</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-danger">Tidak Aktif</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-primary showAsisten" data-nim="<?= $a['nim'] ?>"
+                                        data-nama="<?= $a['nama_asisten'] ?>" data-nohp="<?= $a['no_hp'] ?>"
+                                        data-email="<?= $a['email'] ?>" data-alamat="<?= $a['alamat'] ?>"
+                                        data-jabatan="<?= $a['jabatan'] ?>" data-status="<?= $a['status'] ?>">
+                                        <!-- Fontawesome fa-eye -->
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
@@ -70,6 +88,39 @@
     </section>
 
 </div>
+
+<script>
+    $(document).ready(function () {
+        // Event delegation for show button
+        $(document).on('click', '.showAsisten', function () {
+            // Get data from button show
+            const nim = $(this).data('nim');
+            const nama = $(this).data('nama');
+            const nohp = $(this).data('nohp');
+            const email = $(this).data('email');
+            const alamat = $(this).data('alamat');
+            const jabatan = $(this).data('jabatan');
+            const status = $(this).data('status');
+
+            // Set data to Show
+            $('.nim').html(nim);
+            $('.nama_asisten').html(nama);
+            $('.no_hp').html(nohp);
+            $('.email').html(email);
+            $('.alamat').html(alamat);
+            $('.jabatan').html(jabatan);
+            if (status == 'Aktif') {
+                $('.status').html('<span class="badge bg-success">Aktif</span>');
+            } else {
+                $('.status').html('<span class="badge bg-danger">Tidak Aktif</span>');
+            }
+
+            // Call Modal Show
+            $('#showAsistenModal').modal('show');
+        });
+    });
+
+</script>
 
 <!-- End Content -->
 <?= $this->endSection(); ?>

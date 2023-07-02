@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\AsistenModel;
 use App\Models\PrakerinModel;
 use App\Models\SMKModel;
 
@@ -15,6 +16,8 @@ class Admin extends BaseController
         $this->smkModel = new SMKModel();
         // Model prakerin
         $this->prakerinModel = new PrakerinModel();
+        // Model Asisten
+        $this->asistenModel = new AsistenModel();
     }
 
     // Method daftar smk
@@ -672,7 +675,9 @@ class Admin extends BaseController
             // Get last_name from session
             'last_name' => session()->get('last_name'),
             // Get level from session
-            'level' => session()->get('level')
+            'level' => session()->get('level'),
+            // Get all data from table asisten
+            'asisten' => $this->asistenModel->findAll()
         ];
         return view('admin/master-data/asisten/index', $data);
     }
