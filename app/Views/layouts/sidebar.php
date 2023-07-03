@@ -70,9 +70,9 @@
                                 <a href="/master-data/prakerin" class="submenu-link">Siswa Prakerin</a>
                             </li>
 
-                            <li class="submenu-item <?= ($uri->getSegment(2) === 'asisten') ? 'active' : '' ?>">
+                            <!-- <li class="submenu-item <?= ($uri->getSegment(2) === 'asisten') ? 'active' : '' ?>">
                                 <a href="/master-data/asisten" class="submenu-link">Daftar Asisten</a>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
                 <?php endif; ?>
@@ -86,9 +86,9 @@
                     </a>
 
                     <ul class="submenu">
-                        <li class="submenu-item <?= ($uri->getSegment(2) === 'kegiatan') ? 'active' : '' ?>">
+                        <!-- <li class="submenu-item <?= ($uri->getSegment(2) === 'kegiatan') ? 'active' : '' ?>">
                             <a href="/input-data/kegiatan" class="submenu-link">Input Kegiatan Harian</a>
-                        </li>
+                        </li> -->
 
                         <li class="submenu-item <?= ($uri->getSegment(2) === 'nilai') ? 'active' : '' ?>">
                             <a href="/input-data/nilai" class="submenu-link">Input Nilai Siswa</a>
@@ -99,7 +99,7 @@
                 <?php if (session()->get('level') == 'admin'): ?>
                     <!-- Report -->
 
-                    <li class="sidebar-item has-sub <?= ($uri->getSegment(1) === 'cetak-data') ? 'active' : '' ?>">
+                    <!-- <li class="sidebar-item has-sub <?= ($uri->getSegment(1) === 'cetak-data') ? 'active' : '' ?>">
                         <a href="#" class="sidebar-link">
                             <i class="bi bi-printer-fill"></i>
                             <span>Cetak Data</span>
@@ -118,18 +118,18 @@
                                 <a href="/cetak-data/sertifikat" class="submenu-link">Cetak Sertifikat Prakerin</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
 
                     <!-- Account -->
 
-                    <li class="sidebar-title">Account</li>
+                    <!-- <li class="sidebar-title">Account</li>
 
                     <li class="sidebar-item">
                         <a href="/listUsers" class="sidebar-link">
                             <i class="bi bi-people-fill"></i>
                             <span>Users</span>
                         </a>
-                    </li>
+                    </li> -->
                 <?php endif; ?>
 
             </ul>

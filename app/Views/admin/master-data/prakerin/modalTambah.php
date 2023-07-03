@@ -5,7 +5,6 @@
         <div class="modal-content">
             <div class="modal-header bg-primary">
                 <h5 class="modal-title white" id="myModalLabel1">
-                    <i class="fa-solid fa-user-plus me-3 fs-6"></i>
                     Tambah Siswa Prakerin
                 </h5>
                 <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">

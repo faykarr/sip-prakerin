@@ -16,10 +16,8 @@
     <link rel="stylesheet" href="/assets/compiled/css/iconly.css" />
     <link rel="stylesheet" href="/assets/extensions/flatpickr/flatpickr.min.css" />
     <link rel="stylesheet" href="/assets/extensions/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="/assets/extensions/@fortawesome/fontawesome-free/css/all.min.css">
 
-
-
-    <script src="https://kit.fontawesome.com/712e5f8866.js" crossorigin="anonymous"></script>
     <script src="/assets/extensions/jquery/jquery.min.js"></script>
 </head>
 
@@ -116,6 +114,7 @@
 
     <script src="/assets/static/js/components/dark.js"></script>
     <script src="/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/extensions/@fortawesome/fontawesome-free/js/all.min.js"></script>
 
     <script src="/assets/compiled/js/app.js"></script>
 
