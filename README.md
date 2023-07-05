@@ -47,6 +47,10 @@ and any database settings. <br>
 
 ## Server Requirements
 
+MySQL Server extra extension configuration `my.ini` or `my.cnf` is required, some config is:
+[mysqld]
+event_scheduler=ON
+
 PHP version 7.4 or higher is required, with the following extensions installed:
 
 - [intl](http://php.net/manual/en/intl.requirements.php)
