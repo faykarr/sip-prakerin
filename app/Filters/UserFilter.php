@@ -48,7 +48,7 @@ class UserFilter implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // Check if user level is admin
+        // Check if user level is user
         if (session()->get('level') == 'user') {
             return redirect()->to('/dashboard');
         }

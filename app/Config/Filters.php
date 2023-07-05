@@ -60,6 +60,7 @@ class Filters extends BaseConfig
                     'master-data/*/*',
                     'input-data',
                     'input-data/*',
+                    'input-data/*/*',
                     'cetak-data',
                     'cetak-data/*',
                     'listUsers',
@@ -71,6 +72,7 @@ class Filters extends BaseConfig
                     'dashboard',
                     'input-data',
                     'input-data/*',
+                    'input-data/*/*',
                     'logout'
                 ]
             ],

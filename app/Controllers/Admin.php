@@ -10,15 +10,15 @@ use App\Models\SMKModel;
 class Admin extends BaseController
 {
     // Method construct
-    public function __construct()
-    {
-        // Model smk
-        $this->smkModel = new SMKModel();
-        // Model prakerin
-        $this->prakerinModel = new PrakerinModel();
-        // Model Asisten
-        $this->asistenModel = new AsistenModel();
-    }
+    // public function __construct()
+    // {
+    //     // Model smk
+    //     $this->smkModel = new SMKModel();
+    //     // Model prakerin
+    //     $this->prakerinModel = new PrakerinModel();
+    //     // Model Asisten
+    //     $this->asistenModel = new AsistenModel();
+    // }
 
     // Method daftar smk
     public function listSmk()

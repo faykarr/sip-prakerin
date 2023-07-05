@@ -63,15 +63,15 @@
 
                         <ul class="submenu">
                             <li class="submenu-item <?= ($uri->getSegment(2) === 'smk') ? 'active' : '' ?>">
-                                <a href="/master-data/smk" class="submenu-link">Daftar SMK</a>
+                                <a href="/master-data/smk" class="submenu-link">Data SMK</a>
                             </li>
 
                             <li class="submenu-item <?= ($uri->getSegment(2) === 'prakerin') ? 'active' : '' ?>">
-                                <a href="/master-data/prakerin" class="submenu-link">Siswa Prakerin</a>
+                                <a href="/master-data/prakerin" class="submenu-link">Data Siswa Prakerin</a>
                             </li>
 
                             <li class="submenu-item <?= ($uri->getSegment(2) === 'asisten') ? 'active' : '' ?>">
-                                <a href="/master-data/asisten" class="submenu-link">Daftar Asisten</a>
+                                <a href="/master-data/asisten" class="submenu-link">Data Asisten Dosen</a>
                             </li>
                         </ul>
                     </li>
@@ -106,15 +106,18 @@
                         </a>
 
                         <ul class="submenu">
-                            <li class="submenu-item <?= ($uri->getSegment(2) === 'kegiatan') ? 'active' : '' ?>">
+                            <li
+                                class="submenu-item <?= ($uri->getSegment(1) === 'cetak-data' && $uri->getSegment(2) === 'kegiatan') ? 'active' : '' ?>">
                                 <a href="/cetak-data/kegiatan" class="submenu-link">Cetak Laporan Kegiatan</a>
                             </li>
 
-                            <li class="submenu-item <?= ($uri->getSegment(2) === 'nilai') ? 'active' : '' ?>">
+                            <li
+                                class="submenu-item <?= ($uri->getSegment(1) === 'cetak-data' && $uri->getSegment(2) === 'nilai') ? 'active' : '' ?>">
                                 <a href="/cetak-data/nilai" class="submenu-link">Cetak Nilai Siswa</a>
                             </li>
 
-                            <li class="submenu-item <?= ($uri->getSegment(2) === 'sertifikat') ? 'active' : '' ?>">
+                            <li
+                                class="submenu-item <?= ($uri->getSegment(1) === 'cetak-data' && $uri->getSegment(2) === 'sertifikat') ? 'active' : '' ?>">
                                 <a href="/cetak-data/sertifikat" class="submenu-link">Cetak Sertifikat Prakerin</a>
                             </li>
                         </ul>
