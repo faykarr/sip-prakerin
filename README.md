@@ -48,7 +48,7 @@ and any database settings. <br>
 ## Server Requirements
 
 MySQL Server extra extension configuration `my.ini` or `my.cnf` is required, some config is: <br>
-<br>
+
 `[mysqld]` <br>
 `1. event_scheduler=ON`
 
