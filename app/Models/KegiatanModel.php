@@ -6,36 +6,20 @@ use CodeIgniter\Model;
 
 class KegiatanModel extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'kegiatans';
-    protected $primaryKey       = 'id';
+    protected $table = 'kegiatans';
+    protected $primaryKey = 'id_kegiatan';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $returnType = 'array';
+    protected $protectFields = true;
+    protected $allowedFields = ['id_asisten', 'asisten_pembantu', 'tanggal', 'waktu', 'ruang_lab', 'detail_kegiatan'];
 
-    // Dates
-    protected $useTimestamps = false;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    // Join table tb_kegiatan and tb_asisten
+    public function getKegiatan()
+    {
+        return $this->db->table('tb_kegiatan')
+            ->join('tb_asisten', 'tb_asisten.id_asisten = tb_kegiatan.id_asisten')
+            ->get()->getResultArray();
+    }
 
-    // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
 
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
 }

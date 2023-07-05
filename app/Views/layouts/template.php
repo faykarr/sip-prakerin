@@ -50,7 +50,7 @@
                                     <div class="user-menu d-flex">
                                         <div class="user-name text-end me-3">
                                             <h6 class="mb-0 text-gray-600">
-                                                <?= $first_name . " " . $last_name ?>
+                                                <?= $first_name ?>
                                             </h6>
                                             <p class="mb-0 text-sm text-gray-600">
                                                 <?= ucfirst($level) ?>

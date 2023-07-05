@@ -45,7 +45,7 @@ class Auth extends BaseController
         $userModel = new UserModel();
 
         // Get data from database
-        $user = $userModel->where('username', $username)->first();
+        $user = $userModel->getAsistenByUsername($username);
 
         // Check if validation fails
         if (!$valid) {
@@ -65,8 +65,7 @@ class Auth extends BaseController
                     $data = [
                         'id_user' => $user['id_user'],
                         'username' => $user['username'],
-                        'first_name' => $user['first_name'],
-                        'last_name' => $user['last_name'],
+                        'first_name' => $user['nama_asisten'],
                         'level' => $user['level']
                     ];
 
