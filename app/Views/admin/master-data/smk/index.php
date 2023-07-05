@@ -180,9 +180,9 @@
             $('.siswa').text(siswa);
 
             if (aktif == 'Aktif') {
-                $('.aktif').html('<span class="badge bg-success">Aktif</span>');
+                $('.aktif_status').html('<span class="badge bg-success">Aktif</span>');
             } else {
-                $('.aktif').html('<span class="badge bg-danger">Tidak Aktif</span>');
+                $('.aktif_status').html('<span class="badge bg-danger">Tidak Aktif</span>');
             }
 
             // Call Modal Show

@@ -255,7 +255,7 @@
                                 <label for="status_prakerin">
                                     Status Prakerin
                                 </label>
-                                <select name="status_prakerin" id="status" class="form-select status_prakerin">
+                                <select name="status_prakerin" id="status" class="form-select status_prakerin" hidden>
                                     <option value="Aktif">Aktif</option>
                                     <option value="Pencabutan">Pencabutan</option>
                                 </select>

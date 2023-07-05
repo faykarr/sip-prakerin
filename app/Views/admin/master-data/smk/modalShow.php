@@ -131,7 +131,7 @@
                                                 <td>
                                                     <strong>:</strong>
                                                 </td>
-                                                <td class="aktif">
+                                                <td class="aktif_status">
                                                 </td>
                                             </tr>
                                         </tbody>

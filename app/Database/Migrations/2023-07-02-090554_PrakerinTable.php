@@ -89,6 +89,10 @@ class PrakerinTable extends Migration
         // Membuat tabel prakerin
         $this->forge->createTable('tb_prakerin');
 
+        // Panggil methode trigger
+        $this->addTriggerUpdate();
+        $this->addTriggerInsert();
+
         // Menambahkan 10 data pada tabel prakerin menggunakan faker dengan npsn diambil dari tb_smk
         $faker = \Faker\Factory::create('id_ID');
 
@@ -115,9 +119,55 @@ class PrakerinTable extends Migration
         }
     }
 
+    public function addTriggerUpdate()
+    {
+        $this->db->query('DELIMITER //');
+
+        $this->db->query('CREATE TRIGGER tr_update_update_status_prakerin
+            BEFORE UPDATE ON tb_prakerin
+            FOR EACH ROW
+            BEGIN
+                IF DATE(NEW.periode_akhir) < CURDATE() THEN
+                    SET NEW.status_prakerin = \'Pencabutan\';
+                ELSE
+                    SET NEW.status_prakerin = \'Aktif\';
+                END IF;
+            END //');
+
+        $this->db->query('DELIMITER ;');
+    }
+
+    public function addTriggerInsert()
+    {
+        $this->db->query('DELIMITER //');
+
+        $this->db->query('CREATE TRIGGER tr_insert_update_status_prakerin
+            BEFORE INSERT ON tb_prakerin
+            FOR EACH ROW
+            BEGIN
+                IF DATE(NEW.periode_akhir) < CURDATE() THEN
+                    SET NEW.status_prakerin = \'Pencabutan\';
+                ELSE
+                    SET NEW.status_prakerin = \'Aktif\';
+                END IF;
+            END //');
+
+        $this->db->query('DELIMITER ;');
+    }
+
+    public function downTriggerUpdate()
+    {
+        $this->db->query('DROP TRIGGER IF EXISTS tr_update_update_status_prakerin');
+        $this->db->query('DROP TRIGGER IF EXISTS tr_insert_update_status_prakerin');
+    }
+
+
     public function down()
     {
         // menghapus tabel prakerin
         $this->forge->dropTable('tb_prakerin');
+
+        // memanggil methode downTriggerUpdate
+        $this->downTriggerUpdate();
     }
 }

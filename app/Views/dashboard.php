@@ -77,7 +77,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center">
-                                        <h6 class="text-muted font-semibold">Jumlah Siswa Prakerin Aktif</h6>
+                                        <h6 class="text-muted font-semibold">Siswa Prakerin Aktif</h6>
                                         <h6 class="font-extrabold mb-0">
                                             <?= $count_prakerin_aktif ?>
                                         </h6>
