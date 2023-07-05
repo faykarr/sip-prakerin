@@ -175,7 +175,7 @@
                                 </label>
                                 <?php $tanggal_mulai = (session()->getFlashdata('tanggal_mulai')) ? 'is-invalid' : '' ?>
                                 <input type="text"
-                                    class="form-control <?= $tanggal_mulai ?> tanggal_mulai mb-3 flatpickr-start flatpickr-input"
+                                    class="form-control <?= $tanggal_mulai ?> tanggal_mulai mb-3 flatpickr-no-config flatpickr-input"
                                     placeholder="Pilih Tanggal" id="tanggal_mulai" name="tanggal_mulai"
                                     value="<?= old('tanggal_mulai') ?>">
                                 <?php if (session()->getFlashdata('tanggal_mulai')): ?>
@@ -191,7 +191,7 @@
                                     Tanggal Pencabutan Prakerin
                                 </label>
                                 <input type="text"
-                                    class="form-control tanggal_pencabutan mb-3 flatpickr-start flatpickr-input"
+                                    class="form-control tanggal_pencabutan mb-3 flatpickr-no-config flatpickr-input"
                                     placeholder="Pilih Tanggal" id="tanggal_pencabutan" name="tanggal_pencabutan"
                                     value="<?= old('tanggal_pencabutan') ?>">
                             </div>

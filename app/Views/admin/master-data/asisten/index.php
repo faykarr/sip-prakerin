@@ -45,6 +45,7 @@
                             <th>No.</th>
                             <th>NIM</th>
                             <th>Nama Asisten</th>
+                            <th>Jabatan</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
@@ -62,6 +63,9 @@
                                 </td>
                                 <td>
                                     <?= $a['nama_asisten']; ?>
+                                </td>
+                                <td>
+                                    <?= $a['jabatan']; ?>
                                 </td>
                                 <td>
                                     <?php if ($a['status'] == 'Aktif'): ?>

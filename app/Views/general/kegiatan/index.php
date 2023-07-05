@@ -31,6 +31,10 @@
 
     <!-- Include modalTambah-->
     <?= $this->include('/general/kegiatan/modalTambah') ?>
+    <!-- Include modalShow -->
+    <?= $this->include('/general/kegiatan/modalShow') ?>
+    <!-- Inlcude modalEdit -->
+    <?= $this->include('/general/kegiatan/modalEdit') ?>
 
     <section class="section">
         <div class="card">
@@ -58,27 +62,53 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1.</td>
-                            <td>21.230.0194</td>
-                            <td>Muhammad Rahman Arsalan</td>
-                            <td>12/08/2021</td>
-                            <td>Lab. Komputer 1</td>
-                            <td>Membuat aplikasi learning management system menggunakan PHP</td>
-                            <td>
-                                <div class="btn-group">
-                                    <a href="#" class="btn icon btn-sm btn-primary showBAK">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </a>
-                                    <a href="#" class="btn icon btn-sm btn-warning text-white edit">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <a href="/input-data/deleteKegiatan/" class="btn icon btn-sm btn-danger delete">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                        <!-- Foreach data -->
+                        <?php $i = 1; ?>
+                        <?php foreach ($kegiatan as $k): ?>
+                            <tr>
+                                <td>
+                                    <?= $i++; ?>
+                                </td>
+                                <td>
+                                    <?= $k['nim']; ?>
+                                </td>
+                                <td>
+                                    <?= $k['nama_asisten']; ?>
+                                </td>
+                                <td>
+                                    <?= $k['tanggal']; ?>
+                                </td>
+                                <td>
+                                    <?= $k['ruang_lab']; ?>
+                                </td>
+                                <td>
+                                    <?= $k['detail_kegiatan']; ?>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="#" class="btn icon btn-sm btn-primary showBAK" data-nim="<?= $k['nim'] ?>"
+                                            data-nama-asisten="<?= $k['nama_asisten'] ?>"
+                                            data-asisten="<?= $k['asisten_pembantu'] ?>" data-tanggal="<?= $k['tanggal'] ?>"
+                                            data-waktu="<?= $k['waktu'] ?>" data-ruang="<?= $k['ruang_lab'] ?>"
+                                            data-kegiatan="<?= $k['detail_kegiatan'] ?>">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <a href="#" class="btn icon btn-sm btn-warning text-white edit"
+                                            data-id="<?= $k['id_kegiatan'] ?>" data-nama-asisten="<?= $k['nama_asisten'] ?>"
+                                            data-asisten="<?= $k['asisten_pembantu'] ?>" data-tanggal="<?= $k['tanggal'] ?>"
+                                            data-waktu="<?= $k['waktu'] ?>" data-ruang="<?= $k['ruang_lab'] ?>"
+                                            data-kegiatan="<?= $k['detail_kegiatan'] ?>"
+                                            data-id-asisten="<?= $k['id_asisten'] ?>">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <a href="/input-data/kegiatan/deleteKegiatan/<?= $k['id_kegiatan']; ?>"
+                                            class="btn icon btn-sm btn-danger delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
@@ -90,31 +120,55 @@
 <script>
     $(document).ready(function () {
         // Event delegation for show button
-        $(document).on('click', '.showAsisten', function () {
+        $(document).on('click', '.showBAK', function () {
             // Get data from button show
             const nim = $(this).data('nim');
-            const nama = $(this).data('nama');
-            const nohp = $(this).data('nohp');
-            const email = $(this).data('email');
-            const alamat = $(this).data('alamat');
-            const jabatan = $(this).data('jabatan');
-            const status = $(this).data('status');
+            const nama = $(this).data('nama-asisten');
+            const asisten = $(this).data('asisten');
+            const tanggal = $(this).data('tanggal');
+            const waktu = $(this).data('waktu');
+            const ruang = $(this).data('ruang');
+            const kegiatan = $(this).data('kegiatan');
+
 
             // Set data to Show
-            $('.nim').html(nim);
-            $('.nama_asisten').html(nama);
-            $('.no_hp').html(nohp);
-            $('.email').html(email);
-            $('.alamat').html(alamat);
-            $('.jabatan').html(jabatan);
-            if (status == 'Aktif') {
-                $('.status').html('<span class="badge bg-success">Aktif</span>');
-            } else {
-                $('.status').html('<span class="badge bg-danger">Tidak Aktif</span>');
-            }
+            $('.primary').text(nim);
+            $('.asisten').text(nama);
+            $('.asisten_pembantu').text(asisten);
+            $('.tanggal_kegiatan').text(tanggal);
+            $('.waktu').text(waktu);
+            $('.ruang_lab').text(ruang);
+            $('.detail_kegiatan').text(kegiatan);
 
             // Call Modal Show
-            $('#showAsistenModal').modal('show');
+            $('#showBAKModal').modal('show');
+        });
+        // Event delegation for show button
+        $(document).on('click', '.edit', function () {
+            // Get data from button edit
+            const id = $(this).data('id');
+            const nim = $(this).data('nim');
+            const nama = $(this).data('nama-asisten');
+            const asisten = $(this).data('asisten');
+            const tanggal = $(this).data('tanggal');
+            const waktu = $(this).data('waktu');
+            const ruang = $(this).data('ruang');
+            const kegiatan = $(this).data('kegiatan');
+            const id_asisten = $(this).data('id-asisten');
+
+            // Set data to form with class edit
+            $('.name').val(nama);
+            $('.id_kegiatan').val(id);
+            $('.pembantu').val(asisten).change();
+            $('.tanggal').val(tanggal);
+            $('.waktu_kegiatan').val(waktu);
+            $('.lab').val(ruang).change();
+            $('.kegiatan').val(kegiatan);
+            $('.id_asisten').val(id_asisten);
+
+
+            // Call Modal Show
+            $('#editBAKModal').modal('show');
         });
     });
 

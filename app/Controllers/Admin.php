@@ -9,17 +9,6 @@ use App\Models\SMKModel;
 
 class Admin extends BaseController
 {
-    // Method construct
-    // public function __construct()
-    // {
-    //     // Model smk
-    //     $this->smkModel = new SMKModel();
-    //     // Model prakerin
-    //     $this->prakerinModel = new PrakerinModel();
-    //     // Model Asisten
-    //     $this->asistenModel = new AsistenModel();
-    // }
-
     // Method daftar smk
     public function listSmk()
     {
@@ -676,8 +665,8 @@ class Admin extends BaseController
             'last_name' => session()->get('last_name'),
             // Get level from session
             'level' => session()->get('level'),
-            // Get all data from table asisten
-            'asisten' => $this->asistenModel->findAll()
+            // Get all data from table asisten order by jabatan ASC
+            'asisten' => $this->asistenModel->orderBy('jabatan', 'ASC')->findAll()
         ];
         return view('admin/master-data/asisten/index', $data);
     }

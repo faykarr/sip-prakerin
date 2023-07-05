@@ -61,6 +61,10 @@ abstract class BaseController extends Controller
         $this->prakerinModel = new \App\Models\PrakerinModel();
         // Model Asisten
         $this->asistenModel = new \App\Models\AsistenModel();
+        // Model Kegiatan
+        $this->kegiatanModel = new \App\Models\KegiatanModel();
+        // Validation
+        $this->validation = \Config\Services::validation();
 
     }
 }

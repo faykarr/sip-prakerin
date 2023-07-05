@@ -1,10 +1,10 @@
-<div class="modal fade text-left modal-borderless" id="showBAPModal" tabindex="-1" role="dialog"
+<div class="modal fade text-left modal-borderless" id="showBAKModal" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
-                    Detail Asisten
+                    Detail Kegiatan Harian
                 </h5>
                 <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -22,10 +22,10 @@
                         <img class="card-img-top img-fluid rounded" src="/assets/compiled/jpg/school.jpg"
                             alt="Card image cap" style="height: 20rem">
                         <div class="card-body">
-                            <h4 class="card-title nama_asisten">
+                            <h4 class="card-title asisten">
                             </h4>
                             <p class="text-muted">
-                                Detail asisten dosen UPT Komputer - <span class="nama_asisten"></span>
+                                Detail kegiatan prakerin UPT Komputer - <span class="asisten"></span>
                             </p>
                             <hr>
                             <div class="row justify-content-start">
@@ -41,7 +41,7 @@
                                                     <strong>:</strong>
                                                 </td>
                                                 <td>
-                                                    <strong class="nim">
+                                                    <strong class="primary">
                                                     </strong>
                                                 </td>
                                             </tr>
@@ -53,62 +53,62 @@
                                                 <td>
                                                     <strong>:</strong>
                                                 </td>
-                                                <td class="nama_asisten">
+                                                <td class="asisten">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td></td>
                                                 <td>
-                                                    No HP
+                                                    Asisten Pembantu
                                                 </td>
                                                 <td>
                                                     <strong>:</strong>
                                                 </td>
-                                                <td class="no_hp">
+                                                <td class="asisten_pembantu">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td></td>
                                                 <td>
-                                                    Email Asisten
+                                                    Tanggal
                                                 </td>
                                                 <td>
                                                     <strong>:</strong>
                                                 </td>
-                                                <td class="email">
+                                                <td class="tanggal_kegiatan">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td></td>
                                                 <td>
-                                                    Alamat
+                                                    Waktu Mulai
                                                 </td>
                                                 <td>
                                                     <strong>:</strong>
                                                 </td>
-                                                <td class="alamat">
+                                                <td class="waktu">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td></td>
                                                 <td>
-                                                    Jabatan
+                                                    Ruang Lab
                                                 </td>
                                                 <td>
                                                     <strong>:</strong>
                                                 </td>
-                                                <td class="jabatan">
+                                                <td class="ruang_lab">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td></td>
                                                 <td>
-                                                    Status
+                                                    Detail Kegiatan
                                                 </td>
                                                 <td>
                                                     <strong>:</strong>
                                                 </td>
-                                                <td class="status">
+                                                <td class="detail_kegiatan">
                                                 </td>
                                             </tr>
                                         </tbody>

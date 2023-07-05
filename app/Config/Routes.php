@@ -53,6 +53,9 @@ $routes->get('/master-data/prakerin/deletePrakerin/(:segment)', 'Admin::deletePr
 $routes->get('/master-data/prakerin/showPrakerin/(:segment)', 'Admin::showPrakerin/$1');
 $routes->post('/master-data/prakerin/updatePrakerin', 'Admin::updatePrakerin');
 $routes->get('/input-data/kegiatan', 'General::kegiatan');
+$routes->post('/input-data/kegiatan/addKegiatan', 'General::addKegiatan');
+$routes->get('/input-data/kegiatan/deleteKegiatan/(:segment)', 'General::deleteKegiatan/$1');
+$routes->post('/input-data/kegiatan/updateKegiatan', 'General::updateKegiatan');
 
 /*
  * --------------------------------------------------------------------

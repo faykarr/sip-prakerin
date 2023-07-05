@@ -66,7 +66,8 @@ class Auth extends BaseController
                         'id_user' => $user['id_user'],
                         'username' => $user['username'],
                         'first_name' => $user['nama_asisten'],
-                        'level' => $user['level']
+                        'level' => $user['level'],
+                        'id_asisten' => $user['id_asisten'],
                     ];
 
                     // Set session
