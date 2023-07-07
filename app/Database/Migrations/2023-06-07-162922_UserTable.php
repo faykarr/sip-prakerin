@@ -15,6 +15,10 @@ class UserTable extends Migration
                 'constraint' => 11,
                 'auto_increment' => true,
             ],
+            'id_asisten' => [
+                'type' => 'INT',
+                'constraint' => 11,
+            ],
             'username' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
@@ -23,14 +27,6 @@ class UserTable extends Migration
             'password' => [
                 'type' => 'VARCHAR',
                 'constraint' => 32,
-            ],
-            'first_name' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-            ],
-            'last_name' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
             ],
             'level' => [
                 'type' => 'ENUM',
@@ -43,27 +39,31 @@ class UserTable extends Migration
 
         $this->forge->addKey('id_user', true);
 
-        // Create table user
+        // Add foreign key
 
+        // Create table user
         $this->forge->createTable('tb_user');
+
+        // $this->forge->addForeignKey('id_asisten', 'tb_asisten', 'id_asisten', 'CASCADE', 'CASCADE');
 
         // Add default user
 
-        $this->db->table('tb_user')->insert([
-            'username' => 'admin',
-            'password' => md5('admin'),
-            'first_name' => 'Admin',
-            'last_name' => 'UPT Komputer',
-            'level' => 'admin',
-        ]);
+        // $this->db->table('tb_user')->insert([
+        //     'id_user' => 1,
+        //     'username' => '21.230.0194',
+        //     'password' => md5('21.230.0194'),
+        //     'first_name' => 'Nasyath Faykar',
+        //     'last_name' => 'UPT Komputer',
+        //     'level' => 'admin',
+        // ]);
 
-        $this->db->table('tb_user')->insert([
-            'username' => 'user',
-            'password' => md5('user'),
-            'first_name' => 'User',
-            'last_name' => 'UPT Komputer',
-            'level' => 'user',
-        ]);
+        // $this->db->table('tb_user')->insert([
+        //     'username' => 'user',
+        //     'password' => md5('user'),
+        //     'first_name' => 'User',
+        //     'last_name' => 'UPT Komputer',
+        //     'level' => 'user',
+        // ]);
     }
 
     public function down()

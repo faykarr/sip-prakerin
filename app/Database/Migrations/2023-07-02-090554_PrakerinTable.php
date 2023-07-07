@@ -96,7 +96,7 @@ class PrakerinTable extends Migration
         // Menambahkan 10 data pada tabel prakerin menggunakan faker dengan npsn diambil dari tb_smk
         $faker = \Faker\Factory::create('id_ID');
 
-        for ($i = 0; $i < 200; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $data = [
                 'nisn' => $faker->unique()->randomNumber(8),
                 'npsn' => $faker->randomElement($this->db->table('tb_smk')->select('npsn')->get()->getResultArray()),
@@ -106,7 +106,7 @@ class PrakerinTable extends Migration
                 'jenis_kelamin' => $faker->randomElement(['Laki-laki', 'Perempuan']),
                 'alamat_siswa' => $faker->address(),
                 'kelas' => $faker->randomElement(['X', 'XI', 'XII']),
-                'jurusan' => $faker->randomElement(['RPL', 'TKJ', 'MM', 'BC']),
+                'jurusan' => $faker->randomElement(['RPL', 'TKJ', 'MM']),
                 'no_hp_siswa' => $faker->numberBetween(10000000, 99999999),
                 'tahun_ajaran' => $faker->randomElement(['2018/2019', '2019/2020', '2020/2021', '2021/2022']),
                 'nama_orang_tua' => $faker->name(),
@@ -121,8 +121,6 @@ class PrakerinTable extends Migration
 
     public function addTriggerUpdate()
     {
-        $this->db->query('DELIMITER //');
-
         $this->db->query('CREATE TRIGGER tr_update_update_status_prakerin
             BEFORE UPDATE ON tb_prakerin
             FOR EACH ROW
@@ -132,15 +130,11 @@ class PrakerinTable extends Migration
                 ELSE
                     SET NEW.status_prakerin = \'Aktif\';
                 END IF;
-            END //');
-
-        $this->db->query('DELIMITER ;');
+            END');
     }
 
     public function addTriggerInsert()
     {
-        $this->db->query('DELIMITER //');
-
         $this->db->query('CREATE TRIGGER tr_insert_update_status_prakerin
             BEFORE INSERT ON tb_prakerin
             FOR EACH ROW
@@ -150,9 +144,7 @@ class PrakerinTable extends Migration
                 ELSE
                     SET NEW.status_prakerin = \'Aktif\';
                 END IF;
-            END //');
-
-        $this->db->query('DELIMITER ;');
+            END');
     }
 
     public function downTriggerUpdate()
