@@ -2,10 +2,12 @@
 flatpickr('.flatpickr-birth', {
     minDate: "2002-01",
     maxDate: "2010-12",
-    defaultDate: "2004-01-01"
+    defaultDate: "01-01-2004",
+    dateFormat: "d-m-Y",
 })
 flatpickr('.flatpickr-start', {
-    defaultDate: "today"
+    defaultDate: "today",
+    dateFormat: "d-m-Y",
 })
 flatpickr('.flatpickr-time', {
     enableTime: true,

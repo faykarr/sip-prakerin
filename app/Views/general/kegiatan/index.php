@@ -54,7 +54,7 @@
                         <tr>
                             <th>No.</th>
                             <th width="12%">NIM</th>
-                            <th width="20%">Nama Asisten</th>
+                            <th width="15%%">Nama Asisten</th>
                             <th>Tanggal</th>
                             <th>Ruang Lab</th>
                             <th width="30%">Detail Kegiatan</th>
@@ -76,7 +76,7 @@
                                     <?= $k['nama_asisten']; ?>
                                 </td>
                                 <td>
-                                    <?= $k['tanggal']; ?>
+                                    <?= date('d-m-Y', strtotime($k['tanggal'])); ?>
                                 </td>
                                 <td>
                                     <?= $k['ruang_lab']; ?>
@@ -135,7 +135,8 @@
             $('.primary').text(nim);
             $('.asisten').text(nama);
             $('.asisten_pembantu').text(asisten);
-            $('.tanggal_kegiatan').text(tanggal);
+            var date = moment(tanggal, 'YYYY-MM-DD').format('DD-MM-YYYY');
+            $('.tanggal_kegiatan').text(date);
             $('.waktu').text(waktu);
             $('.ruang_lab').text(ruang);
             $('.detail_kegiatan').text(kegiatan);
@@ -160,7 +161,8 @@
             $('.name').val(nama);
             $('.id_kegiatan').val(id);
             $('.pembantu').val(asisten).change();
-            $('.tanggal').val(tanggal);
+            var date = moment(tanggal, 'YYYY-MM-DD').format('DD-MM-YYYY');
+            $('.tanggal').val(date);
             $('.waktu_kegiatan').val(waktu);
             $('.lab').val(ruang).change();
             $('.kegiatan').val(kegiatan);

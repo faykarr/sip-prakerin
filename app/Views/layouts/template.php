@@ -120,6 +120,7 @@
     <script src="/assets/compiled/js/app.js"></script>
 
     <script src="/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
+    <script src="/assets/extensions/moment/moment.min.js"></script>
     <script src="/assets/static/js/pages/simple-datatables.js"></script>
 
 

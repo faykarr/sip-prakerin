@@ -86,7 +86,7 @@
                                                 <td>
                                                     <strong>:</strong>
                                                 </td>
-                                                <td class="tanggal_lahir">
+                                                <td class="Tanggallahir">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -141,7 +141,7 @@
                                                 <td>
                                                     <strong>:</strong>
                                                 </td>
-                                                <td class="tanggal_mulai">
+                                                <td class="Tanggalmulai">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -152,7 +152,7 @@
                                                 <td>
                                                     <strong>:</strong>
                                                 </td>
-                                                <td class="tanggal_pencabutan">
+                                                <td class="Tanggalpencabutan">
                                                 </td>
                                             </tr>
                                             <tr>

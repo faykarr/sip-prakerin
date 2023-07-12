@@ -87,7 +87,7 @@
                                     <?= $value['jurusan'] ?>
                                 </td>
                                 <td>
-                                    <?= $value['periode_akhir'] ?>
+                                    <?= date('d-m-Y', strtotime($value['periode_akhir'])); ?>
                                 </td>
                                 <td>
                                     <?php if ($value['status_prakerin'] == 'Aktif'): ?>
@@ -183,13 +183,16 @@
             $('.nama_siswa').val(namaSiswa);
             $('.jenis_kelamin').val(jenisKelamin).change();
             $('.tempat_lahir').val(tempatLahir);
-            $('.tanggal_lahir').val(tanggalLahir);
+            var date_lahir = moment(tanggalLahir, 'YYYY-MM-DD').format('DD-MM-YYYY');
+            $('.tanggal_lahir').val(date_lahir);
             $('.no_hp_siswa').val(noHPSiswa);
             $('.asal_sekolah').val(asalSekolah).change();
             $('.kelas').val(kelas);
             $('.jurusan').val(jurusan).change();
-            $('.tanggal_mulai').val(tanggalMulai);
-            $('.tanggal_pencabutan').val(tanggalPencabutan);
+            var date_mulai = moment(tanggalMulai, 'YYYY-MM-DD').format('DD-MM-YYYY');
+            $('.tanggal_mulai').val(date_mulai);
+            var date_cabut = moment(tanggalPencabutan, 'YYYY-MM-DD').format('DD-MM-YYYY');
+            $('.tanggal_pencabutan').val(date_cabut);
             $('.tahun_ajaran').val(tahunAjaran);
             $('.nama_orang_tua').val(namaOrtu);
             $('.no_hp_orang_tua').val(noHPOrtu);
@@ -228,13 +231,16 @@
             $('.nama_siswa').html(namaSiswa);
             $('.jekel').html(jenisKelamin);
             $('.tempat_lahir').html(tempatLahir);
-            $('.tanggal_lahir').html(tanggalLahir);
+            var dateLahir = moment(tanggalLahir, 'YYYY-MM-DD').format('DD-MM-YYYY');
+            $('.Tanggallahir').html(dateLahir);
             $('.no_hp_siswa').html(noHPSiswa);
             $('.asal').html(asalSekolah);
             $('.kelas').html(kelas);
             $('.keahlian').html(jurusan);
-            $('.tanggal_mulai').html(tanggalMulai);
-            $('.tanggal_pencabutan').html(tanggalPencabutan);
+            var dateMulai = moment(tanggalMulai, 'YYYY-MM-DD').format('DD-MM-YYYY');
+            $('.Tanggalmulai').html(dateMulai);
+            var dateCabut = moment(tanggalPencabutan, 'YYYY-MM-DD').format('DD-MM-YYYY');
+            $('.Tanggalpencabutan').html(dateCabut);
             $('.tahun_ajaran').html(tahunAjaran);
             $('.nama_orang_tua').html(namaOrtu);
             $('.no_hp_orang_tua').html(noHPOrtu);

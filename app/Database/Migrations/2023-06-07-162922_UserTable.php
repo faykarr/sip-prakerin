@@ -40,11 +40,11 @@ class UserTable extends Migration
         $this->forge->addKey('id_user', true);
 
         // Add foreign key
+        $this->forge->addForeignKey('id_asisten', 'tb_asisten', 'id_asisten', 'CASCADE', 'CASCADE');
 
         // Create table user
         $this->forge->createTable('tb_user');
 
-        // $this->forge->addForeignKey('id_asisten', 'tb_asisten', 'id_asisten', 'CASCADE', 'CASCADE');
 
         // Add default user
 

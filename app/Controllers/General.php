@@ -118,7 +118,7 @@ class General extends BaseController
         // Get detail_kegiatan from input
         $detail_kegiatan = $this->request->getPost('detail_kegiatan');
         // Get tanggal from input
-        $tanggal = $this->request->getPost('tanggal');
+        $tanggal = date('Y-m-d', strtotime($this->request->getPost('tanggal')));
         // Get waktu from input
         $waktu = $this->request->getPost('waktu');
 

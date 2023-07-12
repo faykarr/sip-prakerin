@@ -39,10 +39,6 @@ class AsistenTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'id_user' => [
-                'type' => 'INT',
-                'constraint' => 11,
-            ],
             'status' => [
                 'type' => 'ENUM',
                 'constraint' => ['Aktif', 'Tidak Aktif'],
@@ -57,9 +53,6 @@ class AsistenTable extends Migration
         // $this->forge->addForeignKey('id_user', 'tb_user', 'id_user', 'CASCADE', 'CASCADE');
         // Membuat tabel asisten
         $this->forge->createTable('tb_asisten');
-        // Call addTrigger() function
-        $this->addTrigger();
-
         // Insert 10 data ke tabel asisten
         // $faker = \Faker\Factory::create('id_ID');
         // for ($i = 0; $i < 10; $i++) {
@@ -88,6 +81,9 @@ class AsistenTable extends Migration
             'status' => 'Aktif',
         ];
         $this->db->table('tb_asisten')->insert($data);
+        // Call addTrigger() function
+        $this->addTrigger();
+
 
 
     }
