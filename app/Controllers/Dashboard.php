@@ -24,6 +24,8 @@ class Dashboard extends BaseController
             'last_name' => session()->get('last_name'),
             // Get level from session
             'level' => session()->get('level'),
+            // Get jabatan from session
+            'jabatan' => session()->get('jabatan'),
             // Get count smk data
             'count_smk' => $smkModel->getCountSMK(),
             // Get count siswa prakerin

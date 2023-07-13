@@ -21,6 +21,8 @@ class Admin extends BaseController
             'last_name' => session()->get('last_name'),
             // Get level from session
             'level' => session()->get('level'),
+            // Get jabatan from session
+            'jabatan' => session()->get('jabatan'),
             // Get smk from model
             'smk' => $this->smkModel->getCountSiswaPrakerin()
         ];
@@ -266,6 +268,8 @@ class Admin extends BaseController
             'first_name' => session()->get('first_name'),
             // Get last_name from session
             'last_name' => session()->get('last_name'),
+            // Get jabatan from session
+            'jabatan' => session()->get('jabatan'),
             // Get level from session
             'level' => session()->get('level'),
             // Get SMK data from database
@@ -663,6 +667,8 @@ class Admin extends BaseController
             'first_name' => session()->get('first_name'),
             // Get last_name from session
             'last_name' => session()->get('last_name'),
+            // Get jabaatan from session
+            'jabatan' => session()->get('jabatan'),
             // Get level from session
             'level' => session()->get('level'),
             // Get all data from table asisten order by jabatan ASC

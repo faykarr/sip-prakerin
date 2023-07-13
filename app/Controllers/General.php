@@ -22,6 +22,8 @@ class General extends BaseController
             'first_name' => session()->get('first_name'),
             // Get last_name from session
             'last_name' => session()->get('last_name'),
+            // Get jabatan from session
+            'jabatan' => session()->get('jabatan'),
             // Get level from session
             'level' => session()->get('level'),
             // Get smk from model

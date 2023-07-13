@@ -53,7 +53,7 @@
                                                 <?= $first_name ?>
                                             </h6>
                                             <p class="mb-0 text-sm text-gray-600">
-                                                <?= ucfirst($level) ?>
+                                                <?= ucfirst($jabatan) ?>
                                             </p>
                                         </div>
                                         <div class="user-img d-flex align-items-center">
