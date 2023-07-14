@@ -294,7 +294,7 @@ class Admin extends BaseController
         $kelas = $this->request->getPost('kelas');
         $jurusan = $this->request->getPost('jurusan');
         $tanggal_mulai = date('Y-m-d', strtotime($this->request->getPost('tanggal_mulai')));
-        $tanggal_pencabutan = date('Y-m-d', strtotime($this->request->getPost('tanggal_mulai')));
+        $tanggal_pencabutan = date('Y-m-d', strtotime($this->request->getPost('tanggal_pencabutan')));
         $tahun_ajaran = $this->request->getPost('tahun_ajaran');
         $nama_orang_tua = $this->request->getPost('nama_orang_tua');
         $no_hp_orang_tua = $this->request->getPost('no_hp_orang_tua');

@@ -8,10 +8,11 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Daftar Siswa Prakerin</h3>
+                <h3>Nilai Siswa Prakerin</h3>
                 <p class="text-subtitle text-muted">
                     <!-- Fitur untuk mengelola daftar asisten terdaftar -->
-                    Mengelola daftar siswa prakerin yang terdaftar untuk kegiatan prakerin di UPT Komputer STMIK Widya
+                    Mengelola daftar nilai siswa prakerin yang terdaftar untuk kegiatan prakerin di UPT Komputer STMIK
+                    Widya
                     Pratama
                     Pekalongan.
                 </p>
@@ -20,10 +21,10 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="/master-data/prakerin">Master Data</a>
+                            <a href="/input-data/nilai">Master Data</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            Daftar Siswa Prakerin
+                            Daftar Nilai Siswa
                         </li>
                     </ol>
                 </nav>
@@ -34,12 +35,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="row justify-content-between">
-                    <h4 class="card-title col-lg-4">List Siswa Terdaftar</h4>
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#tambahSiswaModal"
-                        class="btn btn-success col-lg-2 align-items-center">
-                        <i class="fa-solid fa-file-circle-plus"></i>
-                        <span class="ms-1">Tambah Data</span>
-                    </button>
+                    <h4 class="card-title col-lg-4">List Nilai Siswa</h4>
                 </div>
             </div>
             <div class="card-body">
@@ -47,24 +43,20 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>NISN</th>
                             <th>Nama Siswa</th>
                             <th>Asal Sekolah</th>
-                            <th>Jurusan</th>
-                            <th>Tanggal Pencabutan</th>
-                            <th>Status</th>
+                            <th>Nilai Akhir</th>
+                            <th>Predikat</th>
+                            <th>Status Nilai</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- Get data from $prakerin with foreach -->
-                        <?php foreach ($prakerin as $key => $value): ?>
+                        <?php foreach ($nilai as $key => $value): ?>
                             <tr>
                                 <td>
                                     <?= $key + 1 ?>
-                                </td>
-                                <td>
-                                    <?= $value['nisn'] ?>
                                 </td>
                                 <td>
                                     <?= $value['nama_siswa'] ?>
@@ -73,28 +65,31 @@
                                     <?= $value['nama_sekolah'] ?>
                                 </td>
                                 <td>
-                                    <?= $value['jurusan'] ?>
+                                    <?= $value['rata_rata'] ?>
                                 </td>
                                 <td>
-                                    <?= date('d-m-Y', strtotime($value['periode_akhir'])); ?>
+                                    <?= $value['predikat'] ?>
                                 </td>
                                 <td>
-                                    <?php if ($value['status_prakerin'] == 'Aktif'): ?>
-                                        <span class="badge bg-success">Aktif</span>
+                                    <?php if ($value['status_nilai'] == 'Dinilai'): ?>
+                                        <span class="badge bg-success">Dinilai</span>
                                     <?php else: ?>
-                                        <span class="badge bg-danger">Pencabutan</span>
+                                        <span class="badge bg-danger">Belum Dinilai</span>
                                     <?php endif; ?>
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <!-- Show -->
-                                        <a href="#" class="btn icon btn-sm btn-primary showPrakerin">
-                                            <i class="fa-solid fa-eye"></i>
-                                        </a>
-                                        <!-- Edit -->
-                                        <a href="#" class="btn icon btn-sm btn-warning text-white edit">
+                                        <!-- Input Nilai -->
+                                        <a href="#" class="btn icon btn-sm btn-primary text-white inputNilai">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
+                                        <!-- If the level is admin -->
+                                        <?php if (session()->get('level') == 'admin'): ?>
+                                            <!-- Cetak Data -->
+                                            <a href="#" class="btn icon btn-sm btn-warning text-white">
+                                                <i class="fa-solid fa-print"></i>
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
                                 </td>
                             </tr>
@@ -106,6 +101,15 @@
     </section>
 
 </div>
+
+<!-- Script for inputNilai -->
+<script>
+    $(document).ready(function () {
+        // Event delegation for show button
+        $(document).on('click', '.inputNilai', function () {
+        });
+    });
+</script>
 
 <!-- End Content -->
 <?= $this->endSection(); ?>

@@ -172,4 +172,25 @@ class General extends BaseController
         return redirect()->to('/input-data/kegiatan');
     }
 
+    // Method nilai
+    public function nilai()
+    {
+        $data = [
+            'title' => 'Input Kegiatan',
+            // Get first_name from session
+            'first_name' => session()->get('first_name'),
+            // Get last_name from session
+            'last_name' => session()->get('last_name'),
+            // Get jabatan from session
+            'jabatan' => session()->get('jabatan'),
+            // Get level from session
+            'level' => session()->get('level'),
+            // Get smk from model
+            'nilai' => $this->nilaiModel->getAllNilai(),
+        ];
+
+        // return view to general/nilai/index with data
+        return view('general/nilai/index', $data);
+    }
+
 }
