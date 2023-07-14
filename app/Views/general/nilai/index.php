@@ -83,13 +83,6 @@
                                         <a href="#" class="btn icon btn-sm btn-primary text-white inputNilai">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
-                                        <!-- If the level is admin -->
-                                        <?php if (session()->get('level') == 'admin'): ?>
-                                            <!-- Cetak Data -->
-                                            <a href="#" class="btn icon btn-sm btn-warning text-white">
-                                                <i class="fa-solid fa-print"></i>
-                                            </a>
-                                        <?php endif; ?>
                                     </div>
                                 </td>
                             </tr>
