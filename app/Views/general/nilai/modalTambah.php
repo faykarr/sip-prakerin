@@ -6,7 +6,7 @@
             <div class="modal-header bg-primary">
                 <h5 class="modal-title white" id="myModalLabel1">
                     <i class="fa-solid fa-file-circle-plus me-3 fs-6"></i>
-                    Input Berita Acara Kegiatan
+                    Input Nilai Prakerin Siswa
                 </h5>
                 <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
                     <i data-feather="x"></i>
