@@ -28,4 +28,13 @@ class UserModel extends Model
             ->where('username', $username)
             ->get()->getRowArray();
     }
+
+    // Get asisten by id_asisten with join tb_asisten
+    public function getAsistenById($id_asisten)
+    {
+        return $this->db->table('tb_user')
+            ->join('tb_asisten', 'tb_asisten.id_asisten = tb_user.id_asisten')
+            ->where('tb_user.id_asisten', $id_asisten)
+            ->get()->getRowArray();
+    }
 }

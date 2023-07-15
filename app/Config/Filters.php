@@ -54,6 +54,8 @@ class Filters extends BaseConfig
         'after' => [
             'adminfilter' => [
                 'except' => [
+                    'profile',
+                    'profile/*',
                     'dashboard',
                     'master-data',
                     'master-data/*',
@@ -69,6 +71,8 @@ class Filters extends BaseConfig
             ],
             'userfilter' => [
                 'except' => [
+                    'profile',
+                    'profile/*',
                     'dashboard',
                     'input-data',
                     'input-data/*',

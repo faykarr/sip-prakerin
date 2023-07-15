@@ -58,7 +58,7 @@
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="/assets/compiled/jpg/1.jpg" alt="Profile Picture" />
+                                                <img src="/assets/compiled/jpg/2.jpg" alt="Profile Picture" />
                                             </div>
                                         </div>
                                     </div>
@@ -71,9 +71,10 @@
                                         </h6>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/profile"><i
-                                                class="icon-mid bi bi-person me-2"></i> My
-                                            Profile</a>
+                                        <a class="dropdown-item" href="/profile">
+                                            <i class="icon-mid bi bi-person me-2"></i>
+                                            Profile
+                                        </a>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider" />

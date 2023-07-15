@@ -65,6 +65,8 @@ abstract class BaseController extends Controller
         $this->kegiatanModel = new \App\Models\KegiatanModel();
         // Model Nilai
         $this->nilaiModel = new \App\Models\NilaiModel();
+        // Model User
+        $this->userModel = new \App\Models\UserModel();
         // Validation
         $this->validation = \Config\Services::validation();
 

@@ -41,10 +41,10 @@
                         <span class="ms-1">Tambah Data</span>
                     </button>
                 </div>
-                <!-- Include Modal Tambah -->
-                <?= $this->include('/admin/master-data/smk/modalTambah') ?>
-                <!-- Include Modal Tambah -->
             </div>
+            <!-- Include Modal Tambah -->
+            <?= $this->include('/admin/master-data/smk/modalTambah') ?>
+            <!-- Include Modal Tambah -->
             <!-- Include Modal Edit -->
             <?= $this->include('/admin/master-data/smk/modalEdit') ?>
             <!-- Include Modal Edit -->
