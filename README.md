@@ -35,7 +35,8 @@ The user guide corresponding to the latest version of the framework can be found
 
 ## Installation
 
-Go to project destination & run `composer install` in terminal to start this project.
+Go to project destination & run `composer install` in terminal to start this project. <br>
+Note : `The migration is currently error!, do the importing SQL in database instead of migration.`
 
 ## Setup
 
@@ -64,4 +65,8 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
 
 ## Some Screenshot of the Program
-<img src="./public/assets/static/images/bg/master-smk.png">
+- Master Data SMK view.
+<img src="./public/assets/static/images/bg/master-smk.png"> <br>
+
+- Profile view.
+<img src="./public/assets/static/images/bg/profile-view.png"> <br>
