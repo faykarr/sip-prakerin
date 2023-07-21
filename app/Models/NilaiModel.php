@@ -17,10 +17,22 @@ class NilaiModel extends Model
     public function getAllNilai()
     {
         return $this->db->table('tb_prakerin')
-            ->select('tb_prakerin.id_prakerin, tb_prakerin.nama_siswa, tb_smk.nama_sekolah, tb_nilai.disiplin, tb_nilai.kerja_motivasi, tb_nilai.inisiatif_kreatif, tb_nilai.kejujuran_tanggung_jawab, tb_nilai.kesopanan, tb_nilai.kerjasama, tb_nilai.jumlah_nilai, tb_nilai.rata_rata, tb_nilai.predikat, tb_nilai.status_nilai', )
+            ->select('tb_nilai.id_nilai, tb_prakerin.id_prakerin, tb_smk.npsn, tb_prakerin.nama_siswa, tb_smk.nama_sekolah, tb_nilai.disiplin, tb_nilai.kerja_motivasi, tb_nilai.kehadiran, tb_nilai.inisiatif_kreatif, tb_nilai.kejujuran_tanggung_jawab, tb_nilai.kesopanan, tb_nilai.kerjasama, tb_nilai.jumlah_nilai, tb_nilai.rata_rata, tb_nilai.predikat, tb_nilai.status_nilai', )
             ->join('tb_nilai', 'tb_nilai.id_prakerin = tb_prakerin.id_prakerin', 'left')
             ->join('tb_smk', 'tb_smk.npsn = tb_prakerin.npsn', 'left')
             ->get()->getResultArray();
     }
+
+    // Insert or update data with prakerin id
+    public function insertOrUpdate($data, $id_prakerin)
+    {
+        $query = $this->db->table($this->table)->where('id_prakerin', $id_prakerin)->get()->getRowArray();
+        if ($query) {
+            $this->db->table($this->table)->where('id_prakerin', $id_prakerin)->update($data);
+        } else {
+            $this->db->table($this->table)->insert($data);
+        }
+    }
+
 
 }

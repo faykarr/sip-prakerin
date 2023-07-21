@@ -31,6 +31,10 @@
             </div>
         </div>
     </div>
+
+    <!-- Include modalInput -->
+    <?= $this->include('/general/nilai/modalInput') ?>
+    <!-- Include modalInput -->
     <section class="section">
         <div class="card">
             <div class="card-header">
@@ -80,7 +84,16 @@
                                 <td>
                                     <div class="btn-group">
                                         <!-- Input Nilai -->
-                                        <a href="#" class="btn icon btn-sm btn-primary text-white inputNilai">
+                                        <a href="#" class="btn icon btn-sm btn-primary text-white inputNilai"
+                                            data-siswa="<?= $value['nama_siswa'] ?>"
+                                            data-disiplin="<?= $value['disiplin'] ?>"
+                                            data-kerja="<?= $value['kerja_motivasi'] ?>"
+                                            data-hadir="<?= $value['kehadiran'] ?>"
+                                            data-kreatif="<?= $value['inisiatif_kreatif'] ?>"
+                                            data-jujur="<?= $value['kejujuran_tanggung_jawab'] ?>"
+                                            data-sopan="<?= $value['kesopanan'] ?>" data-sama="<?= $value['kerjasama'] ?>"
+                                            data-jumlah="<?= $value['jumlah_nilai'] ?>"
+                                            data-rata="<?= $value['rata_rata'] ?>">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                     </div>
@@ -98,8 +111,45 @@
 <!-- Script for inputNilai -->
 <script>
     $(document).ready(function () {
-        // Event delegation for show button
+        // Event delegation for input button
         $(document).on('click', '.inputNilai', function () {
+            // Get data from button
+            const siswa = $(this).data('siswa');
+            const disiplin = $(this).data('disiplin');
+            const kerja = $(this).data('kerja');
+            const hadir = $(this).data('hadir');
+            const kreatif = $(this).data('kreatif');
+            const jujur = $(this).data('jujur');
+            const sopan = $(this).data('sopan');
+            const sama = $(this).data('sama');
+            const jumlah = $(this).data('jumlah');
+            const rata = $(this).data('rata');
+
+            // Set data to modal
+            $('#nama_siswa').val(siswa);
+            $('#disiplin').val(disiplin);
+            $('#kerja_motivasi').val(kerja);
+            $('#kehadiran').val(hadir);
+            $('#inisiatif_kreatif').val(kreatif);
+            $('#kejujuran_tanggung_jawab').val(jujur);
+            $('#kesopanan').val(sopan);
+            $('#kerjasama').val(sama);
+            $('#jumlah_nilai').val(jumlah);
+            $('#rata_rata').val(rata);
+
+            // Calculate and display the total nilai and rata-rata real-time
+            $('.nilai').on('input', function () {
+                let jumlah_nilai = 0;
+                $('.nilai').each(function () {
+                    jumlah_nilai += parseInt($(this).val() || 0);
+                });
+                const jumlah_nilai_input = jumlah_nilai / 8; // Jumlah nilai dibagi dengan jumlah input nilai
+                $('#jumlah_nilai').val(jumlah_nilai);
+                $('#rata_rata').val(jumlah_nilai_input.toFixed(2)); // Tampilkan 2 desimal angka di rata-rata
+            });
+
+            // Call Modal Edit
+            $('#inputNilai').modal('show');
         });
     });
 </script>
