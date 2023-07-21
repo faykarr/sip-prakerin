@@ -13,10 +13,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form" method="post" action="/input-data/nilai/addNilai">
+                <form class="form" method="post" action="/input-data/nilai/saveNilai">
                     <!-- Form Tambah Siswa -->
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="nama_siswa">
                                     <span class="fw-bold">Nama Siswa</span>
@@ -24,13 +24,27 @@
                                 <input type="text" id="nama_siswa" class="form-control" name="nama_siswa" disabled>
                             </div>
                         </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="asal_sekolah">
+                                    <span class="fw-bold">Asal Sekolah</span>
+                                </label>
+                                <input type="text" id="asal_sekolah" class="form-control" name="asal_sekolah" disabled>
+                            </div>
+                        </div>
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label for="disiplin">
                                     <span class="fw-bold">Nilai Disiplin</span>
                                 </label>
-                                <input type="number" id="disiplin" class="form-control nilai" name="disiplin"
-                                    step="any">
+                                <?php $disiplin = (session()->getFlashdata('disiplin')) ? 'is-invalid' : '' ?>
+                                <input type="number" id="disiplin" class="form-control nilai <?= $disiplin ?>"
+                                    name="disiplin" step="any">
+                                <?php if (session()->getFlashdata('disiplin')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= session()->getFlashdata('disiplin') ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
@@ -38,8 +52,15 @@
                                 <label for="kerja_motivasi">
                                     <span class="fw-bold">Nilai Kerja/Motivasi</span>
                                 </label>
-                                <input type="number" id="kerja_motivasi" class="form-control nilai"
-                                    name="kerja_motivasi" step="any">
+                                <?php $kerja_motivasi = (session()->getFlashdata('kerja_motivasi')) ? 'is-invalid' : '' ?>
+
+                                <input type="number" id="kerja_motivasi"
+                                    class="form-control nilai <?= $kerja_motivasi ?>" name="kerja_motivasi" step="any">
+                                <?php if (session()->getFlashdata('kerja_motivasi')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= session()->getFlashdata('kerja_motivasi') ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
@@ -47,8 +68,15 @@
                                 <label for="kehadiran">
                                     <span class="fw-bold">Nilai Kehadiran</span>
                                 </label>
-                                <input type="number" id="kehadiran" class="form-control nilai" name="kehadiran"
-                                    step="any">
+                                <?php $kehadiran = (session()->getFlashdata('kehadiran')) ? 'is-invalid' : '' ?>
+
+                                <input type="number" id="kehadiran" class="form-control nilai <?= $kehadiran ?>"
+                                    name="kehadiran" step="any">
+                                <?php if (session()->getFlashdata('kehadiran')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= session()->getFlashdata('kehadiran') ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
@@ -56,8 +84,16 @@
                                 <label for="inisiatif_kreatif">
                                     <span class="fw-bold">Nilai Inisiatif/Kreatif</span>
                                 </label>
-                                <input type="number" id="inisiatif_kreatif" class="form-control nilai"
-                                    name="inisiatif_kreatif" step="any">
+                                <?php $inisiatif_kreatif = (session()->getFlashdata('inisiatif_kreatif')) ? 'is-invalid' : '' ?>
+
+                                <input type="number" id="inisiatif_kreatif"
+                                    class="form-control <?= $inisiatif_kreatif ?> nilai" name="inisiatif_kreatif"
+                                    step="any">
+                                <?php if (session()->getFlashdata('inisiatif_kreatif')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= session()->getFlashdata('inisiatif_kreatif') ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
@@ -65,8 +101,16 @@
                                 <label for="kejujuran_tanggung_jawab">
                                     <span class="fw-bold">Nilai Kejujuran/Tanggung Jawab</span>
                                 </label>
-                                <input type="number" id="kejujuran_tanggung_jawab" class="form-control nilai"
+                                <?php $kejujuran_tanggung_jawab = (session()->getFlashdata('kejujuran_tanggung_jawab')) ? 'is-invalid' : '' ?>
+
+                                <input type="number" id="kejujuran_tanggung_jawab"
+                                    class="form-control <?= $kejujuran_tanggung_jawab ?> nilai"
                                     name="kejujuran_tanggung_jawab" step="any">
+                                <?php if (session()->getFlashdata('kejujuran_tanggung_jawab')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= session()->getFlashdata('kejujuran_tanggung_jawab') ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
@@ -74,8 +118,15 @@
                                 <label for="kesopanan">
                                     <span class="fw-bold">Nilai Kesopanan</span>
                                 </label>
-                                <input type="number" id="kesopanan" class="form-control nilai" name="kesopanan"
-                                    step="any">
+                                <?php $kesopanan = (session()->getFlashdata('kesopanan')) ? 'is-invalid' : '' ?>
+
+                                <input type="number" id="kesopanan" class="form-control <?= $kesopanan ?> nilai"
+                                    name="kesopanan" step="any">
+                                <?php if (session()->getFlashdata('kesopanan')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= session()->getFlashdata('kesopanan') ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
@@ -83,8 +134,15 @@
                                 <label for="kerjasama">
                                     <span class="fw-bold">Nilai Kerjasama</span>
                                 </label>
-                                <input type="number" id="kerjasama" class="form-control nilai" name="kerjasama"
-                                    step="any">
+                                <?php $kerjasama = (session()->getFlashdata('kerjasama')) ? 'is-invalid' : '' ?>
+
+                                <input type="number" id="kerjasama" class="form-control <?= $kerjasama ?> nilai"
+                                    name="kerjasama" step="any">
+                                <?php if (session()->getFlashdata('kerjasama')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= session()->getFlashdata('kerjasama') ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
@@ -109,7 +167,6 @@
                     <!-- Form Tambah Siswa -->
             </div>
             <div class="modal-footer">
-                <input type="hidden" name="id_nilai" id="id_nilai">
                 <input type="hidden" name="id_prakerin" id="id_prakerin">
                 <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
                     <i class="bx bx-x d-block d-sm-none"></i>

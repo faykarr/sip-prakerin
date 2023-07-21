@@ -46,7 +46,7 @@ class Admin extends BaseController
         $valid = $this->validate([
             'npsn' => [
                 'label' => 'NPSN',
-                'rules' => 'required|is_unique[tb_smk.npsn]',
+                'rules' => 'required|is_unique[tb_smk.npsn]|regex_match[/^[0-9]{8}$/]',
                 'errors' => [
                     'required' => '{field} tidak boleh kosong',
                     'is_unique' => '{field} sudah terdaftar',

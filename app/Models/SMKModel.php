@@ -21,12 +21,6 @@ class SMKModel extends Model
     // mendapatkan jumlah siswa prakerin per smk dengan join table tb_prakerin
     public function getCountSiswaPrakerin()
     {
-        // $db = \Config\Database::connect();
-        // $builder = $db->table('tb_smk');
-        // $builder->select('tb_smk.npsn, tb_smk.nama_sekolah, tb_smk.status_sekolah, tb_smk.pembimbing_prakerin, tb_smk.no_hp_pembimbing, tb_smk.jurusan_terdaftar, tb_smk.alamat_sekolah, tb_smk.status_aktif, COUNT(tb_prakerin.nisn) as jumlah_siswa_prakerin');
-        // $builder->join('tb_prakerin', 'tb_prakerin.npsn = tb_smk.npsn');
-        // $builder->groupBy('tb_smk.npsn');
-        // $builder->orderBy('tb_smk.npsn', 'ASC');
         $db = \Config\Database::connect(); // Connect to the database
         $builder = $db->table('tb_smk');
         $builder->select('tb_smk.npsn, tb_smk.nama_sekolah, tb_smk.status_sekolah, tb_smk.pembimbing_prakerin, tb_smk.no_hp_pembimbing, tb_smk.jurusan_terdaftar, tb_smk.alamat_sekolah, tb_smk.status_aktif, COUNT(tb_prakerin.nisn) AS prakerin_count');

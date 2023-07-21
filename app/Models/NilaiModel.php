@@ -27,12 +27,15 @@ class NilaiModel extends Model
     public function insertOrUpdate($data, $id_prakerin)
     {
         $query = $this->db->table($this->table)->where('id_prakerin', $id_prakerin)->get()->getRowArray();
+        $data['id_prakerin'] = $id_prakerin; // Pastikan id_prakerin selalu diset dalam data
+
         if ($query) {
+            // Update data jika sudah ada data nilai dengan id_prakerin tersebut
             $this->db->table($this->table)->where('id_prakerin', $id_prakerin)->update($data);
         } else {
+            // Tambah data baru jika belum ada data nilai dengan id_prakerin tersebut
             $this->db->table($this->table)->insert($data);
         }
     }
-
 
 }

@@ -294,4 +294,125 @@ class General extends BaseController
         return view('general/nilai/index', $data);
     }
 
+    // Method saveNilai
+    public function saveNilai()
+    {
+        // Get id_prakerin from post
+        $id_prakerin = $this->request->getPost('id_prakerin');
+        // Get nilai disiplin from post
+        $disiplin = $this->request->getPost('disiplin');
+        // Get nilai kerja_motivasi from post
+        $kerja_motivasi = $this->request->getPost('kerja_motivasi');
+        // Get nilai kehadiran from post
+        $kehadiran = $this->request->getPost('kehadiran');
+        // Get nilai inisiatif_kreatif from post
+        $inisiatif_kreatif = $this->request->getPost('inisiatif_kreatif');
+        // Get nilai kejujuran_tanggung_jawab from post
+        $kejujuran_tanggung_jawab = $this->request->getPost('kejujuran_tanggung_jawab');
+        // Get nilai kesopanan from post
+        $kesopanan = $this->request->getPost('kesopanan');
+        // Get nilai kerjasama from post
+        $kerjasama = $this->request->getPost('kerjasama');
+        // Get jumlah nilai from post
+        $jumlah_nilai = $this->request->getPost('jumlah_nilai');
+        // Get rata-rata nilai from post
+        $rata_rata = $this->request->getPost('rata_rata');
+
+        // Validation input
+        if (
+            !$this->validate([
+                'disiplin' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Nilai Disiplin harus diisi'
+                    ]
+                ],
+                'kerja_motivasi' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Nilai Kerja/Motivasi harus diisi'
+                    ]
+                ],
+                'kehadiran' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Nilai Kehadiran harus diisi'
+                    ]
+                ],
+                'inisiatif_kreatif' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Nilai Inisiatif/Kreatif harus diisi'
+                    ]
+                ],
+                'kejujuran_tanggung_jawab' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Nilai Kejujuran/Tanggung Jawab harus diisi'
+                    ]
+                ],
+                'kesopanan' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Nilai Kesopanan harus diisi'
+                    ]
+                ],
+                'kerjasama' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Nilai Kerjasama harus diisi'
+                    ]
+                ],
+                'jumlah_nilai' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Jumlah Nilai harus diisi'
+                    ]
+                ],
+                'rata_rata' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Rata-rata harus diisi'
+                    ]
+                ],
+            ])
+        ) {
+            // $errorMessage variable
+            $errorMessage = [
+                'disiplin' => $this->validation->getError('disiplin'),
+                'kerja_motivasi' => $this->validation->getError('kerja_motivasi'),
+                'kehadiran' => $this->validation->getError('kehadiran'),
+                'inisiatif_kreatif' => $this->validation->getError('inisiatif_kreatif'),
+                'kejujuran_tanggung_jawab' => $this->validation->getError('kejujuran_tanggung_jawab'),
+                'kesopanan' => $this->validation->getError('kesopanan'),
+                'kerjasama' => $this->validation->getError('kerjasama'),
+                'jumlah_nilai' => $this->validation->getError('jumlah_nilai'),
+                'rata_rata' => $this->validation->getError('rata_rata'),
+                'error' => 'Nilai gagal diinput.'
+            ];
+            // Set flashdata untuk error
+            session()->setFlashdata($errorMessage);
+            // Jika validasi gagal, kembali ke halaman input kegiatan
+            return redirect()->to('/input-data/nilai')->withInput();
+        }
+
+        // Jika validasi berhasil, simpan data ke database menggunakan method insertOrUpdate yang sudah dibuat di model.
+        $this->nilaiModel->insertOrUpdate([
+            'disiplin' => $disiplin,
+            'kerja_motivasi' => $kerja_motivasi,
+            'kehadiran' => $kehadiran,
+            'inisiatif_kreatif' => $inisiatif_kreatif,
+            'kejujuran_tanggung_jawab' => $kejujuran_tanggung_jawab,
+            'kesopanan' => $kesopanan,
+            'kerjasama' => $kerjasama,
+            'jumlah_nilai' => $jumlah_nilai,
+            'rata_rata' => $rata_rata,
+        ], $id_prakerin);
+
+        // Set session flashdata
+        session()->setFlashdata('success', 'Nilai berhasil diinput.');
+
+        // Redirect to /input-data/nilai
+        return redirect()->to('/input-data/nilai');
+    }
 }

@@ -59,6 +59,7 @@ $routes->post('/input-data/kegiatan/addKegiatan', 'General::addKegiatan');
 $routes->get('/input-data/kegiatan/deleteKegiatan/(:segment)', 'General::deleteKegiatan/$1');
 $routes->post('/input-data/kegiatan/updateKegiatan', 'General::updateKegiatan');
 $routes->get('/input-data/nilai', 'General::nilai');
+$routes->post('/input-data/nilai/saveNilai', 'General::saveNilai');
 
 /*
  * --------------------------------------------------------------------

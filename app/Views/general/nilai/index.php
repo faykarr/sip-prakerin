@@ -93,7 +93,8 @@
                                             data-jujur="<?= $value['kejujuran_tanggung_jawab'] ?>"
                                             data-sopan="<?= $value['kesopanan'] ?>" data-sama="<?= $value['kerjasama'] ?>"
                                             data-jumlah="<?= $value['jumlah_nilai'] ?>"
-                                            data-rata="<?= $value['rata_rata'] ?>">
+                                            data-rata="<?= $value['rata_rata'] ?>" data-id="<?= $value['id_prakerin'] ?>"
+                                            data-sekolah="<?= $value['nama_sekolah'] ?>">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                     </div>
@@ -124,6 +125,8 @@
             const sama = $(this).data('sama');
             const jumlah = $(this).data('jumlah');
             const rata = $(this).data('rata');
+            const id = $(this).data('id');
+            const sekolah = $(this).data('sekolah');
 
             // Set data to modal
             $('#nama_siswa').val(siswa);
@@ -136,6 +139,8 @@
             $('#kerjasama').val(sama);
             $('#jumlah_nilai').val(jumlah);
             $('#rata_rata').val(rata);
+            $('#id_prakerin').val(id);
+            $('#asal_sekolah').val(sekolah);
 
             // Calculate and display the total nilai and rata-rata real-time
             $('.nilai').on('input', function () {
@@ -143,7 +148,7 @@
                 $('.nilai').each(function () {
                     jumlah_nilai += parseInt($(this).val() || 0);
                 });
-                const jumlah_nilai_input = jumlah_nilai / 8; // Jumlah nilai dibagi dengan jumlah input nilai
+                const jumlah_nilai_input = jumlah_nilai / 7; // Jumlah nilai dibagi dengan jumlah input nilai
                 $('#jumlah_nilai').val(jumlah_nilai);
                 $('#rata_rata').val(jumlah_nilai_input.toFixed(2)); // Tampilkan 2 desimal angka di rata-rata
             });
