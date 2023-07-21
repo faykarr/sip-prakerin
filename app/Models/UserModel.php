@@ -10,13 +10,13 @@ class UserModel extends Model
     protected $primaryKey = 'id_user';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['username', 'password', 'first_name', 'last_name', 'level'];
+    protected $allowedFields = ['username', 'password', 'level', 'id_asisten'];
 
     // Join tb_asisten
     public function getAsisten()
     {
         return $this->db->table('tb_user')
-            ->join('tb_asisten', 'tb_asisten.id_user = tb_user.id_user')
+            ->join('tb_asisten', 'tb_asisten.id_asisten = tb_user.id_asisten')
             ->get()->getResultArray();
     }
 

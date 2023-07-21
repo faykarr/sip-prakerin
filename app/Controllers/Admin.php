@@ -3,12 +3,28 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\AsistenModel;
-use App\Models\PrakerinModel;
-use App\Models\SMKModel;
 
 class Admin extends BaseController
 {
+    // Method listUsers
+    function listUsers()
+    {
+        // return view admin/users/index.php
+        $data = [
+            'title' => 'Daftar Pengguna',
+            // Get first_name from session
+            'first_name' => session()->get('first_name'),
+            // Get last_name from session
+            'last_name' => session()->get('last_name'),
+            // Get level from session
+            'level' => session()->get('level'),
+            // Get jabatan from session
+            'jabatan' => session()->get('jabatan'),
+            // Get data from model
+            'users' => $this->userModel->getAsisten()
+        ];
+        return view('admin/users/index', $data);
+    }
     // Method daftar smk
     public function listSmk()
     {

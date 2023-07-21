@@ -66,6 +66,8 @@ class Filters extends BaseConfig
                     'cetak-data',
                     'cetak-data/*',
                     'listUsers',
+                    'listUsers/*',
+                    'listUsers/*/*',
                     'logout'
                 ]
             ],
