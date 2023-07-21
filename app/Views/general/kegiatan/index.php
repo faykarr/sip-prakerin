@@ -53,7 +53,6 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th width="12%">NIM</th>
                             <th width="15%%">Nama Asisten</th>
                             <th>Tanggal</th>
                             <th>Ruang Lab</th>
@@ -68,9 +67,6 @@
                             <tr>
                                 <td>
                                     <?= $i++; ?>
-                                </td>
-                                <td>
-                                    <?= $k['nim']; ?>
                                 </td>
                                 <td>
                                     <?= $k['nama_asisten']; ?>

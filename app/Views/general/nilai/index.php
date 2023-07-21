@@ -137,8 +137,8 @@
             $('#kejujuran_tanggung_jawab').val(jujur);
             $('#kesopanan').val(sopan);
             $('#kerjasama').val(sama);
-            $('#jumlah_nilai').val(jumlah);
-            $('#rata_rata').val(rata);
+            $('.jumlah_nilai').val(jumlah);
+            $('.rata_rata').val(rata);
             $('#id_prakerin').val(id);
             $('#asal_sekolah').val(sekolah);
 
@@ -149,8 +149,8 @@
                     jumlah_nilai += parseInt($(this).val() || 0);
                 });
                 const jumlah_nilai_input = jumlah_nilai / 7; // Jumlah nilai dibagi dengan jumlah input nilai
-                $('#jumlah_nilai').val(jumlah_nilai);
-                $('#rata_rata').val(jumlah_nilai_input.toFixed(2)); // Tampilkan 2 desimal angka di rata-rata
+                $('.jumlah_nilai').val(jumlah_nilai);
+                $('.rata_rata').val(jumlah_nilai_input.toFixed(2)); // Tampilkan 2 desimal angka di rata-rata
             });
 
             // Call Modal Edit

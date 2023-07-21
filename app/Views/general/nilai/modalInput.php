@@ -150,8 +150,7 @@
                                 <label for="jumlah_nilai">
                                     <span class="fw-bold">Jumlah Nilai</span>
                                 </label>
-                                <input type="number" id="jumlah_nilai" class="form-control" name="jumlah_nilai"
-                                    step="any" readonly>
+                                <input type="number" class="form-control jumlah_nilai" step="any" disabled>
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
@@ -159,8 +158,7 @@
                                 <label for="rata_rata">
                                     <span class="fw-bold">Rata-rata Nilai</span>
                                 </label>
-                                <input type="number" id="rata_rata" class="form-control" name="rata_rata" step="any"
-                                    readonly>
+                                <input type="number" class="form-control rata_rata" step="any" disabled>
                             </div>
                         </div>
                     </div>
@@ -168,6 +166,8 @@
             </div>
             <div class="modal-footer">
                 <input type="hidden" name="id_prakerin" id="id_prakerin">
+                <input type="hidden" name="jumlah_nilai" class="jumlah_nilai" step="any">
+                <input type="hidden" name="rata_rata" class="rata_rata" step="any">
                 <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
                     <i class="bx bx-x d-block d-sm-none"></i>
                     <span class="d-none d-sm-block">Close</span>
