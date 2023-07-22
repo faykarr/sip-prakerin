@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 21, 2023 at 08:19 PM
+-- Generation Time: Jul 22, 2023 at 08:12 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -136,16 +136,16 @@ INSERT INTO `tb_kegiatan` (`id_kegiatan`, `id_asisten`, `asisten_pembantu`, `tan
 CREATE TABLE `tb_nilai` (
   `id_nilai` int(11) UNSIGNED NOT NULL,
   `id_prakerin` int(11) NOT NULL,
-  `disiplin` int(11) NOT NULL,
-  `kerja_motivasi` int(11) NOT NULL,
-  `kehadiran` int(11) NOT NULL,
-  `inisiatif_kreatif` int(11) NOT NULL,
-  `kejujuran_tanggung_jawab` int(11) NOT NULL,
-  `kesopanan` int(11) NOT NULL,
-  `kerjasama` int(11) NOT NULL,
-  `jumlah_nilai` int(11) NOT NULL,
-  `rata_rata` decimal(10,1) NOT NULL,
-  `predikat` varchar(32) NOT NULL,
+  `disiplin` int(11) DEFAULT NULL,
+  `kerja_motivasi` int(11) DEFAULT NULL,
+  `kehadiran` int(11) DEFAULT NULL,
+  `inisiatif_kreatif` int(11) DEFAULT NULL,
+  `kejujuran_tanggung_jawab` int(11) DEFAULT NULL,
+  `kesopanan` int(11) DEFAULT NULL,
+  `kerjasama` int(11) DEFAULT NULL,
+  `jumlah_nilai` int(11) DEFAULT NULL,
+  `rata_rata` decimal(10,1) DEFAULT NULL,
+  `predikat` varchar(32) DEFAULT NULL,
   `status_nilai` enum('Dinilai','Belum Dinilai') NOT NULL DEFAULT 'Belum Dinilai'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -154,9 +154,10 @@ CREATE TABLE `tb_nilai` (
 --
 
 INSERT INTO `tb_nilai` (`id_nilai`, `id_prakerin`, `disiplin`, `kerja_motivasi`, `kehadiran`, `inisiatif_kreatif`, `kejujuran_tanggung_jawab`, `kesopanan`, `kerjasama`, `jumlah_nilai`, `rata_rata`, `predikat`, `status_nilai`) VALUES
-(4, 11, 89, 87, 80, 90, 93, 98, 87, 624, '89.1', 'Sempurna', 'Dinilai'),
-(6, 13, 100, 100, 97, 96, 98, 97, 97, 685, '97.9', 'Sempurna', 'Dinilai'),
-(7, 18, 89, 87, 80, 65, 76, 78, 90, 565, '80.7', 'Pujian', 'Dinilai');
+(4, 11, 89, 98, 80, 90, 93, 98, 87, 635, '90.7', 'Sempurna', 'Dinilai'),
+(6, 13, 100, 87, 97, 96, 98, 97, 97, 672, '96.0', 'Sempurna', 'Dinilai'),
+(7, 18, 89, 87, 80, 65, 90, 78, 90, 579, '82.7', 'Pujian', 'Dinilai'),
+(8, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Belum Dinilai');
 
 --
 -- Triggers `tb_nilai`
@@ -243,8 +244,9 @@ CREATE TABLE `tb_prakerin` (
 
 INSERT INTO `tb_prakerin` (`id_prakerin`, `nisn`, `npsn`, `nama_siswa`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `alamat_siswa`, `kelas`, `jurusan`, `no_hp_siswa`, `tahun_ajaran`, `nama_orang_tua`, `no_hp_orang_tua`, `periode_awal`, `periode_akhir`, `status_prakerin`) VALUES
 (11, 98787675, 98787675, 'Nasyath Faykar', 'Pekalongan', '2002-11-30', 'Laki-laki', 'Jalan KH Ahmad Dahlan Tirto Gg. 7 No.31 Pekalongan Barat', '4M51', 'TKJ', '088806923500', '2023/2024', 'Nanang Akhmad Syamton', '088806923500', '2023-07-11', '2023-07-01', 'Pencabutan'),
-(13, 98787675, 98787675, 'Haikal Syarif', 'Kota Pemalang', '2002-10-18', 'Perempuan', 'Pekalongan, Tirto', 'XII', 'RPL', '085695685452', '2023/2024', 'Mukti Jaya', '085696535215', '2023-07-06', '2023-07-22', 'Aktif'),
-(18, 2147483647, 87879098, 'Muhammad Nauval Azhar', 'Bogor', '2002-12-31', 'Laki-laki', 'Bogor, Jakarta', 'XII', 'TKJ', '085695685452', '2023/2024', 'Mukti Jaya', '085674569856', '2023-07-22', '2024-02-22', 'Aktif');
+(13, 98787675, 98787675, 'Haikal Syarif', 'Kota Pemalang', '2002-10-18', 'Perempuan', 'Pekalongan, Tirto', 'XII', 'RPL', '085695685452', '2023/2024', 'Mukti Jaya', '085696535215', '2023-07-06', '2023-07-22', 'Pencabutan'),
+(18, 2147483647, 87879098, 'Muhammad Nauval Azhar', 'Bogor', '2002-12-31', 'Laki-laki', 'Bogor, Jakarta', 'XII', 'TKJ', '085695685452', '2023/2024', 'Mukti Jaya', '085674569856', '2023-07-22', '2024-02-22', 'Aktif'),
+(20, 2147483647, 2147483647, 'Hafid Firman Febrian', 'Pekalongan', '2004-01-01', 'Laki-laki', 'Pekalongan Barat', 'XII', 'RPL', '085695685452', '2023/2024', 'Wildan VK', '085674569856', '2023-07-23', '2023-07-23', 'Aktif');
 
 --
 -- Triggers `tb_prakerin`
@@ -267,6 +269,13 @@ CREATE TRIGGER `tr_update_update_status_prakerin` BEFORE UPDATE ON `tb_prakerin`
                     SET NEW.status_prakerin = 'Aktif';
                 END IF;
             END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_after_insert_prakerin` AFTER INSERT ON `tb_prakerin` FOR EACH ROW BEGIN
+    INSERT INTO tb_nilai (id_prakerin, disiplin, kerja_motivasi, kehadiran, inisiatif_kreatif, kejujuran_tanggung_jawab, kesopanan, kerjasama, jumlah_nilai, rata_rata, predikat, status_nilai)
+    VALUES (NEW.id_prakerin, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+END
 $$
 DELIMITER ;
 
@@ -316,7 +325,7 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id_user`, `id_asisten`, `username`, `password`, `level`) VALUES
-(1, 1, '21.230.0194', 'cb3496cb7a8d66cf399b3043b7668483', 'admin'),
+(1, 1, '21.230.0194', '501108d0c41b2990b45da1e39bde5cff', 'admin'),
 (2, 2, '21.230.0189', 'da292cc5b587278acdc032e5b8a1c820', 'user'),
 (3, 3, '21.230.0175', '365b4a5a9e902c5d006f1a29bfbe55ee', 'admin'),
 (4, 4, '21.230.0144', '6d5de4b160a3bbe5cc76ead0856a1790', 'user'),
@@ -398,19 +407,19 @@ ALTER TABLE `tb_kegiatan`
 -- AUTO_INCREMENT for table `tb_nilai`
 --
 ALTER TABLE `tb_nilai`
-  MODIFY `id_nilai` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_nilai` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tb_prakerin`
 --
 ALTER TABLE `tb_prakerin`
-  MODIFY `id_prakerin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_prakerin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

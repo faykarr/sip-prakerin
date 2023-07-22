@@ -40,14 +40,16 @@ class Filters extends BaseConfig
                 'except' => [
                     '/',
                     'login',
-                    'login/*'
+                    'login/*',
+                    'prakerin/api'
                 ]
             ],
             'userfilter' => [
                 'except' => [
                     '/',
                     'login',
-                    'login/*'
+                    'login/*',
+                    'prakerin/api'
                 ]
             ],
         ],
@@ -68,7 +70,8 @@ class Filters extends BaseConfig
                     'users',
                     'users/*',
                     'users/*/*',
-                    'logout'
+                    'logout',
+                    'prakerin/api'
                 ]
             ],
             'userfilter' => [
@@ -79,7 +82,8 @@ class Filters extends BaseConfig
                     'input-data',
                     'input-data/*',
                     'input-data/*/*',
-                    'logout'
+                    'logout',
+                    'prakerin/api'
                 ]
             ],
             'toolbar',

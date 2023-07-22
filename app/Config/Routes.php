@@ -62,6 +62,8 @@ $routes->get('/input-data/kegiatan/deleteKegiatan/(:segment)', 'General::deleteK
 $routes->post('/input-data/kegiatan/updateKegiatan', 'General::updateKegiatan');
 $routes->get('/input-data/nilai', 'General::nilai');
 $routes->post('/input-data/nilai/saveNilai', 'General::saveNilai');
+// Show the api data
+$routes->get('/prakerin/api', 'ApiController::index');
 
 /*
  * --------------------------------------------------------------------
