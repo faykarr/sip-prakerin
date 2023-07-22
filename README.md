@@ -10,7 +10,7 @@ Repository ini berisi proyek SIP-Prakerin (Sistem Informasi Prakerin) yang dikem
   <li> Framework          : Codeigniter 4 </li>
   <li> Database           : MySQL </li>
   <li> Frontend           : HTML, CSS, Bootstrap 5 </li>
-  <li> Template           : Mazer Admin Dashboard </li>
+  <li> Template           : <a href="https://github.com/zuramai/mazer">Mazer Admin Dashboard</a> </li>
 </ul>
 
 ## Sistem ini sedang dalam pengembangan.
@@ -70,3 +70,6 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 
 - Profile view.
 <img src="./public/assets/static/images/bg/profile-view.png"> <br>
+
+- Manage Account view.
+<img src="./public/assets/static/images/bg/reset-password.png"> <br>
