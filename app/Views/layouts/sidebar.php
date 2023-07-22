@@ -127,8 +127,8 @@
 
                     <li class="sidebar-title">Account</li>
 
-                    <li class="sidebar-item <?= ($uri->getSegment(1) === 'listUsers') ? 'active' : '' ?>">
-                        <a href="/listUsers" class="sidebar-link">
+                    <li class="sidebar-item <?= ($uri->getSegment(1) === 'users') ? 'active' : '' ?>">
+                        <a href="/users/list" class="sidebar-link">
                             <i class="bi bi-people-fill"></i>
                             <span>Users</span>
                         </a>

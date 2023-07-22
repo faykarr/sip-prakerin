@@ -18,7 +18,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="/input-data/nilai">Users Account</a>
+                            <a href="/users/list">Users Account</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
                             Daftar Akun Asisten
@@ -69,11 +69,11 @@
                                 </td>
                                 <td>
                                     <!-- Button to reset password same as username -->
-                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#resetPassword<?= $value['id_user']; ?>">
+                                    <a href="/users/reset/<?= $value['id_asisten']; ?>" type="button"
+                                        class="btn btn-danger btn-sm reset">
                                         Reset
                                         <i class="fa-solid fa-lock"></i>
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

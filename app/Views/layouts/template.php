@@ -138,11 +138,32 @@
             }
         })
 
+        // Delete data
         $(document).on('click', '.delete', function () {
             var getURL = $(this).attr('href');
             Swal2.fire({
                 icon: "warning",
                 title: "Are you sure want to delete this data?",
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonColor: '#B31312',
+                confirmButtonText: 'Yes',
+                cancelButtonColor: '#3085d6',
+                cancelButtonText: 'No'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    window.location.href = getURL;
+                }
+            })
+            return false;
+        });
+
+        // Reset Password
+        $(document).on('click', '.reset', function () {
+            var getURL = $(this).attr('href');
+            Swal2.fire({
+                icon: "warning",
+                title: "Are you sure want to reset this user's password?",
                 showCancelButton: true,
                 showConfirmButton: true,
                 confirmButtonColor: '#B31312',

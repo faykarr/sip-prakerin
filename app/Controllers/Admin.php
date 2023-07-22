@@ -25,6 +25,29 @@ class Admin extends BaseController
         ];
         return view('admin/users/index', $data);
     }
+
+    // Method resetPassword same with username
+    function resetPassword($id)
+    {
+        // Get data from database
+        $data = $this->userModel->find($id);
+
+        // Set new password
+        $newPassword = $data['username'];
+
+        // Update password
+        $this->userModel->save([
+            'id_user' => $id,
+            'password' => md5($newPassword)
+        ]);
+
+        // Set flashdata success
+        session()->setFlashdata('success', 'Password berhasil direset');
+
+        // Redirect to list users
+        return redirect()->to('/users/list');
+    }
+
     // Method daftar smk
     public function listSmk()
     {
