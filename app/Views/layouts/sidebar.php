@@ -86,11 +86,13 @@
                     </a>
 
                     <ul class="submenu">
-                        <li class="submenu-item <?= ($uri->getSegment(2) === 'kegiatan') ? 'active' : '' ?>">
+                        <li
+                            class="submenu-item <?= ($uri->getSegment(1) === 'input-data' && $uri->getSegment(2) === 'kegiatan') ? 'active' : '' ?>">
                             <a href="/input-data/kegiatan" class="submenu-link">Input Kegiatan Harian</a>
                         </li>
 
-                        <li class="submenu-item <?= ($uri->getSegment(2) === 'nilai') ? 'active' : '' ?>">
+                        <li
+                            class="submenu-item <?= ($uri->getSegment(1) === 'input-data' && $uri->getSegment(2) === 'nilai') ? 'active' : '' ?>">
                             <a href="/input-data/nilai" class="submenu-link">Input Nilai Siswa</a>
                         </li>
                     </ul>

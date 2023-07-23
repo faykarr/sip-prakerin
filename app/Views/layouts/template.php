@@ -122,7 +122,15 @@
 
     <script src="/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
     <script src="/assets/extensions/moment/moment.min.js"></script>
-    <script src="/assets/static/js/pages/simple-datatables.js"></script>
+    <?php
+    $uri = service('uri');
+    // Check if the segment 1 is not cetak-data
+    if ($uri->getSegment(1) != 'cetak-data') {
+        echo '<script src="/assets/static/js/pages/simple-datatables.js"></script>';
+    } elseif ($uri->getSegment(1) == 'cetak-data') {
+        echo '<script src="/assets/static/js/pages/date-filter.js"></script>';
+    }
+    ?>
 
 
     <script src="/assets/extensions/flatpickr/flatpickr.min.js"></script>

@@ -715,4 +715,25 @@ class Admin extends BaseController
         ];
         return view('admin/master-data/asisten/index', $data);
     }
+
+    // Method cetakKegiatan
+    public function cetakKegiatan()
+    {
+        $data = [
+            'title' => 'Cetak Laporan Kegiatan',
+            // Get first_name from session
+            'first_name' => session()->get('first_name'),
+            // Get last_name from session
+            'last_name' => session()->get('last_name'),
+            // Get jabatan from session
+            'jabatan' => session()->get('jabatan'),
+            // Get level from session
+            'level' => session()->get('level'),
+            // Get kegiatan from model
+            'kegiatan' => $this->kegiatanModel->getKegiatan(),
+        ];
+
+        // return view to admin/cetak-data/kegiatan with data
+        return view('admin/cetak-data/kegiatan', $data);
+    }
 }
