@@ -68,6 +68,7 @@ class Filters extends BaseConfig
                     'cetak-data',
                     'cetak-data/*',
                     'cetak-data/*/*',
+                    'cetak-data/*/*/*',
                     'users',
                     'users/*',
                     'users/*/*',

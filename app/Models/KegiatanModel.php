@@ -30,5 +30,27 @@ class KegiatanModel extends Model
             ->get()->getResultArray();
     }
 
+    // Get data kegiatan by date range
+    public function getKegiatanByDateRange($date_range = null)
+    {
+        // Query untuk mencari data kegiatan berdasarkan date range
+        $query = $this->db->table('tb_kegiatan')
+            ->join('tb_asisten', 'tb_asisten.id_asisten = tb_kegiatan.id_asisten');
 
+        // Filter data berdasarkan periode tanggal jika tanggal tidak kosong
+        if ($date_range) {
+            list($start_date, $end_date) = explode(' to ', $date_range);
+            $formattedStartDate = date('Y-m-d', strtotime($start_date));
+            $formattedEndDate = date('Y-m-d', strtotime($end_date));
+
+            $query->where('tb_kegiatan.tanggal >=', $formattedStartDate)
+                ->where('tb_kegiatan.tanggal <=', $formattedEndDate);
+        }
+
+        // Eksekusi query
+        $result = $query->get();
+
+        // Kembalikan hasil query dalam bentuk array
+        return $result->getResultArray();
+    }
 }

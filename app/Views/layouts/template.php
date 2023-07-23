@@ -8,7 +8,7 @@
         <?= $title; ?> - SIP-Prakerin
     </title>
 
-    <link rel="shortcut icon" href="/assets/compiled/png/logo-upt.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="/assets/static/images/logo/logo-upt.png" type="image/x-icon" />
     <link rel="stylesheet" href="/assets/extensions/simple-datatables/style.css" />
     <link rel="stylesheet" href="/assets/compiled/css/table-datatable.css" />
     <link rel="stylesheet" href="/assets/compiled/css/app.css" />

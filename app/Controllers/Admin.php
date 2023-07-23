@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+// Dompdf
+use Dompdf\Dompdf;
 
 class Admin extends BaseController
 {
@@ -735,5 +737,59 @@ class Admin extends BaseController
 
         // return view to admin/cetak-data/kegiatan with data
         return view('admin/cetak-data/kegiatan', $data);
+    }
+
+    // Method printKegiatan
+    public function printKegiatan($date_range = null)
+    {
+        // Ambil data kegiatan dari model (sesuaikan dengan model yang Anda gunakan)
+        $data = [
+            'kegiatan' => $this->kegiatanModel->getKegiatanByDateRange($date_range),
+            'start_date' => null,
+            'end_date' => null
+        ];
+
+        // Inisialisasi variabel $start_date dan $end_date
+        $start_date = null;
+        $end_date = null;
+
+        // Filter data berdasarkan periode tanggal (jika tanggal dipilih)
+        if ($date_range) {
+            list($start_date, $end_date) = explode(' to ', $date_range);
+
+            // Konversi format tanggal dari d-m-Y ke Y-m-d (format yang cocok untuk query database)
+            $data['start_date'] = date('Y-m-d', strtotime($start_date));
+            $data['end_date'] = date('Y-m-d', strtotime($end_date));
+        }
+
+        // Render view kegiatan dalam bentuk HTML
+        $html = view('admin/cetak-data/kegiatan_pdf', $data);
+
+        // Buat objek Dompdf
+        $dompdf = new Dompdf();
+
+        // Load HTML kegiatan ke dalam Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Opsional) Atur ukuran dan orientasi halaman PDF
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render HTML ke PDF
+        $dompdf->render();
+
+        // Generate nama file PDF (sesuaikan dengan kebutuhan)
+        $filename = 'laporan_kegiatan_prakerin';
+
+        // Jika tanggal dipilih, tambahkan periode tanggal ke dalam nama file
+        if ($date_range) {
+            $filename .= '_' . str_replace(' ', '_', $date_range);
+        } else {
+            $filename .= '_' . date('F_Y');
+        }
+
+        $filename .= '.pdf';
+
+        // Unduh file PDF ke pengguna
+        $dompdf->stream($filename, ['Attachment' => true]);
     }
 }

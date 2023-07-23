@@ -63,6 +63,8 @@ $routes->post('/input-data/kegiatan/updateKegiatan', 'General::updateKegiatan');
 $routes->get('/input-data/nilai', 'General::nilai');
 $routes->post('/input-data/nilai/saveNilai', 'General::saveNilai');
 $routes->get('/cetak-data/kegiatan', 'Admin::cetakKegiatan');
+$routes->get('/cetak-data/kegiatan/print/', 'Admin::printKegiatan');
+$routes->get('/cetak-data/kegiatan/print/(:any)', 'Admin::printKegiatan/$1');
 // Show the api data
 $routes->get('/prakerin/api', 'ApiController::index');
 
