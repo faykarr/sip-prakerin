@@ -749,17 +749,23 @@ class Admin extends BaseController
             'end_date' => null
         ];
 
-        // Inisialisasi variabel $start_date dan $end_date
-        $start_date = null;
-        $end_date = null;
-
         // Filter data berdasarkan periode tanggal (jika tanggal dipilih)
         if ($date_range) {
-            list($start_date, $end_date) = explode(' to ', $date_range);
+            $date_range_parts = explode(' to ', $date_range);
 
-            // Konversi format tanggal dari d-m-Y ke Y-m-d (format yang cocok untuk query database)
-            $data['start_date'] = date('Y-m-d', strtotime($start_date));
-            $data['end_date'] = date('Y-m-d', strtotime($end_date));
+            // Pastikan explode menghasilkan dua elemen
+            if (count($date_range_parts) === 2) {
+                $start_date = trim($date_range_parts[0]);
+                $end_date = trim($date_range_parts[1]);
+
+                // Konversi format tanggal dari d-m-Y ke Y-m-d (format yang cocok untuk query database)
+                $data['start_date'] = date('Y-m-d', strtotime($start_date));
+
+                // Periksa apakah tanggal akhir sudah ada atau kosong
+                if (!empty($end_date)) {
+                    $data['end_date'] = date('Y-m-d', strtotime($end_date));
+                }
+            }
         }
 
         // Render view kegiatan dalam bentuk HTML
@@ -778,18 +784,15 @@ class Admin extends BaseController
         $dompdf->render();
 
         // Generate nama file PDF (sesuaikan dengan kebutuhan)
-        $filename = 'laporan_kegiatan_prakerin';
+        $filename = 'laporan_kegiatan';
 
         // Jika tanggal dipilih, tambahkan periode tanggal ke dalam nama file
-        if ($date_range) {
-            $filename .= '_' . str_replace(' ', '_', $date_range);
-        } else {
-            $filename .= '_' . date('F_Y');
-        }
+        $filename .= ($date_range) ? '_' . str_replace(' ', '_', $date_range) : '_' . date('F_Y');
 
         $filename .= '.pdf';
 
         // Unduh file PDF ke pengguna
         $dompdf->stream($filename, ['Attachment' => true]);
     }
+
 }

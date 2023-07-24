@@ -30,7 +30,6 @@ class KegiatanModel extends Model
             ->get()->getResultArray();
     }
 
-    // Get data kegiatan by date range
     public function getKegiatanByDateRange($date_range = null)
     {
         // Query untuk mencari data kegiatan berdasarkan date range
@@ -39,12 +38,18 @@ class KegiatanModel extends Model
 
         // Filter data berdasarkan periode tanggal jika tanggal tidak kosong
         if ($date_range) {
-            list($start_date, $end_date) = explode(' to ', $date_range);
-            $formattedStartDate = date('Y-m-d', strtotime($start_date));
-            $formattedEndDate = date('Y-m-d', strtotime($end_date));
+            $date_range_parts = explode(' to ', $date_range);
+            $formattedStartDate = date('Y-m-d', strtotime(trim($date_range_parts[0])));
 
-            $query->where('tb_kegiatan.tanggal >=', $formattedStartDate)
-                ->where('tb_kegiatan.tanggal <=', $formattedEndDate);
+            // Periksa apakah tanggal akhir ada dalam array
+            if (isset($date_range_parts[1]) && !empty(trim($date_range_parts[1]))) {
+                $formattedEndDate = date('Y-m-d', strtotime(trim($date_range_parts[1])));
+                $query->where('tb_kegiatan.tanggal >=', $formattedStartDate)
+                    ->where('tb_kegiatan.tanggal <=', $formattedEndDate);
+            } else {
+                // Jika tanggal akhir tidak ada dalam array, gunakan hanya tanggal awal sebagai filter
+                $query->where('tb_kegiatan.tanggal', $formattedStartDate);
+            }
         }
 
         // Eksekusi query
@@ -53,4 +58,5 @@ class KegiatanModel extends Model
         // Kembalikan hasil query dalam bentuk array
         return $result->getResultArray();
     }
+
 }
