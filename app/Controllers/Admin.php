@@ -795,4 +795,56 @@ class Admin extends BaseController
         $dompdf->stream($filename, ['Attachment' => true]);
     }
 
+    // Method cetakNilai
+    public function cetakNilai()
+    {
+        $data = [
+            'title' => 'Cetak Laporan Nilai',
+            // Get first_name from session
+            'first_name' => session()->get('first_name'),
+            // Get last_name from session
+            'last_name' => session()->get('last_name'),
+            // Get jabatan from session
+            'jabatan' => session()->get('jabatan'),
+            // Get level from session
+            'level' => session()->get('level'),
+            // Get nilai from model
+            'nilai' => $this->nilaiModel->getAllNilai(),
+        ];
+
+        // return view to admin/cetak-data/nilai with data
+        return view('admin/cetak-data/nilai', $data);
+    }
+
+    // Method printNilai
+    public function printNilai($id)
+    {
+        // Ambil data nilai dari model (sesuaikan dengan model yang Anda gunakan)
+        $data = [
+            'nilai' => $this->nilaiModel->getNilaiById($id)
+        ];
+
+        // Render view nilai dalam bentuk HTML
+        $html = view('admin/cetak-data/nilai_pdf', $data);
+
+        // Buat objek Dompdf
+        $dompdf = new Dompdf();
+
+        // Load HTML nilai ke dalam Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Opsional) Atur ukuran dan orientasi halaman PDF
+        $dompdf->setPaper('F4', 'portrait');
+
+        // Render HTML ke PDF
+        $dompdf->render();
+
+        // Generate nama file PDF (sesuaikan dengan kebutuhan)
+        $filename = 'laporan_nilai';
+
+        $filename .= '.pdf';
+
+        // Unduh file PDF ke pengguna
+        $dompdf->stream($filename, ['Attachment' => true]);
+    }
 }

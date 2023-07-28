@@ -23,6 +23,17 @@ class NilaiModel extends Model
             ->get()->getResultArray();
     }
 
+    // Join table tb_nilai and tb_prakerin
+    public function getNilaiById($id)
+    {
+        return $this->db->table('tb_prakerin')
+            ->select('tb_nilai.id_nilai, tb_prakerin.id_prakerin, tb_smk.npsn, tb_prakerin.nama_siswa, tb_smk.nama_sekolah, tb_nilai.disiplin, tb_nilai.kerja_motivasi, tb_nilai.kehadiran, tb_nilai.inisiatif_kreatif, tb_nilai.kejujuran_tanggung_jawab, tb_nilai.kesopanan, tb_nilai.kerjasama, tb_nilai.jumlah_nilai, tb_nilai.rata_rata, tb_nilai.predikat, tb_nilai.status_nilai, tb_prakerin.nisn, tb_prakerin.tempat_lahir, tb_prakerin.tanggal_lahir, tb_prakerin.kelas, tb_prakerin.jurusan, tb_prakerin.periode_akhir')
+            ->join('tb_nilai', 'tb_nilai.id_prakerin = tb_prakerin.id_prakerin', 'left')
+            ->join('tb_smk', 'tb_smk.npsn = tb_prakerin.npsn', 'left')
+            ->where('tb_nilai.id_nilai', $id)
+            ->get()->getRowArray();
+    }
+
     // Insert or update data with prakerin id
     public function insertOrUpdate($data, $id_prakerin)
     {

@@ -118,10 +118,10 @@
                                 <a href="/cetak-data/nilai" class="submenu-link">Cetak Nilai Siswa</a>
                             </li>
 
-                            <li
+                            <!-- <li
                                 class="submenu-item <?= ($uri->getSegment(1) === 'cetak-data' && $uri->getSegment(2) === 'sertifikat') ? 'active' : '' ?>">
                                 <a href="/cetak-data/sertifikat" class="submenu-link">Cetak Sertifikat Prakerin</a>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
 
