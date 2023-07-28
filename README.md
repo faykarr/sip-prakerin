@@ -1,4 +1,5 @@
 # SIP-Prakerin
+
 <b>Sistem Informasi Prakerin</b>.
 <br>
 Repository ini berisi proyek SIP-Prakerin (Sistem Informasi Prakerin) yang dikembangkan untuk mempermudah proses manajemen kegiatan magang SMK di UPT Komputer, kampus STMIK Widya Pratama. Sistem ini bertujuan untuk meningkatkan efisiensi dalam mengelola informasi dan memfasilitasi koordinasi antara SMK dan UPT Komputer dalam pelaksanaan kegiatan prakerin.
@@ -15,28 +16,15 @@ Repository ini berisi proyek SIP-Prakerin (Sistem Informasi Prakerin) yang dikem
 
 ## Sistem ini sedang dalam pengembangan.
 
-Sistem yang saya buat sedang dalam tahap pengembangan untuk memenuhi tugas mata kuliah Pengembangan Aplikasi Enterprise.
+Sistem yang saya buat sedang dalam tahap pengembangan untuk memenuhi tugas mata kuliah Pengembangan Aplikasi Enterprise. Sistem ini hanya bisa dijalankan dengan local development server. Defaultnya adalah localhost:8080. <br>
 
-## Codeigniter 4
-
-## What is CodeIgniter?
-
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
-
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
-
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
-
-The user guide corresponding to the latest version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
-
-## Installation
+## Cara Penggunaan
 
 Go to project destination & run `composer install` in terminal to start this project. <br>
-Note : `The migration is currently error!, do the importing SQL in database instead of migration.`
+Note : `The migration is currently error!, do the importing SQL in database instead of migration.` <br>
+`The SQL file is in the SQL directory of this project.` <br>
+
+Cara menjalankan project ini adalah dengan menjalankan perintah `php spark serve` di terminal. <br>
 
 ## Setup
 
@@ -65,11 +53,12 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
 
 ## Some Screenshot of the Program
+
 - Master Data SMK view.
-<img src="./public/assets/static/images/bg/master-smk.png"> <br>
+  <img src="./public/assets/static/images/bg/master-smk.png"> <br>
 
 - Profile view.
-<img src="./public/assets/static/images/bg/profile-view.png"> <br>
+  <img src="./public/assets/static/images/bg/profile-view.png"> <br>
 
 - Manage Account view.
-<img src="./public/assets/static/images/bg/reset-password.png"> <br>
+  <img src="./public/assets/static/images/bg/reset-password.png"> <br>

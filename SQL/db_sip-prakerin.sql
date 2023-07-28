@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2023 at 08:12 PM
+-- Generation Time: Jul 28, 2023 at 01:54 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -20,34 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_sip-prakerin`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `migrations`
---
-
-CREATE TABLE `migrations` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `version` varchar(255) NOT NULL,
-  `class` varchar(255) NOT NULL,
-  `group` varchar(255) NOT NULL,
-  `namespace` varchar(255) NOT NULL,
-  `time` int(11) NOT NULL,
-  `batch` int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`, `batch`) VALUES
-(1, '2023-06-07-162922', 'App\\Database\\Migrations\\UserTable', 'default', 'App', 1688650240, 1),
-(2, '2023-06-25-155242', 'App\\Database\\Migrations\\SMKTable', 'default', 'App', 1688650240, 1),
-(3, '2023-07-02-090554', 'App\\Database\\Migrations\\PrakerinTable', 'default', 'App', 1688650240, 1),
-(4, '2023-07-02-180332', 'App\\Database\\Migrations\\AsistenTable', 'default', 'App', 1688650240, 1),
-(5, '2023-07-05-150449', 'App\\Database\\Migrations\\KegiatanTable', 'default', 'App', 1688650240, 1),
-(6, '2023-07-06-120720', 'App\\Database\\Migrations\\NilaiTable', 'default', 'App', 1688650240, 1);
 
 -- --------------------------------------------------------
 
@@ -125,7 +97,14 @@ INSERT INTO `tb_kegiatan` (`id_kegiatan`, `id_asisten`, `asisten_pembantu`, `tan
 (3, 4, 'Muhammad Fadli', '2023-07-13', '05:04:00', 'Lab Komputer 3', 'Perkenalan siswa dalam kegiatan praktik kerja industri'),
 (4, 2, 'Zaky Farid Harun', '2023-07-13', '09:22:00', 'Lab Komputer 6', 'Pembuatan database MySQL '),
 (5, 1, 'Tidak Ada', '2023-07-21', '18:12:00', 'Lab Komputer 3', 'Pembersihan lab komputer masing-masing dibantu siswa magang'),
-(6, 2, 'Tidak Ada', '2023-07-21', '18:16:00', 'Lab Komputer 5', 'Membuat website fullstack dengan Codeigniter 4 dan ReactJS');
+(6, 2, 'Tidak Ada', '2023-07-21', '18:16:00', 'Lab Komputer 5', 'Membuat website fullstack dengan Codeigniter 4 dan ReactJS'),
+(7, 2, 'Tidak Ada', '2023-07-24', '02:14:00', 'Lab Komputer 4', 'Mengikuti kegiatan perkuliahan dengan mata kuliah Visualisasi Data & Data Science'),
+(8, 1, 'Melidya Sholehati Kurniadani', '2023-07-24', '05:23:00', 'Lab Komputer 1', 'Test menambahkan data kegiatan 1'),
+(9, 1, 'Zaky Farid Harun', '2023-07-24', '05:23:00', 'Lab Komputer 2', 'Tes menambahkan data kegiatan 2'),
+(10, 1, 'Muhammad Fadli', '2023-07-24', '05:24:00', 'Lab Komputer 3', 'Tes menambahkan kegiatan 3'),
+(11, 1, 'Zaky Farid Harun', '2023-07-24', '05:24:00', 'Lab Komputer 4', 'Tes menambahkan kegiatan 4'),
+(12, 1, 'RR. Nadia Amalia Putri', '2023-07-24', '05:25:00', 'Lab Komputer 6', 'Tes menambahkan kegiatan 6'),
+(13, 1, 'Muhammad Fadli', '2023-07-28', '11:47:00', 'Lab Komputer 1', 'Test menambahkan data kegiatan 1');
 
 -- --------------------------------------------------------
 
@@ -157,7 +136,8 @@ INSERT INTO `tb_nilai` (`id_nilai`, `id_prakerin`, `disiplin`, `kerja_motivasi`,
 (4, 11, 89, 98, 80, 90, 93, 98, 87, 635, '90.7', 'Sempurna', 'Dinilai'),
 (6, 13, 100, 87, 97, 96, 98, 97, 97, 672, '96.0', 'Sempurna', 'Dinilai'),
 (7, 18, 89, 87, 80, 65, 90, 78, 90, 579, '82.7', 'Pujian', 'Dinilai'),
-(8, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Belum Dinilai');
+(8, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Belum Dinilai'),
+(9, 21, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Belum Dinilai');
 
 --
 -- Triggers `tb_nilai`
@@ -246,7 +226,8 @@ INSERT INTO `tb_prakerin` (`id_prakerin`, `nisn`, `npsn`, `nama_siswa`, `tempat_
 (11, 98787675, 98787675, 'Nasyath Faykar', 'Pekalongan', '2002-11-30', 'Laki-laki', 'Jalan KH Ahmad Dahlan Tirto Gg. 7 No.31 Pekalongan Barat', '4M51', 'TKJ', '088806923500', '2023/2024', 'Nanang Akhmad Syamton', '088806923500', '2023-07-11', '2023-07-01', 'Pencabutan'),
 (13, 98787675, 98787675, 'Haikal Syarif', 'Kota Pemalang', '2002-10-18', 'Perempuan', 'Pekalongan, Tirto', 'XII', 'RPL', '085695685452', '2023/2024', 'Mukti Jaya', '085696535215', '2023-07-06', '2023-07-22', 'Pencabutan'),
 (18, 2147483647, 87879098, 'Muhammad Nauval Azhar', 'Bogor', '2002-12-31', 'Laki-laki', 'Bogor, Jakarta', 'XII', 'TKJ', '085695685452', '2023/2024', 'Mukti Jaya', '085674569856', '2023-07-22', '2024-02-22', 'Aktif'),
-(20, 2147483647, 2147483647, 'Hafid Firman Febrian', 'Pekalongan', '2004-01-01', 'Laki-laki', 'Pekalongan Barat', 'XII', 'RPL', '085695685452', '2023/2024', 'Wildan VK', '085674569856', '2023-07-23', '2023-07-23', 'Aktif');
+(20, 2147483647, 2147483647, 'Hafid Firman Febrian', 'Pekalongan', '2004-01-01', 'Laki-laki', 'Pekalongan Barat', 'XII', 'RPL', '085695685452', '2023/2024', 'Wildan VK', '085674569856', '2023-07-23', '2023-07-23', 'Pencabutan'),
+(21, 2147483647, 89898786, 'Julyan Rico Saputra', 'Pekalongan', '2004-01-01', 'Laki-laki', 'Pekalongan', 'XII', 'RPL', '085695685452', '2023/2024', 'Wildan VK', '085674569856', '2023-07-23', '2024-04-30', 'Aktif');
 
 --
 -- Triggers `tb_prakerin`
@@ -336,12 +317,6 @@ INSERT INTO `tb_user` (`id_user`, `id_asisten`, `username`, `password`, `level`)
 --
 
 --
--- Indexes for table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `tb_asisten`
 --
 ALTER TABLE `tb_asisten`
@@ -386,12 +361,6 @@ ALTER TABLE `tb_user`
 --
 
 --
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT for table `tb_asisten`
 --
 ALTER TABLE `tb_asisten`
@@ -401,19 +370,19 @@ ALTER TABLE `tb_asisten`
 -- AUTO_INCREMENT for table `tb_kegiatan`
 --
 ALTER TABLE `tb_kegiatan`
-  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tb_nilai`
 --
 ALTER TABLE `tb_nilai`
-  MODIFY `id_nilai` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_nilai` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tb_prakerin`
 --
 ALTER TABLE `tb_prakerin`
-  MODIFY `id_prakerin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_prakerin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
@@ -453,7 +422,7 @@ DELIMITER $$
 --
 -- Events
 --
-CREATE DEFINER=`root`@`localhost` EVENT `update_status_prakerin_event` ON SCHEDULE EVERY 10 MINUTE STARTS '2023-07-05 13:12:43' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE tb_prakerin
+CREATE DEFINER=`root`@`localhost` EVENT `update_status_prakerin_event` ON SCHEDULE EVERY 3 HOUR STARTS '2023-07-05 13:12:43' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE tb_prakerin
 SET status_prakerin = 'Pencabutan'
 WHERE periode_akhir < CURDATE()$$
 
