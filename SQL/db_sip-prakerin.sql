@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2023 at 01:54 PM
+-- Generation Time: Oct 01, 2023 at 04:49 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -47,7 +47,8 @@ INSERT INTO `tb_asisten` (`id_asisten`, `nama_asisten`, `nim`, `no_hp`, `email`,
 (2, 'Muhammad Fadli', '21.230.0189', '088806923500', 'fadli@uptkomp.com', 'Jalan KH Ahmad Dahlan Tirto Gg. 7 No.31', 'Asisten', 'Aktif'),
 (3, 'Zaky Farid Harun', '21.230.0175', '085468958756', 'zhidar@uptkomp.com', 'Batang, Alun-alun', 'Administrator', 'Aktif'),
 (4, 'RR. Nadia Amalia Putri', '21.230.0144', '085658956875', 'nadia@uptkomp.com', 'Bumirejo, Kec. Pekalongan Barat, Kota Pekalongan', 'Asisten', 'Aktif'),
-(5, 'Melidya Sholehati Kurniadani', '21.230.0043', '085645821535', 'meli@uptkomp.com', 'Batang, Alun-alun', 'Asisten', 'Aktif');
+(5, 'Melidya Sholehati Kurniadani', '21.230.0043', '085645821535', 'meli@uptkomp.com', 'Batang, Alun-alun', 'Asisten', 'Aktif'),
+(6, 'Humairah Wahidatul Izzah', '21.230.0186', '088806923500', 'humairah.wp@stmik-wp.ac.id', 'Tangerang, Banten', 'Koordinator', 'Aktif');
 
 --
 -- Triggers `tb_asisten`
@@ -104,7 +105,8 @@ INSERT INTO `tb_kegiatan` (`id_kegiatan`, `id_asisten`, `asisten_pembantu`, `tan
 (10, 1, 'Muhammad Fadli', '2023-07-24', '05:24:00', 'Lab Komputer 3', 'Tes menambahkan kegiatan 3'),
 (11, 1, 'Zaky Farid Harun', '2023-07-24', '05:24:00', 'Lab Komputer 4', 'Tes menambahkan kegiatan 4'),
 (12, 1, 'RR. Nadia Amalia Putri', '2023-07-24', '05:25:00', 'Lab Komputer 6', 'Tes menambahkan kegiatan 6'),
-(13, 1, 'Muhammad Fadli', '2023-07-28', '11:47:00', 'Lab Komputer 1', 'Test menambahkan data kegiatan 1');
+(13, 1, 'Muhammad Fadli', '2023-07-28', '11:47:00', 'Lab Komputer 1', 'Test menambahkan data kegiatan 1'),
+(14, 6, 'Tidak Ada', '2023-10-01', '14:43:00', 'Lab Komputer 3', 'Menambahkan kegiatan Humairah W.I');
 
 -- --------------------------------------------------------
 
@@ -310,7 +312,8 @@ INSERT INTO `tb_user` (`id_user`, `id_asisten`, `username`, `password`, `level`)
 (2, 2, '21.230.0189', 'da292cc5b587278acdc032e5b8a1c820', 'user'),
 (3, 3, '21.230.0175', '365b4a5a9e902c5d006f1a29bfbe55ee', 'admin'),
 (4, 4, '21.230.0144', '6d5de4b160a3bbe5cc76ead0856a1790', 'user'),
-(5, 5, '21.230.0043', 'e5df719e857e38ee4f3c5e5b7bab492d', 'user');
+(5, 5, '21.230.0043', 'e5df719e857e38ee4f3c5e5b7bab492d', 'user'),
+(7, 6, '21.230.0186', 'f2ff42b8d1f7999c76e55afdd1b7b5cd', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -364,13 +367,13 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_asisten`
 --
 ALTER TABLE `tb_asisten`
-  MODIFY `id_asisten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_asisten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tb_kegiatan`
 --
 ALTER TABLE `tb_kegiatan`
-  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tb_nilai`
@@ -388,7 +391,7 @@ ALTER TABLE `tb_prakerin`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -398,7 +401,7 @@ ALTER TABLE `tb_user`
 -- Constraints for table `tb_kegiatan`
 --
 ALTER TABLE `tb_kegiatan`
-  ADD CONSTRAINT `tb_kegiatan_id_asisten_foreign` FOREIGN KEY (`id_asisten`) REFERENCES `tb_asisten` (`id_asisten`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tb_kegiatan_id_asisten_foreign` FOREIGN KEY (`id_asisten`) REFERENCES `tb_asisten` (`id_asisten`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `tb_nilai`
