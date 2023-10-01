@@ -718,6 +718,105 @@ class Admin extends BaseController
         return view('admin/master-data/asisten/index', $data);
     }
 
+    // Method tambah asisten with validation
+    public function addAsisten()
+    {
+        // Get input from form
+        $nim = $this->request->getPost('nim');
+        $nama = $this->request->getPost('nama_asisten');
+        $jabatan = $this->request->getPost('jabatan');
+        $no_hp = $this->request->getPost('no_hp');
+        $email = $this->request->getPost('email');
+        $alamat = $this->request->getPost('alamat');
+        // Validation Service
+        $validation = \Config\Services::validation();
+
+        // Validation rules
+        $valid = $this->validate([
+            'nim' => [
+                'label' => 'nim',
+                'rules' => 'required|is_unique[tb_asisten.nim]',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong',
+                    'is_unique' => '{field} sudah terdaftar'
+                ]
+            ],
+            'nama_asisten' => [
+                'label' => 'Nama Asisten',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+
+            'jabatan' => [
+                'label' => 'Jabatan',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+
+            'no_hp' => [
+                'label' => 'No. HP',
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong',
+                    'numeric' => '{field} harus berupa angka'
+                ]
+            ],
+
+            'email' => [
+                'label' => 'Email',
+                'rules' => 'required|valid_email|is_unique[tb_asisten.email]',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong',
+                    'valid_email' => 'Email tidak valid',
+                    'is_unique' => '{field} sudah terdaftar'
+                ]
+            ],
+
+            'alamat' => [
+                'label' => 'Alamat',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+
+            ]
+        ]);
+
+        // If validation is false then go back to add asisten page
+        if (!$valid) {
+            $errorMessage = [
+                'nim' => $validation->getError('nim'),
+                'nama_asisten' => $validation->getError('nama_asisten'),
+                'jabatan' => $validation->getError('jabatan'),
+                'no_hp' => $validation->getError('no_hp'),
+                'email' => $validation->getError('email'),
+                'alamat' => $validation->getError('alamat'),
+                'error' => 'Data gagal ditambahkan'
+            ];
+            session()->setFlashdata($errorMessage);
+            return redirect()->to('/master-data/asisten/')->withInput();
+        } else {
+            // If validation is true then save data to database
+            $data = [
+                'nim' => $nim,
+                'nama_asisten' => $nama,
+                'jabatan' => $jabatan,
+                'no_hp' => $no_hp,
+                'email' => $email,
+                'alamat' => $alamat,
+                'status' => 'Aktif'
+            ];
+            $this->asistenModel->insert($data);
+            session()->setFlashdata('success', 'Data berhasil ditambahkan');
+            return redirect()->to('/master-data/asisten');
+        }
+
+    }
+
     // Method cetakKegiatan
     public function cetakKegiatan()
     {

@@ -33,9 +33,9 @@
             <img src="/assets/compiled/jpg/2.jpg" alt="Profile Picture" class="rounded-4 shadow" width="100%" />
             <!-- Change profile pciture button -->
             <div class="d-flex justify-content-center mt-3">
-                <button type="button" class="btn btn-outline-primary btn-sm">
+                <button type="button" class="btn btn-outline-primary btn-sm text-muted" disabled>
                     <i class="fa-solid fa-camera"></i>
-                    Change Picture
+                    Under development
                 </button>
             </div>
         </div>

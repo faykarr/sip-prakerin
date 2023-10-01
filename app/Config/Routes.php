@@ -46,6 +46,7 @@ $routes->get('/profile', 'General::profile');
 $routes->post('/profile/changePassword', 'General::changePassword');
 $routes->get('/dashboard', 'Dashboard::index');
 $routes->get('/master-data/asisten', 'Admin::listAsisten');
+$routes->post('/master-data/asisten/addAsisten', 'Admin::addAsisten');
 $routes->get('/master-data/smk', 'Admin::listSmk');
 $routes->post('/master-data/smk/addSMK', 'Admin::addSMK');
 $routes->get('/master-data/smk/deleteSMK/(:segment)', 'Admin::deleteSMK/$1');

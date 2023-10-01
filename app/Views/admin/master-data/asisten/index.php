@@ -30,12 +30,20 @@
 
     <!-- Include modalshow -->
     <?= $this->include('/admin/master-data/asisten/modalShow') ?>
+    <!-- Include Modal Tambah -->
+    <?= $this->include('/admin/master-data/asisten/modalTambah') ?>
+    <!-- Include Modal Tambah -->
 
     <section class="section">
         <div class="card">
             <div class="card-header">
                 <div class="row justify-content-between">
                     <h4 class="card-title col-lg-4">List Asisten Terdaftar</h4>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#tambahAsistenModal"
+                        class="btn btn-success col-lg-2 align-items-center">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span class="ms-1">Tambah User</span>
+                    </button>
                 </div>
             </div>
             <div class="card-body">
@@ -75,13 +83,20 @@
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-sm btn-primary showAsisten" data-nim="<?= $a['nim'] ?>"
-                                        data-nama="<?= $a['nama_asisten'] ?>" data-nohp="<?= $a['no_hp'] ?>"
-                                        data-email="<?= $a['email'] ?>" data-alamat="<?= $a['alamat'] ?>"
-                                        data-jabatan="<?= $a['jabatan'] ?>" data-status="<?= $a['status'] ?>">
-                                        <!-- Fontawesome fa-eye -->
-                                        <i class="fa-solid fa-eye"></i>
-                                    </a>
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-sm btn-primary showAsisten" data-nim="<?= $a['nim'] ?>"
+                                            data-nama="<?= $a['nama_asisten'] ?>" data-nohp="<?= $a['no_hp'] ?>"
+                                            data-email="<?= $a['email'] ?>" data-alamat="<?= $a['alamat'] ?>"
+                                            data-jabatan="<?= $a['jabatan'] ?>" data-status="<?= $a['status'] ?>">
+                                            <!-- Fontawesome fa-eye -->
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+
+                                        <!-- Edit Status -->
+                                        <a href="#" class="btn icon btn-sm btn-warning text-white edit">
+                                            <i class="fa-solid fa-edit"></i>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
