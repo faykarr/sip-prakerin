@@ -935,15 +935,15 @@ class Admin extends BaseController
         // (Opsional) Atur ukuran dan orientasi halaman PDF
         $dompdf->setPaper('F4', 'portrait');
 
-        // Render HTML ke PDF
+        // Render HTML ke PDF & print
         $dompdf->render();
 
         // Generate nama file PDF (sesuaikan dengan kebutuhan)
-        $filename = 'laporan_nilai';
+        $filename = strtolower(str_replace(' ', '_', $data['nilai']['nama_siswa'])) . '_laporan_nilai';
 
         $filename .= '.pdf';
 
         // Unduh file PDF ke pengguna
-        $dompdf->stream($filename, ['Attachment' => true]);
+        $dompdf->stream($filename, ['Attachment' => false]);
     }
 }

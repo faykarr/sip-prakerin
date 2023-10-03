@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2023 at 04:49 PM
+-- Generation Time: Oct 03, 2023 at 05:00 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -45,9 +45,7 @@ CREATE TABLE `tb_asisten` (
 INSERT INTO `tb_asisten` (`id_asisten`, `nama_asisten`, `nim`, `no_hp`, `email`, `alamat`, `jabatan`, `status`) VALUES
 (1, 'Nasyath Faykar', '21.230.0194', '08123456789', 'koor@uptkomp.com', 'Jl. Jalan', 'Koordinator', 'Aktif'),
 (2, 'Muhammad Fadli', '21.230.0189', '088806923500', 'fadli@uptkomp.com', 'Jalan KH Ahmad Dahlan Tirto Gg. 7 No.31', 'Asisten', 'Aktif'),
-(3, 'Zaky Farid Harun', '21.230.0175', '085468958756', 'zhidar@uptkomp.com', 'Batang, Alun-alun', 'Administrator', 'Aktif'),
 (4, 'RR. Nadia Amalia Putri', '21.230.0144', '085658956875', 'nadia@uptkomp.com', 'Bumirejo, Kec. Pekalongan Barat, Kota Pekalongan', 'Asisten', 'Aktif'),
-(5, 'Melidya Sholehati Kurniadani', '21.230.0043', '085645821535', 'meli@uptkomp.com', 'Batang, Alun-alun', 'Asisten', 'Aktif'),
 (6, 'Humairah Wahidatul Izzah', '21.230.0186', '088806923500', 'humairah.wp@stmik-wp.ac.id', 'Tangerang, Banten', 'Koordinator', 'Aktif');
 
 --
@@ -93,20 +91,7 @@ CREATE TABLE `tb_kegiatan` (
 --
 
 INSERT INTO `tb_kegiatan` (`id_kegiatan`, `id_asisten`, `asisten_pembantu`, `tanggal`, `waktu`, `ruang_lab`, `detail_kegiatan`) VALUES
-(1, 1, 'Nasyath Faykar', '2023-07-08', '14:34:00', 'Lab Komputer 2', 'Maintenance & pembersihan lab komputer 2'),
-(2, 1, 'Melidya Sholehati Kurniadani', '2023-07-12', '01:30:00', 'Lab Komputer 6', 'Tutorial membuat game 2D menggunakan Construct 2'),
-(3, 4, 'Muhammad Fadli', '2023-07-13', '05:04:00', 'Lab Komputer 3', 'Perkenalan siswa dalam kegiatan praktik kerja industri'),
-(4, 2, 'Zaky Farid Harun', '2023-07-13', '09:22:00', 'Lab Komputer 6', 'Pembuatan database MySQL '),
-(5, 1, 'Tidak Ada', '2023-07-21', '18:12:00', 'Lab Komputer 3', 'Pembersihan lab komputer masing-masing dibantu siswa magang'),
-(6, 2, 'Tidak Ada', '2023-07-21', '18:16:00', 'Lab Komputer 5', 'Membuat website fullstack dengan Codeigniter 4 dan ReactJS'),
-(7, 2, 'Tidak Ada', '2023-07-24', '02:14:00', 'Lab Komputer 4', 'Mengikuti kegiatan perkuliahan dengan mata kuliah Visualisasi Data & Data Science'),
-(8, 1, 'Melidya Sholehati Kurniadani', '2023-07-24', '05:23:00', 'Lab Komputer 1', 'Test menambahkan data kegiatan 1'),
-(9, 1, 'Zaky Farid Harun', '2023-07-24', '05:23:00', 'Lab Komputer 2', 'Tes menambahkan data kegiatan 2'),
-(10, 1, 'Muhammad Fadli', '2023-07-24', '05:24:00', 'Lab Komputer 3', 'Tes menambahkan kegiatan 3'),
-(11, 1, 'Zaky Farid Harun', '2023-07-24', '05:24:00', 'Lab Komputer 4', 'Tes menambahkan kegiatan 4'),
-(12, 1, 'RR. Nadia Amalia Putri', '2023-07-24', '05:25:00', 'Lab Komputer 6', 'Tes menambahkan kegiatan 6'),
-(13, 1, 'Muhammad Fadli', '2023-07-28', '11:47:00', 'Lab Komputer 1', 'Test menambahkan data kegiatan 1'),
-(14, 6, 'Tidak Ada', '2023-10-01', '14:43:00', 'Lab Komputer 3', 'Menambahkan kegiatan Humairah W.I');
+(1, 6, 'Nasyath Faykar', '2023-10-01', '14:55:00', 'Lab Komputer 2', 'Tes menambahkan tutor Humairah');
 
 -- --------------------------------------------------------
 
@@ -139,7 +124,8 @@ INSERT INTO `tb_nilai` (`id_nilai`, `id_prakerin`, `disiplin`, `kerja_motivasi`,
 (6, 13, 100, 87, 97, 96, 98, 97, 97, 672, '96.0', 'Sempurna', 'Dinilai'),
 (7, 18, 89, 87, 80, 65, 90, 78, 90, 579, '82.7', 'Pujian', 'Dinilai'),
 (8, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Belum Dinilai'),
-(9, 21, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Belum Dinilai');
+(9, 21, 80, 80, 80, 80, 80, 80, 80, 560, '80.0', 'Pujian', 'Dinilai'),
+(10, 22, 90, 90, 78, 89, 78, 78, 95, 598, '85.4', 'Pujian', 'Dinilai');
 
 --
 -- Triggers `tb_nilai`
@@ -193,6 +179,23 @@ CREATE TRIGGER `trg_set_status_nilai` BEFORE INSERT ON `tb_nilai` FOR EACH ROW B
 END
 $$
 DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_set_status_nilai_update` BEFORE UPDATE ON `tb_nilai` FOR EACH ROW BEGIN
+    IF NEW.disiplin IS NULL
+       AND NEW.kerja_motivasi IS NULL
+       AND NEW.kehadiran IS NULL
+       AND NEW.inisiatif_kreatif IS NULL
+       AND NEW.kejujuran_tanggung_jawab IS NULL
+       AND NEW.kesopanan IS NULL
+       AND NEW.kerjasama IS NULL
+    THEN
+        SET NEW.status_nilai = 'Belum Dinilai';
+    ELSE
+    	SET NEW.status_nilai = 'Dinilai';
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -229,7 +232,8 @@ INSERT INTO `tb_prakerin` (`id_prakerin`, `nisn`, `npsn`, `nama_siswa`, `tempat_
 (13, 98787675, 98787675, 'Haikal Syarif', 'Kota Pemalang', '2002-10-18', 'Perempuan', 'Pekalongan, Tirto', 'XII', 'RPL', '085695685452', '2023/2024', 'Mukti Jaya', '085696535215', '2023-07-06', '2023-07-22', 'Pencabutan'),
 (18, 2147483647, 87879098, 'Muhammad Nauval Azhar', 'Bogor', '2002-12-31', 'Laki-laki', 'Bogor, Jakarta', 'XII', 'TKJ', '085695685452', '2023/2024', 'Mukti Jaya', '085674569856', '2023-07-22', '2024-02-22', 'Aktif'),
 (20, 2147483647, 2147483647, 'Hafid Firman Febrian', 'Pekalongan', '2004-01-01', 'Laki-laki', 'Pekalongan Barat', 'XII', 'RPL', '085695685452', '2023/2024', 'Wildan VK', '085674569856', '2023-07-23', '2023-07-23', 'Pencabutan'),
-(21, 2147483647, 89898786, 'Julyan Rico Saputra', 'Pekalongan', '2004-01-01', 'Laki-laki', 'Pekalongan', 'XII', 'RPL', '085695685452', '2023/2024', 'Wildan VK', '085674569856', '2023-07-23', '2024-04-30', 'Aktif');
+(21, 2147483647, 89898786, 'Julyan Rico Saputra', 'Pekalongan', '2004-01-01', 'Laki-laki', 'Pekalongan', 'XII', 'RPL', '085695685452', '2023/2024', 'Wildan VK', '085674569856', '2023-07-23', '2024-04-30', 'Aktif'),
+(22, 2147483647, 67687675, 'Naila Azqiya', 'Pemalang', '2004-01-15', 'Perempuan', 'Jalan KH Ahmad Dahlan Tirto Gg. 7 No.31', 'X', 'TKJ', '088806923500', '2023/2024', 'Aminah', '08880678', '2023-10-03', '2023-10-31', 'Aktif');
 
 --
 -- Triggers `tb_prakerin`
@@ -284,6 +288,7 @@ CREATE TABLE `tb_smk` (
 --
 
 INSERT INTO `tb_smk` (`npsn`, `nama_sekolah`, `status_sekolah`, `pembimbing_prakerin`, `no_hp_pembimbing`, `jurusan_terdaftar`, `alamat_sekolah`, `status_aktif`) VALUES
+(67687675, 'SMK Baitussalam', 'Negeri', 'Astika Devy Paramitha', '088806923500', 'TKJ, RPL', 'Jalan KH Ahmad Dahlan Tirto Gg. 7 No.31, Pekalongan', 'Aktif'),
 (87879098, 'SMK Negeri 1 Batang', 'Negeri', 'Ilham Yusuf Maulana', '098986897', 'TKJ, RPL', 'Batang Alun-alun', 'Aktif'),
 (89898786, 'SMK Satya Praja Petarukan', 'Swasta', 'Muhammad Subagiyo', '088806923500', 'TKJ, RPL', 'Pekalongan Selatan', 'Aktif'),
 (98787675, 'SMK Negeri 2 Pekalongan', 'Negeri', 'Danang Subagiyo, S.Kom', '088806923500', 'TKJ, RPL', 'Jalan Perintis Kemerdekaan No. 25', 'Aktif'),
@@ -310,9 +315,7 @@ CREATE TABLE `tb_user` (
 INSERT INTO `tb_user` (`id_user`, `id_asisten`, `username`, `password`, `level`) VALUES
 (1, 1, '21.230.0194', '501108d0c41b2990b45da1e39bde5cff', 'admin'),
 (2, 2, '21.230.0189', 'da292cc5b587278acdc032e5b8a1c820', 'user'),
-(3, 3, '21.230.0175', '365b4a5a9e902c5d006f1a29bfbe55ee', 'admin'),
 (4, 4, '21.230.0144', '6d5de4b160a3bbe5cc76ead0856a1790', 'user'),
-(5, 5, '21.230.0043', 'e5df719e857e38ee4f3c5e5b7bab492d', 'user'),
 (7, 6, '21.230.0186', 'f2ff42b8d1f7999c76e55afdd1b7b5cd', 'admin');
 
 --
@@ -373,19 +376,19 @@ ALTER TABLE `tb_asisten`
 -- AUTO_INCREMENT for table `tb_kegiatan`
 --
 ALTER TABLE `tb_kegiatan`
-  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_nilai`
 --
 ALTER TABLE `tb_nilai`
-  MODIFY `id_nilai` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_nilai` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tb_prakerin`
 --
 ALTER TABLE `tb_prakerin`
-  MODIFY `id_prakerin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_prakerin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
@@ -401,7 +404,7 @@ ALTER TABLE `tb_user`
 -- Constraints for table `tb_kegiatan`
 --
 ALTER TABLE `tb_kegiatan`
-  ADD CONSTRAINT `tb_kegiatan_id_asisten_foreign` FOREIGN KEY (`id_asisten`) REFERENCES `tb_asisten` (`id_asisten`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `tb_kegiatan_id_asisten_foreign` FOREIGN KEY (`id_asisten`) REFERENCES `tb_asisten` (`id_asisten`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tb_nilai`

@@ -7,7 +7,7 @@
     <title>Surat Hasil Kegiatan Prakerin</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             line-height: 1.6;
         }
 
@@ -24,9 +24,9 @@
         .kop-surat {
             display: flex;
             align-items: center;
-            border-bottom: 2px solid #000;
+            border-bottom: 2px ridge #000;
             padding-bottom: 10px;
-            margin-bottom: 10px;
+            margin-bottom: -15px;
             justify-content: center;
         }
 
@@ -61,6 +61,14 @@
         .judul-surat {
             text-align: center;
             margin: 0;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .judul-surat~p {
+            margin: 0;
+            text-align: center;
+            font-weight: bold;
         }
 
         .content p {
@@ -90,6 +98,22 @@
             text-align: center;
         }
 
+        .biodata {
+            border: none;
+            width: 80%;
+        }
+
+        .biodata td {
+            border: none;
+            padding: 0;
+            padding-bottom: 4px;
+        }
+
+        .biodata td:nth-child(2) {
+            padding-left: -10px;
+            padding-right: 10px;
+        }
+
         footer {
             text-align: right;
             margin-top: 40px;
@@ -115,47 +139,94 @@
     <div class="container">
         <header>
             <div class="kop-surat">
-                <img src="data:image/png;base64,<?php echo base64_encode(file_get_contents('assets/static/images/logo/logo-upt.png')); ?>"
+                <img src="data:image/png;base64,<?php echo base64_encode(file_get_contents('assets/static/images/logo/logo-stmik.png')); ?>"
                     alt="UPT Komputer STMIK Widya Pratama Pekalongan">
                 <div class="judul-kop">
-                    <h1>UPT Komputer STMIK Widya Pratama Pekalongan</h1>
-                    <p>Jl. Patriot No.25, Dukuh, Kec. Pekalongan Utara, Kota Pekalongan</p>
-                    <p>Telp: (0123) 4567890</p>
-                    <p>Email: uptkomputer@stmik-wp.ac.id</p>
+                    <h1>Sekolah Tinggi Manajemen Informatika dan Komputer
+                        <br />
+                        (STMIK) Widya Pratama Pekalongan
+                    </h1>
+                    <p>Jl. Patriot No.25 Kota Pekalongan Telp: 0285 - 427816</p>
+                    <p>Email: akademik@stmik-wp.ac.id</p>
                 </div>
             </div>
             <br>
-            <h2 class="judul-surat">Surat Hasil Kegiatan Prakerin</h2>
+            <h2 class="judul-surat">SURAT KETERANGAN <br> HASIL KEGIATAN PRAKTIK KERJA INDUSTRI</h2>
+            <p>Tahun Akademik
+                <?= date("Y") . "/" . (date("Y") + 1) ?>
+            </p>
             <br>
         </header>
         <main>
             <div class="content">
-                <p>Widiyono S.T, M.Kom,</p>
-                <p>STMIK Widya Pratama Pekalongan,</p>
-                <p>Jl. Patriot No.25, Dukuh, Kec. Pekalongan Utara, Kota Pekalongan</p>
-                <br>
-                <p>Surat Keterangan ini diberikan kepada:</p>
+                <p>Yang bertanda tangan di bawah ini, Kepala Unit Pelaksana Teknis (UPT) Komputer STMIK Widya Pratama
+                    Pekalongan, menerangkan
+                    bahwa siswa/i dengan nama berikut:</p>
                 <br>
                 <h2>
-                    <?= $nilai['nama_siswa'] ?>
+                    <?= strtoupper($nilai['nama_siswa']) ?>
                 </h2>
                 <br>
-                <p>Tempat/Tanggal Lahir:
-                    <?= $nilai['tempat_lahir'] ?>,
-                    <?= date('d-F-Y', strtotime($nilai['tanggal_lahir'])) ?>
-                </p>
-                <p>NISN:
-                    <?= $nilai['nisn'] ?>
-                </p>
-                <p>Kelas:
-                    <?= $nilai['kelas'] . ' ' . $nilai['jurusan'] ?>
-                </p>
-                <p>Tanggal Pencabutan:
-                    <?= date('d-F-Y', strtotime($nilai['periode_akhir'])) ?>
-                </p>
+                <table class="biodata">
+                    <tr>
+                        <td>
+                            NISN
+                        </td>
+                        <td>:</td>
+                        <td>
+                            <b>
+                                <?= $nilai['nisn'] ?>
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Asal Sekolah
+                        </td>
+                        <td>:</td>
+                        <td>
+                            <b>
+                                <?= $nilai['nama_sekolah'] ?>
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Kelas
+                        </td>
+                        <td>:</td>
+                        <td>
+                            <?= $nilai['kelas'] . ' ' . $nilai['jurusan'] ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Tempat, Tanggal Lahir
+                        </td>
+                        <td>:</td>
+                        <td>
+                            <?= $nilai['tempat_lahir'] ?>,
+                            <?= str_replace('-', ' ', date('d-F-Y', strtotime($nilai['tanggal_lahir']))) ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Tanggal Pencabutan
+                        </td>
+                        <td>:</td>
+                        <td>
+                            <?= str_replace('-', ' ', date('d-F-Y', strtotime($nilai['periode_akhir']))) ?>
+                        </td>
+                    </tr>
+                </table>
                 <br>
+                <p style="text-align: justify; text-indent: 25px;">Nama tersebut diatas adalah benar siswa/i<b>
+                        <?= $nilai['nama_sekolah']; ?>
+                    </b>yang telah mengikuti kegiatan Praktik Kerja Industri sesuai dengan
+                    peraturan & ketentuan yang ada, dan dinyatakan <b>LULUS.</b>
+                </p>
                 <div class="page-break">
-                    <p>Hasil Kegiatan Prakerin:</p>
+                    <p style="margin-left:15px; margin-top:50px;"><b>A. Hasil Kegiatan Praktik Kerja Industri :</b></p>
                     <table>
                         <thead>
                             <tr>
@@ -223,25 +294,26 @@
                                     <?= $nilai['rata_rata'] ?>
                                 </th>
                                 <th>
-                                    <?= $nilai['predikat'] ?>
+                                    <?= strtoupper($nilai['predikat']) ?>
                                 </th>
                             </tr>
                         </tfoot>
-                        <!-- Tambahkan baris sesuai dengan kegiatan prakerin yang telah diikuti -->
                     </table>
-                    <br>
-                    <p>Demikian Surat Keterangan ini dibuat untuk dipergunakan sebagaimana mestinya.</p>
+                    <p>Demikian Surat Keterangan Hasil Kegiatan Praktik Kerja Industri ini dibuat untuk dipergunakan
+                        sebagaimana mestinya.</p>
                 </div>
         </main>
         <footer>
+            <p>Pekalongan,
+                <?= str_replace('-', ' ', date('d-F-Y')) ?>
+            </p>
+            <p style="margin-top: -17px;">Instruktur DU/DI,</p>
             <div class="tanda-tangan">
                 <img src="data:image/png;base64,<?php echo base64_encode(file_get_contents('assets/static/images/logo/ttd.png')) ?>"
                     alt="Tanda Tangan">
-                <p>Widiyono, S.T, M.Kom</p>
+                <p><u>Widiyono, S.T, M.Kom</u></p>
+                <p style="font-size: small">NPPY: 160401.750314.219</p>
             </div>
-            <p>Tanggal:
-                <?= date('d-F-Y') ?>
-            </p>
         </footer>
     </div>
     </div>

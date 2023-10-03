@@ -49,14 +49,4 @@ class NilaiModel extends Model
         }
     }
 
-    // // Join all table from tb_nilai, tb_prakerin, tb_smk
-    // public function getPrakerinData()
-    // {
-    //     return $this->db->table('tb_prakerin')
-    //         ->select('tb_prakerin.*, tb_smk.nama_sekolah, tb_nilai.*,')
-    //         ->join('tb_nilai', 'tb_nilai.id_prakerin = tb_prakerin.id_prakerin', 'left')
-    //         ->join('tb_smk', 'tb_smk.npsn = tb_prakerin.npsn', 'left')
-    //         ->get()->getResultArray();
-    // }
-
 }
