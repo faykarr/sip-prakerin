@@ -891,7 +891,7 @@ class Admin extends BaseController
         $filename .= '.pdf';
 
         // Unduh file PDF ke pengguna
-        $dompdf->stream($filename, ['Attachment' => true]);
+        $dompdf->stream($filename, ['Attachment' => false]);
     }
 
     // Method cetakNilai

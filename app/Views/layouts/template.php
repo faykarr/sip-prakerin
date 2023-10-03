@@ -100,7 +100,7 @@
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
-                        <p>2023 &copy; UPT Komputer</p>
+                        <p>2023 &copy; <a href="https://github.com/uptkompwp">UPT Komputer</a></p>
                     </div>
                     <div class="float-end">
                         <p>

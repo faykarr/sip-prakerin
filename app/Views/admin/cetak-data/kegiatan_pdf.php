@@ -6,7 +6,7 @@
     <style>
         /* Tambahkan gaya CSS untuk tampilan PDF */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
         }
 
         table {
@@ -16,7 +16,7 @@
 
         th,
         td {
-            border: 1px solid #ddd;
+            border: 1px ridge #ddd;
             padding: 8px;
             text-align: left;
         }
@@ -27,42 +27,59 @@
 
         header {
             display: flex;
+            flex-wrap: nowrap;
         }
 
         h1 {
             text-align: center;
             flex: 1;
             margin-top: -65px;
+            font-size: 20px;
         }
 
         h2 {
-            margin-top: -100px;
-            text-align: center;
+            /* margin-top: -100px; */
+            text-align: left;
+            font-size: 21px;
         }
 
         p {
             text-align: right;
+        }
+
+        .image {
+            position: absolute;
+            top: 0;
+            right: 0;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <img src="data:image/png;base64,<?php echo base64_encode(file_get_contents('assets/static/images/logo/logo-upt.png')); ?>"
+        <img src="data:image/png;base64,<?php echo base64_encode(file_get_contents('assets/static/images/logo/logo-stmik.png')); ?>"
             alt="Logo UPTKOMP" width="84px">
-        <h1>STMIK WIDYA PRATAMA PEKALONGAN</h1>
+        <h1>Sekolah Tinggi Manajemen Informatika dan Komputer
+            <br>(STMIK) Widya Pratama Pekalongan
+            <br>Unit Pelaksana Teknis (UPT) Komputer
+        </h1>
+
+    </header>
+    <img src="data:image/png;base64,<?php echo base64_encode(file_get_contents('assets/static/images/logo/logo-upt.png')); ?>"
+        alt="Logo UPTKOMP" width="84px" class="image">
+    <hr>
+    <div class="title">
         <h2>Laporan Bulanan Kegiatan Prakerin</h2>
-        <hr>
         <?php if ($start_date && $end_date): ?>
-            <p>Periode:
+            <p style="margin-top: -40px;">Periode:
                 <?= date('d F Y', strtotime($start_date)) . ' - ' . date('d F Y', strtotime($end_date)); ?>
             </p>
         <?php else: ?>
-            <p>Periode:
+            <p style="margin-top: -40px;">Periode:
                 <?= date('F Y'); ?>
             </p>
         <?php endif; ?>
-    </header>
+    </div>
     <table>
         <thead>
             <tr>
