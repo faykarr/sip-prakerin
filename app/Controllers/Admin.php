@@ -816,6 +816,78 @@ class Admin extends BaseController
         }
 
     }
+    // Method tambah asisten with validation
+    public function updateAsisten()
+    {
+        // Get input from form
+        $id_asisten = $this->request->getPost('id_asisten');
+        $nim = $this->request->getPost('nim');
+        $nama = $this->request->getPost('nama_asisten');
+        $jabatan = $this->request->getPost('jabatan');
+        $status = $this->request->getPost('status');
+        // Validation Service
+        $validation = \Config\Services::validation();
+
+        // Validation rules
+        $valid = $this->validate([
+            'nim' => [
+                'label' => 'nim',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong',
+                ]
+            ],
+            'nama_asisten' => [
+                'label' => 'Nama Asisten',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+
+            'jabatan' => [
+                'label' => 'Jabatan',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+
+            'status' => [
+                'label' => 'Status',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ]
+        ]);
+
+        // If validation is false then go back to add asisten page
+        if (!$valid) {
+            $errorMessage = [
+                'nim' => $validation->getError('nim'),
+                'nama_asisten' => $validation->getError('nama_asisten'),
+                'jabatan' => $validation->getError('jabatan'),
+                'status' => $validation->getError('status'),
+                'error' => 'Data gagal diupdate!'
+            ];
+            session()->setFlashdata($errorMessage);
+            return redirect()->to('/master-data/asisten/')->withInput();
+        } else {
+            // If validation is true then save data to database
+            $data = [
+                'id_asisten' => $id_asisten,
+                'nim' => $nim,
+                'nama_asisten' => $nama,
+                'jabatan' => $jabatan,
+                'status' => $status
+            ];
+            $this->asistenModel->save($data);
+            session()->setFlashdata('success', 'Data berhasil diupdate!');
+            return redirect()->to('/master-data/asisten');
+        }
+
+    }
 
     // Method cetakKegiatan
     public function cetakKegiatan()

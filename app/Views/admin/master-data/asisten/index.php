@@ -32,7 +32,8 @@
     <?= $this->include('/admin/master-data/asisten/modalShow') ?>
     <!-- Include Modal Tambah -->
     <?= $this->include('/admin/master-data/asisten/modalTambah') ?>
-    <!-- Include Modal Tambah -->
+    <!-- Include Modal Edit -->
+    <?= $this->include('/admin/master-data/asisten/modalEdit') ?>
 
     <section class="section">
         <div class="card">
@@ -92,7 +93,7 @@
                                         </a>
 
                                         <!-- Edit Status / Jabatan -->
-                                        <a href="#" class="btn icon btn-sm btn-warning text-white edit">
+                                        <a href="#" class="btn icon btn-sm btn-warning text-white edit" data-asisten="<?= $a['id_asisten']?>" data-nim="<?= $a['nim'] ?>" data-nama="<?= $a['nama_asisten'] ?>"data-jabatan="<?= $a['jabatan'] ?>" data-status="<?= $a['status'] ?>">
                                             <i class="fa-solid fa-edit"></i>
                                         </a>
                                     </div>
@@ -135,6 +136,26 @@
 
             // Call Modal Show
             $('#showAsistenModal').modal('show');
+        });
+
+        // Event delegation for edit button
+        $(document).on('click', '.edit', function () {
+            // Get data from button edit
+            const id_asisten = $(this).data('asisten');
+            const nim = $(this).data('nim');
+            const nama = $(this).data('nama');
+            const jabatan = $(this).data('jabatan');
+            const status = $(this).data('status');
+
+            // Set data to Show
+            $('.id_asisten').val(id_asisten);
+            $('.nim').val(nim);
+            $('.nama_asisten').val(nama);
+            $('.jabatan').val(jabatan).change();
+            $('.status').val(status).change();
+            
+            // Call Modal Edit
+            $('#editAsistenModal').modal('show');
         });
     });
 
