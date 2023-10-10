@@ -13,7 +13,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form" method="post" action="/master-data/smk/updateSMK">
+                <form class="form" method="post" action="<?= base_url("/master-data/smk/updateSMK") ?>">
                     <!-- Form Edit SMK -->
                     <div class="row">
                         <div class="col-md-6 col-12">

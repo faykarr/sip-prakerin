@@ -946,4 +946,24 @@ class Admin extends BaseController
         // Unduh file PDF ke pengguna
         $dompdf->stream($filename, ['Attachment' => false]);
     }
+
+    // Method cetakSertifikat
+    function cetakSertifikat() {
+        $data = [
+            'title' => 'Cetak Sertifikat Siswa',
+            // Get first_name from session
+            'first_name' => session()->get('first_name'),
+            // Get last_name from session
+            'last_name' => session()->get('last_name'),
+            // Get jabatan from session
+            'jabatan' => session()->get('jabatan'),
+            // Get level from session
+            'level' => session()->get('level'),
+            // Get nilai from model
+            'nilai' => $this->nilaiModel->getAllNilai(),
+        ];
+
+        // return view to admin/cetak-data/sertifikat with data
+        return view('admin/cetak-data/sertifikat', $data);
+    }
 }

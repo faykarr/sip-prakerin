@@ -17,7 +17,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item" aria-current="page">
-                            <a href="/dashboard">Dashboard</a>
+                            <a href="<?= base_url("/dashboard") ?>">Dashboard</a>
                         </li>
                     </ol>
                 </nav>

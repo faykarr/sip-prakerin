@@ -4,7 +4,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="/"><img src="/assets/compiled/svg/upt-komp.svg" alt="Logo" srcset=""
+                    <a href="<?= base_url() ?>"><img src="<?= base_url("/assets/compiled/svg/upt-komp.svg") ?>" alt="Logo" srcset=""
                             style="height:32px;" /></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
@@ -48,7 +48,7 @@
 
                 <li
                     class="sidebar-item <?= ($uri->getSegment(1) === '' || $uri->getSegment(1) === 'dashboard') ? 'active' : '' ?>">
-                    <a href="/dashboard" class="sidebar-link">
+                    <a href="<?= base_url("/dashboard") ?>" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
@@ -63,15 +63,15 @@
 
                         <ul class="submenu">
                             <li class="submenu-item <?= ($uri->getSegment(2) === 'smk') ? 'active' : '' ?>">
-                                <a href="/master-data/smk" class="submenu-link">Data SMK</a>
+                                <a href="<?= base_url("/master-data/smk") ?>" class="submenu-link">Data SMK</a>
                             </li>
 
                             <li class="submenu-item <?= ($uri->getSegment(2) === 'prakerin') ? 'active' : '' ?>">
-                                <a href="/master-data/prakerin" class="submenu-link">Data Siswa Prakerin</a>
+                                <a href="<?= base_url("/master-data/prakerin") ?>" class="submenu-link">Data Siswa Prakerin</a>
                             </li>
 
                             <li class="submenu-item <?= ($uri->getSegment(2) === 'asisten') ? 'active' : '' ?>">
-                                <a href="/master-data/asisten" class="submenu-link">Data Asisten Dosen</a>
+                                <a href="<?= base_url("/master-data/asisten") ?>" class="submenu-link">Data Asisten Dosen</a>
                             </li>
                         </ul>
                     </li>
@@ -88,12 +88,12 @@
                     <ul class="submenu">
                         <li
                             class="submenu-item <?= ($uri->getSegment(1) === 'input-data' && $uri->getSegment(2) === 'kegiatan') ? 'active' : '' ?>">
-                            <a href="/input-data/kegiatan" class="submenu-link">Input Kegiatan Harian</a>
+                            <a href="<?= base_url("/input-data/kegiatan") ?>" class="submenu-link">Input Kegiatan Harian</a>
                         </li>
 
                         <li
                             class="submenu-item <?= ($uri->getSegment(1) === 'input-data' && $uri->getSegment(2) === 'nilai') ? 'active' : '' ?>">
-                            <a href="/input-data/nilai" class="submenu-link">Input Nilai Siswa</a>
+                            <a href="<?= base_url("/input-data/nilai") ?>" class="submenu-link">Input Nilai Siswa</a>
                         </li>
                     </ul>
                 </li>
@@ -110,17 +110,17 @@
                         <ul class="submenu">
                             <li
                                 class="submenu-item <?= ($uri->getSegment(1) === 'cetak-data' && $uri->getSegment(2) === 'kegiatan') ? 'active' : '' ?>">
-                                <a href="/cetak-data/kegiatan" class="submenu-link">Cetak Laporan Kegiatan</a>
+                                <a href="<?= base_url("/cetak-data/kegiatan") ?>" class="submenu-link">Cetak Laporan Kegiatan</a>
                             </li>
 
                             <li
                                 class="submenu-item <?= ($uri->getSegment(1) === 'cetak-data' && $uri->getSegment(2) === 'nilai') ? 'active' : '' ?>">
-                                <a href="/cetak-data/nilai" class="submenu-link">Cetak Nilai Siswa</a>
+                                <a href="<?= base_url("/cetak-data/nilai") ?>" class="submenu-link">Cetak Nilai Siswa</a>
                             </li>
 
                             <li
                                 class="submenu-item <?= ($uri->getSegment(1) === 'cetak-data' && $uri->getSegment(2) === 'sertifikat') ? 'active' : '' ?>">
-                                <a href="/cetak-data/sertifikat" class="submenu-link">Cetak Sertifikat Prakerin</a>
+                                <a href="<?= base_url("/cetak-data/sertifikat") ?>" class="submenu-link">Cetak Sertifikat Prakerin</a>
                             </li>
                         </ul>
                     </li>
@@ -130,7 +130,7 @@
                     <li class="sidebar-title">Account</li>
 
                     <li class="sidebar-item <?= ($uri->getSegment(1) === 'users') ? 'active' : '' ?>">
-                        <a href="/users/list" class="sidebar-link">
+                        <a href="<?= base_url("/users/list") ?>" class="sidebar-link">
                             <i class="bi bi-people-fill"></i>
                             <span>Users</span>
                         </a>

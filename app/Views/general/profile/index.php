@@ -19,7 +19,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item" aria-current="page">
-                            <a href="/dashboard">Dashboard</a>
+                            <a href="<?= base_url("/dashboard") ?>">Dashboard</a>
                         </li>
                     </ol>
                 </nav>
@@ -30,7 +30,7 @@
     <!-- Section -->
     <section class="row section justify-content-around">
         <div class="col-sm-3 d-flex flex-column mb-3">
-            <img src="/assets/compiled/jpg/2.jpg" alt="Profile Picture" class="rounded-4 shadow" width="100%" />
+            <img src="<?= base_url("/assets/compiled/jpg/2.jpg") ?>" alt="Profile Picture" class="rounded-4 shadow" width="100%" />
             <!-- Change profile pciture button -->
             <div class="d-flex justify-content-center mt-3">
                 <button type="button" class="btn btn-outline-primary btn-sm text-muted" disabled>
@@ -52,7 +52,7 @@
                     <hr class="mb-0">
                 </div>
                 <div class="card-body d-flex flex-column gap-2">
-                    <form class="form" action="/profile/changePassword" method="post">
+                    <form class="form" action="<?= base_url("/profile/changePassword") ?>" method="post">
                         <div class="col-12">
                             <?php $old_password = (session()->getFlashdata('old_password')) ? 'is-invalid' : '' ?>
                             <h6>Old password</h6>

@@ -19,7 +19,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="/master-data/smk">Master Data</a>
+                            <a href="<?= base_url("/master-data/smk") ?>">Master Data</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
                             Daftar SMK
@@ -112,7 +112,7 @@
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                         <!-- Delete -->
-                                        <a href="/master-data/smk/deleteSMK/<?= $row['npsn'] ?>"
+                                        <a href="<?= base_url("/master-data/smk/deleteSMK/") ?><?= $row['npsn'] ?>"
                                             class="btn icon btn-sm btn-danger delete">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>

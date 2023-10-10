@@ -8,23 +8,21 @@
         <?= $title; ?> - SIP-Prakerin
     </title>
 
-    <link rel="shortcut icon" href="/assets/static/images/logo/logo-upt.png" type="image/x-icon" />
-    <link rel="stylesheet" href="/assets/extensions/simple-datatables/style.css" />
-    <link rel="stylesheet" href="/assets/compiled/css/table-datatable.css" />
-    <link rel="stylesheet" href="/assets/compiled/css/app.css" />
-    <link rel="stylesheet" href="/assets/compiled/css/app-dark.css" />
-    <link rel="stylesheet" href="/assets/compiled/css/iconly.css" />
-    <link rel="stylesheet" href="/assets/extensions/flatpickr/flatpickr.min.css" />
-    <link rel="stylesheet" href="/assets/extensions/sweetalert2/sweetalert2.min.css">
-
-
+    <link rel="shortcut icon" href="<?= base_url("/assets/static/images/logo/logo-upt.png") ?>" type="image/x-icon" />
+    <link rel="stylesheet" href="<?= base_url("/assets/extensions/simple-datatables/style.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("/assets/compiled/css/table-datatable.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("/assets/compiled/css/app.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("/assets/compiled/css/app-dark.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("/assets/compiled/css/iconly.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("/assets/extensions/flatpickr/flatpickr.min.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("/assets/extensions/sweetalert2/sweetalert2.min.css") ?>">
 
     <script src="https://kit.fontawesome.com/712e5f8866.js" crossorigin="anonymous"></script>
-    <script src="/assets/extensions/jquery/jquery.min.js"></script>
+    <script src="<?= base_url("/assets/extensions/jquery/jquery.min.js") ?>"></script>
 </head>
 
 <body>
-    <script src="/assets/static/js/initTheme.js"></script>
+    <script src="<?= base_url("/assets/static/js/initTheme.js") ?>"></script>
     <div id="app">
         <!-- Include sidebar php -->
         <?php include_once 'sidebar.php'; ?>
@@ -58,7 +56,8 @@
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="/assets/compiled/jpg/2.jpg" alt="Profile Picture" />
+                                                <img src="<?= base_url("/assets/compiled/jpg/2.jpg") ?>"
+                                                    alt="Profile Picture" />
                                             </div>
                                         </div>
                                     </div>
@@ -71,7 +70,7 @@
                                         </h6>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/profile">
+                                        <a class="dropdown-item" href="<?= base_url("/profile") ?>">
                                             <i class="icon-mid bi bi-person me-2"></i>
                                             Profile
                                         </a>
@@ -80,7 +79,7 @@
                                         <hr class="dropdown-divider" />
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/logout"><i
+                                        <a class="dropdown-item" href="<?= base_url("/logout") ?>"><i
                                                 class="icon-mid bi bi-box-arrow-left me-2"></i>
                                             Logout</a>
                                     </li>
@@ -100,13 +99,13 @@
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
-                        <p>2023 &copy; <a href="https://github.com/uptkompwp">UPT Komputer</a></p>
+                        <p>2023 &copy; <a href="https://github.com/uptkompwp" target="_blank">UPT Komputer</a></p>
                     </div>
                     <div class="float-end">
                         <p>
                             Crafted with
                             <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                            by <a href="https://github.com/faykarr">Faykar</a>
+                            by <a href="https://github.com/faykarr" target="_blank">Faykar</a>
                         </p>
                     </div>
                 </div>
@@ -115,28 +114,28 @@
         </div>
     </div>
 
-    <script src="/assets/static/js/components/dark.js"></script>
-    <script src="/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="<?= base_url("/assets/static/js/components/dark.js") ?>"></script>
+    <script src="<?= base_url("/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js") ?>"></script>
 
-    <script src="/assets/compiled/js/app.js"></script>
+    <script src="<?= base_url("/assets/compiled/js/app.js") ?>"></script>
 
-    <script src="/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
-    <script src="/assets/extensions/moment/moment.min.js"></script>
+    <script src="<?= base_url("/assets/extensions/simple-datatables/umd/simple-datatables.js") ?>"></script>
+    <script src="<?= base_url("/assets/extensions/moment/moment.min.js") ?>"></script>
     <?php
     $uri = service('uri');
     // Check if the segment 1 is not cetak-data
     if ($uri->getSegment(1) != 'cetak-data') {
-        echo '<script src="/assets/static/js/pages/simple-datatables.js"></script>';
+        echo '<script src="' . base_url('assets/static/js/pages/simple-datatables.js') . '"></script>';
     } elseif ($uri->getSegment(1) == 'cetak-data') {
-        echo '<script src="/assets/static/js/pages/date-filter.js"></script>';
+        echo '<script src="' . base_url('assets/static/js/pages/date-filter.js') . '"></script>';
     }
     ?>
 
 
-    <script src="/assets/extensions/flatpickr/flatpickr.min.js"></script>
-    <script src="/assets/static/js/pages/date-picker.js"></script>
+    <script src="<?= base_url("/assets/extensions/flatpickr/flatpickr.min.js") ?>"></script>
+    <script src="<?= base_url("/assets/static/js/pages/date-picker.js") ?>"></script>
 
-    <script src="/assets/extensions/sweetalert2/sweetalert2.min.js"></script>
+    <script src="<?= base_url("/assets/extensions/sweetalert2/sweetalert2.min.js") ?>"></script>
 
     <script>
 
