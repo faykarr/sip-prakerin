@@ -139,6 +139,7 @@ class General extends BaseController
     // Method addKegiatan store to database
     public function addKegiatan()
     {
+        date_default_timezone_set('Asia/Jakarta');
         // Get id_asisten from session
         $id_asisten = session()->get('id_asisten');
         // Get asisten_pembantu from input
