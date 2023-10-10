@@ -26,6 +26,7 @@ class UserModel extends Model
         return $this->db->table('tb_user')
             ->join('tb_asisten', 'tb_asisten.id_asisten = tb_user.id_asisten')
             ->where('username', $username)
+            ->where('status', 'Aktif')
             ->get()->getRowArray();
     }
 
