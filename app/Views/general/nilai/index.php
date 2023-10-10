@@ -21,7 +21,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="/input-data/nilai">Master Data</a>
+                            <a href="<?= base_url("/input-data/nilai") ?>">Master Data</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
                             Daftar Nilai Siswa

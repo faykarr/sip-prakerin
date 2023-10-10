@@ -17,7 +17,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="/master-data/asisten">Master Data</a>
+                            <a href="<?= base_url("/master-data/asisten") ?>">Master Data</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
                             Daftar Asisten
@@ -88,11 +88,10 @@
                                             data-nama="<?= $a['nama_asisten'] ?>" data-nohp="<?= $a['no_hp'] ?>"
                                             data-email="<?= $a['email'] ?>" data-alamat="<?= $a['alamat'] ?>"
                                             data-jabatan="<?= $a['jabatan'] ?>" data-status="<?= $a['status'] ?>">
-                                            <!-- Fontawesome fa-eye -->
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
 
-                                        <!-- Edit Status -->
+                                        <!-- Edit Status / Jabatan -->
                                         <a href="#" class="btn icon btn-sm btn-warning text-white edit">
                                             <i class="fa-solid fa-edit"></i>
                                         </a>

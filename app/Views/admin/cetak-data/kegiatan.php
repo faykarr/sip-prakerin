@@ -4,6 +4,10 @@
 <!-- Section Body -->
 <?= $this->section('body'); ?>
 
+<script>
+    var base_url = "<?php echo base_url(); ?>"; 
+</script>
+
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
@@ -18,7 +22,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="/cetak-data/kegiatan">
+                            <a href="<?= base_url("/cetak-data/kegiatan") ?>">
                                 Cetak Data
                             </a>
                         </li>

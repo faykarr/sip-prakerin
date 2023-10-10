@@ -18,7 +18,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="/input-data/kegiatan">Input Data</a>
+                            <a href="<?= base_url("/input-data/kegiatan") ?>">Input Data</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
                             Kegiatan Harian
@@ -97,7 +97,7 @@
                                             data-id-asisten="<?= $k['id_asisten'] ?>">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
-                                        <a href="/input-data/kegiatan/deleteKegiatan/<?= $k['id_kegiatan']; ?>"
+                                        <a href="<?= base_url("/input-data/kegiatan/deleteKegiatan/") ?><?= $k['id_kegiatan']; ?>"
                                             class="btn icon btn-sm btn-danger delete">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>

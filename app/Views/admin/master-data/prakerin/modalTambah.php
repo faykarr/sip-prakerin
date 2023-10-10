@@ -12,7 +12,7 @@
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form class="form" method="post" action="/master-data/prakerin/addPrakerin">
+            <form class="form" method="post" action="<?= base_url("/master-data/prakerin/addPrakerin") ?>">
                 <div class="modal-body">
                     <!-- Form Tambah Siswa -->
                     <div class="row">

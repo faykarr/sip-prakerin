@@ -18,7 +18,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="/cetak-data/kegiatan">
+                            <a href="<?= base_url("/cetak-data/kegiatan") ?>">
                                 Cetak Data
                             </a>
                         </li>
@@ -81,7 +81,7 @@
                                 <td>
                                     <!-- Cetak nilai, bisa cetak jika sudah dinilai, jika belum tidak bisa -->
                                     <?php if ($value['status_nilai'] == 'Dinilai'): ?>
-                                        <a href="/cetak-data/nilai/print/<?= $value['id_nilai'] ?>"
+                                        <a href="<?= base_url("/cetak-data/nilai/print/") ?><?= $value['id_nilai'] ?>"
                                             class="btn btn-primary btn-sm">
                                             <i data-feather="printer"></i>
                                             Cetak

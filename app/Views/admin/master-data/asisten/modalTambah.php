@@ -13,7 +13,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form" method="post" action="/master-data/asisten/addAsisten">
+                <form class="form" method="post" action="<?= base_url("/master-data/asisten/addAsisten") ?>">
                     <!-- Form Tambah Siswa -->
                     <div class="row">
                         <div class="col-md-6 col-12">

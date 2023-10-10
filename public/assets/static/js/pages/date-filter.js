@@ -100,8 +100,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // For example, you can open a print-friendly version of the table or generate a PDF.
     const dateRange = document.getElementById("date_range").value;
 
-    // Arahkan pengguna ke halaman cetak PDF dengan parameter date_range
-    window.location.href =
-      "/cetak-data/kegiatan/print/" + encodeURIComponent(dateRange);
+    // Construct the dynamic URL using base_url
+    const dynamicUrl = `${base_url}/cetak-data/kegiatan/print/${encodeURIComponent(dateRange)}`;
+
+    // Redirect the user to the dynamic URL
+    window.location.href = dynamicUrl;
   });
 });

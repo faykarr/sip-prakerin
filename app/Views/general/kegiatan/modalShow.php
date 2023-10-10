@@ -19,7 +19,7 @@
 
                 <div class="card">
                     <div class="card-content">
-                        <img class="card-img-top img-fluid rounded" src="/assets/compiled/jpg/school.jpg"
+                        <img class="card-img-top img-fluid rounded" src="<?= base_url("/assets/compiled/jpg/school.jpg") ?>"
                             alt="Card image cap" style="height: 20rem">
                         <div class="card-body">
                             <h4 class="card-title asisten">
