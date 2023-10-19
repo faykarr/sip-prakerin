@@ -23,7 +23,7 @@
                                 </label>
                                 <?php $isInvalidNIM = (session()->getFlashdata('nim')) ? 'is-invalid' : '' ?>
                                 <input type="text" id="nim" class="form-control <?= $isInvalidNIM ?>" placeholder="NIM"
-                                    name="nim" value="<?= old('nim') ?>">
+                                    name="nim" value="<?= old('nim') ?>" autofocus>
                                 <?php if (session()->getFlashdata('nim')): ?>
                                     <div class="invalid-feedback">
                                         <?= session()->getFlashdata('nim') ?>

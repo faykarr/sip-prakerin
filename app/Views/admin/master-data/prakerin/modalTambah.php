@@ -23,7 +23,7 @@
                                 </label>
                                 <?php $nisn = (session()->getFlashdata('nisn')) ? 'is-invalid' : '' ?>
                                 <input type="text" id="nisn" class="form-control <?= $nisn ?>" placeholder="NISN"
-                                    name="nisn" value="<?= old('nisn') ?>">
+                                    name="nisn" value="<?= old('nisn') ?>" autofocus>
                                 <?php if (session()->getFlashdata('nisn')): ?>
                                     <div class="invalid-feedback">
                                         <?= session()->getFlashdata('nisn') ?>
@@ -114,7 +114,9 @@
                                     <option value="">-- Pilih asal sekolah --</option>
                                     <?php foreach ($sekolah as $s): ?>
                                         <option <?= (old('asal_sekolah') == $s['npsn'] ? 'selected' : '') ?>
-                                            value="<?= $s['npsn'] ?>"><?= $s['nama_sekolah'] ?></option>
+                                            value="<?= $s['npsn'] ?>">
+                                            <?= $s['nama_sekolah'] ?>
+                                        </option>
                                     <?php endforeach; ?>
                                 </select>
                                 <?php if (session()->getFlashdata('asal_sekolah')): ?>

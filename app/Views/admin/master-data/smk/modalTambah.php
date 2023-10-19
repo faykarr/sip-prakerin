@@ -24,7 +24,7 @@
                                 </label>
                                 <?php $isInvalidNPSN = (session()->getFlashdata('npsn')) ? 'is-invalid' : '' ?>
                                 <input type="text" id="npsn" class="form-control <?= $isInvalidNPSN ?>"
-                                    placeholder="NPSN" name="npsn" value="<?= old('npsn') ?>">
+                                    placeholder="NPSN" name="npsn" value="<?= old('npsn') ?>" autofocus>
                                 <?php if (session()->getFlashdata('npsn')): ?>
                                     <div class="invalid-feedback">
                                         <?= session()->getFlashdata('npsn') ?>
