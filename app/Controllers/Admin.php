@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 // Dompdf
 use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class Admin extends BaseController
 {
@@ -1020,7 +1021,8 @@ class Admin extends BaseController
     }
 
     // Method cetakSertifikat
-    function cetakSertifikat() {
+    function cetakSertifikat()
+    {
         $data = [
             'title' => 'Cetak Sertifikat Siswa',
             // Get first_name from session
@@ -1037,5 +1039,63 @@ class Admin extends BaseController
 
         // return view to admin/cetak-data/sertifikat with data
         return view('admin/cetak-data/sertifikat', $data);
+    }
+
+    // Method printSertifikat
+    public function printSertifikat($id)
+    {
+        // Set options to enable embedded PHP
+        $options = new Options();
+        $options->set('isPhpEnabled', 'true');
+
+        // Ambil data nilai dari model (sesuaikan dengan model yang Anda gunakan)
+        $data = [
+            'nilai' => $this->nilaiModel->getNilaiById($id)
+        ];
+
+        // Render view nilai dalam bentuk HTML
+        $html = view('admin/cetak-data/sertifikat_pdf', $data);
+
+        // Buat objek Dompdf
+        $dompdf = new Dompdf($options);
+
+        // Load HTML nilai ke dalam Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Opsional) Atur ukuran dan orientasi halaman PDF
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render HTML ke PDF & print
+        $dompdf->render();
+
+        // Instantiate canvas instance
+        $canvas = $dompdf->getCanvas();
+
+        // Get height and width of page
+        $w = $canvas->get_width();
+        $h = $canvas->get_height();
+
+        // Specify watermark image
+        $imageURL = 'assets\static\images\logo\logo-stmik.png';
+        $imgWidth = 450;
+        $imgHeight = 450;
+
+        // Set image opacity
+        $canvas->set_opacity(.15);
+
+        // Specify horizontal and vertical position
+        $x = (($w - $imgWidth) / 2);
+        $y = (($h - $imgHeight) / 2);
+
+        // Add an image to the pdf
+        $canvas->image($imageURL, $x, $y, $imgWidth, $imgHeight);
+
+        // Generate nama file PDF (sesuaikan dengan kebutuhan)
+        $filename = strtolower(str_replace(' ', '_', $data['nilai']['nama_siswa'])) . '_sertifikat_prakerin';
+
+        $filename .= '.pdf';
+
+        // Unduh file PDF ke pengguna
+        $dompdf->stream($filename, ['Attachment' => false]);
     }
 }
