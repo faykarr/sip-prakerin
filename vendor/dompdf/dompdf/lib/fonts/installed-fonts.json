@@ -1,0 +1,14 @@
+{
+    "bell mt": {
+        "normal": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELL",
+        "bold": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELLb",
+        "italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELLi",
+        "bold_italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELL"
+    },
+    "chiller": {
+        "normal": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/CHILLER",
+        "bold": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/CHILLER",
+        "italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/CHILLER",
+        "bold_italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/CHILLER"
+    }
+}
