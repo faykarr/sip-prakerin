@@ -1077,8 +1077,8 @@ class Admin extends BaseController
 
         // Specify watermark image
         $imageURL = 'assets\static\images\logo\logo-stmik.png';
-        $imgWidth = 450;
-        $imgHeight = 450;
+        $imgWidth = 380;
+        $imgHeight = 380;
 
         // Set image opacity
         $canvas->set_opacity(.15);
