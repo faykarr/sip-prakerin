@@ -10,5 +10,17 @@
         "bold": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/CHILLER",
         "italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/CHILLER",
         "bold_italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/CHILLER"
+    },
+    "agency fb": {
+        "normal": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCY",
+        "bold": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCYb",
+        "italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCY",
+        "bold_italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCY"
+    },
+    "bookman old style": {
+        "normal": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOS",
+        "bold": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOSb",
+        "italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOSi",
+        "bold_italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOSbi"
     }
 }
