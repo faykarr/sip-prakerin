@@ -7,14 +7,17 @@
     <title>Sertifikat Prakerin</title>
     <style>
         h1 {
-            font-family: 'Chiller';
+            font-family: 'Bookman Old Style', serif;
+            font-weight: bold;
+            font-style: italic;
+            text-decoration: underline;
         }
     </style>
 </head>
 
 <body>
     <h1 align="center">
-        <?= $nilai['nama_siswa']; ?>
+        Eka Adhi Purnomo
     </h1>
 </body>
 
