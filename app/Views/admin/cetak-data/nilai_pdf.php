@@ -36,7 +36,7 @@
             align-self: flex-start;
             position: absolute;
             left: 40;
-            top: 30;
+            top: 25;
             bottom: 0;
         }
 
@@ -121,7 +121,9 @@
 
         .tanda-tangan img {
             width: 150px;
-            margin-bottom: 10px;
+            margin-top: -40px;
+            margin-bottom: -30px;
+            padding: 0px;
         }
 
         .tanda-tangan p {
@@ -222,11 +224,13 @@
                 <br>
                 <p style="text-align: justify; text-indent: 25px;">Nama tersebut diatas adalah benar siswa/i<b>
                         <?= $nilai['nama_sekolah']; ?>
-                    </b>yang telah mengikuti kegiatan Praktik Kerja Industri sesuai dengan
-                    peraturan & ketentuan yang ada, dan dinyatakan <b>LULUS.</b>
+                    </b>yang telah mengikuti kegiatan Praktik Kerja Industri di <b> STMIK Widya Pratama
+                        Pekalongan</b> sesuai dengan
+                    peraturan & ketentuan yang ada, maka dengan ini kami nyatakan siswa/i tersebut <b>LULUS.</b>
+                    Berikut kami lampirkan hasil kegiatan Praktik Kerja Industri sebagai berikut:
                 </p>
                 <div class="page-break">
-                    <p style="margin-left:15px; margin-top:50px;"><b>A. Hasil Kegiatan Praktik Kerja Industri :</b></p>
+                    <p style="margin-left:15px; margin-top:50px;"><b>Hasil Kegiatan Praktik Kerja Industri :</b></p>
                     <table>
                         <thead>
                             <tr>
@@ -305,7 +309,7 @@
         </main>
         <footer>
             <p>Pekalongan,
-                <?= str_replace('-', ' ', date('d-F-Y')) ?>
+                <?= date('d F Y', strtotime($nilai['periode_akhir'] . ' +4 day')); ?>
             </p>
             <p style="margin-top: -17px;">Instruktur DU/DI,</p>
             <div class="tanda-tangan">

@@ -151,14 +151,7 @@
                 alt="Tanda tangan pak widi" class="ttd">
         </div>
         <div id="sertifikat_belakang">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel sed quae odit quam, deserunt necessitatibus
-                perspiciatis recusandae voluptatibus, maxime minus molestiae rerum quas cumque doloremque qui, nisi iure
-                non consequatur illum? Nobis enim possimus quod alias! Corporis aut voluptas cumque, mollitia rerum
-                delectus eaque totam ipsam tempore ipsum ad harum, dolorum consectetur vero tenetur! Exercitationem
-                minus totam laudantium delectus quae facere eveniet dolor beatae deserunt adipisci nihil impedit
-                accusamus eius, voluptate in rem provident numquam temporibus. Iusto accusantium dolor doloremque, non
-                deleniti commodi optio quod, suscipit quis repudiandae architecto hic quidem odio sit quaerat. Ad ex
-                accusantium ut optio illum.</p>
+
         </div>
     </div>
 </body>
