@@ -1068,27 +1068,27 @@ class Admin extends BaseController
         // Render HTML ke PDF & print
         $dompdf->render();
 
-        // Instantiate canvas instance
-        $canvas = $dompdf->getCanvas();
+        // // Instantiate canvas instance
+        // $canvas = $dompdf->getCanvas();
 
-        // Get height and width of page
-        $w = $canvas->get_width();
-        $h = $canvas->get_height();
+        // // Get height and width of page
+        // $w = $canvas->get_width();
+        // $h = $canvas->get_height();
 
-        // Specify watermark image
-        $imageURL = 'assets\static\images\logo\logo-stmik.png';
-        $imgWidth = 380;
-        $imgHeight = 380;
+        // // Specify watermark image
+        // $imageURL = 'assets\static\images\logo\logo-stmik.png';
+        // $imgWidth = 380;
+        // $imgHeight = 380;
 
-        // Set image opacity
-        $canvas->set_opacity(.15);
+        // // Set image opacity
+        // $canvas->set_opacity(.15);
 
-        // Specify horizontal and vertical position
-        $x = (($w - $imgWidth) / 2);
-        $y = (($h - $imgHeight) / 2);
+        // // Specify horizontal and vertical position
+        // $x = (($w - $imgWidth) / 2);
+        // $y = (($h - $imgHeight) / 2);
 
-        // Add an image to the pdf
-        $canvas->image($imageURL, $x, $y, $imgWidth, $imgHeight);
+        // // Add an image to the pdf
+        // $canvas->image($imageURL, $x, $y, $imgWidth, $imgHeight);
 
         // Generate nama file PDF (sesuaikan dengan kebutuhan)
         $filename = strtolower(str_replace(' ', '_', $data['nilai']['nama_siswa'])) . '_sertifikat_prakerin';

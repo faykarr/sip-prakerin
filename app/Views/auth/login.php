@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - SIP-Prakerin</title>
 
-    <link rel="shortcut icon" href="<?= base_url("/assets/compiled/png/logo-upt.png") ?>" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?= base_url("/assets/static/images/logo/logo-upt.png") ?>" type="image/x-icon" />
     <link rel="stylesheet" href="<?= base_url("/assets/compiled/css/app.css") ?>" />
     <link rel="stylesheet" href="<?= base_url("/assets/compiled/css/app-dark.css") ?>" />
     <!-- Make variable base_url in css -->
