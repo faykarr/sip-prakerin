@@ -84,6 +84,20 @@
         .page-break {
             page-break-after: always;
         }
+
+        header>.title-nilai {
+            font-family: 'Agency FB';
+            font-size: 28px;
+            text-align: center;
+            text-decoration: none;
+            letter-spacing: 1px;
+            margin: 0px;
+        }
+
+        table {
+            font-family: 'Agency FB';
+            font-size: 20px;
+        }
     </style>
 </head>
 
@@ -151,7 +165,29 @@
                 alt="Tanda tangan pak widi" class="ttd">
         </div>
         <div id="sertifikat_belakang">
-
+            <header>
+                <h2 class="title-nilai">
+                    DAFTAR NILAI HASIL PRAKTIK KERJA INDUSTRI <br>
+                    <?= strtoupper($nilai['nama_sekolah']); ?>
+                </h2>
+                <table>
+                    <tr>
+                        <td>Nama Lengkap</td>
+                        <td>:</td>
+                        <td>Eka Adhi Purnomo</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Lengkap</td>
+                        <td>:</td>
+                        <td>Eka Adhi Purnomo</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Lengkap</td>
+                        <td>:</td>
+                        <td>Eka Adhi Purnomo</td>
+                    </tr>
+                </table>
+            </header>
         </div>
     </div>
 </body>
