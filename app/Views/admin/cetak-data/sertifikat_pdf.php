@@ -175,16 +175,23 @@
                         <td>Nama Lengkap</td>
                         <td>:</td>
                         <td>Eka Adhi Purnomo</td>
+                        <td style="width:300px;"></td>
+                        <td>Tempat Prakerin</td>
+                        <td>:</td>
+                        <td>STMIK WIDYA PRATAMA PEKALONGAN</td>
                     </tr>
                     <tr>
-                        <td>Nama Lengkap</td>
+                        <td>Sekolah</td>
                         <td>:</td>
-                        <td>Eka Adhi Purnomo</td>
+                        <td colspan="2">SMK Negeri 2 Pekalongan</td>
+                        <td>Periode / Waktu</td>
+                        <td>:</td>
+                        <td>01 Januari 2021 - 01 Februari 2021</td>
                     </tr>
                     <tr>
-                        <td>Nama Lengkap</td>
+                        <td>Kompetensi Keahlian</td>
                         <td>:</td>
-                        <td>Eka Adhi Purnomo</td>
+                        <td colspan="5">Teknik Komputer dan Jaringan</td>
                     </tr>
                 </table>
             </header>
