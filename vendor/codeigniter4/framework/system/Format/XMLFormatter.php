@@ -17,6 +17,8 @@ use SimpleXMLElement;
 
 /**
  * XML data formatter
+ *
+ * @see \CodeIgniter\Format\XMLFormatterTest
  */
 class XMLFormatter implements FormatterInterface
 {
@@ -53,6 +55,8 @@ class XMLFormatter implements FormatterInterface
      * @see http://www.codexworld.com/convert-array-to-xml-in-php/
      *
      * @param SimpleXMLElement $output
+     *
+     * @return void
      */
     protected function arrayToXML(array $data, &$output)
     {

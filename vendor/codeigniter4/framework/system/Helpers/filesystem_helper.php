@@ -209,7 +209,7 @@ if (! function_exists('get_filenames')) {
 
         try {
             foreach (new RecursiveIteratorIterator(
-                new RecursiveDirectoryIterator($sourceDir, RecursiveDirectoryIterator::SKIP_DOTS),
+                new RecursiveDirectoryIterator($sourceDir, RecursiveDirectoryIterator::SKIP_DOTS | FilesystemIterator::FOLLOW_SYMLINKS),
                 RecursiveIteratorIterator::SELF_FIRST
             ) as $name => $object) {
                 $basename = pathinfo($name, PATHINFO_BASENAME);
@@ -292,8 +292,8 @@ if (! function_exists('get_file_info')) {
      * Options are: name, server_path, size, date, readable, writable, executable, fileperms
      * Returns false if the file cannot be found.
      *
-     * @param string $file           Path to file
-     * @param mixed  $returnedValues Array or comma separated string of information returned
+     * @param string       $file           Path to file
+     * @param array|string $returnedValues Array or comma separated string of information returned
      *
      * @return array|null
      */

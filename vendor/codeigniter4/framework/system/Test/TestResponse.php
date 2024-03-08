@@ -31,6 +31,7 @@ use PHPUnit\Framework\TestCase;
  * @internal
  *
  * @mixin DOMParser
+ * @see \CodeIgniter\Test\TestResponseTest
  */
 class TestResponse extends TestCase
 {
@@ -134,8 +135,11 @@ class TestResponse extends TestCase
         if ($status >= 400 || $status < 200) {
             return false;
         }
+
+        $body = (string) $this->response->getBody();
+
         // Empty bodies are not considered valid, unless in redirects
-        return ! ($status < 300 && empty($this->response->getBody()));
+        return ! ($status < 300 && $body === '');
     }
 
     /**
@@ -350,7 +354,7 @@ class TestResponse extends TestCase
     /**
      * Returns the response's body as JSON
      *
-     * @return false|string|null
+     * @return false|string
      */
     public function getJSON()
     {
@@ -385,7 +389,7 @@ class TestResponse extends TestCase
      * Asserts that the JSON exactly matches the passed in data.
      * If the value being passed in is a string, it must be a json_encoded string.
      *
-     * @param array|string $test
+     * @param array|object|string $test
      *
      * @throws Exception
      */

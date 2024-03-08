@@ -19,6 +19,8 @@ use Config\Honeypot as HoneypotConfig;
 
 /**
  * class Honeypot
+ *
+ * @see \CodeIgniter\Honeypot\HoneypotTest
  */
 class Honeypot
 {
@@ -42,7 +44,7 @@ class Honeypot
             throw HoneypotException::forNoHiddenValue();
         }
 
-        if (empty($this->config->container) || strpos($this->config->container, '{template}') === false) {
+        if ($this->config->container === '' || strpos($this->config->container, '{template}') === false) {
             $this->config->container = '<div style="display:none">{template}</div>';
         }
 
@@ -59,6 +61,8 @@ class Honeypot
 
     /**
      * Checks the request if honeypot field has data.
+     *
+     * @return bool
      */
     public function hasContent(RequestInterface $request)
     {
@@ -69,9 +73,15 @@ class Honeypot
 
     /**
      * Attaches Honeypot template to response.
+     *
+     * @return void
      */
     public function attachHoneypot(ResponseInterface $response)
     {
+        if ($response->getBody() === null) {
+            return;
+        }
+
         if ($response->getCSP()->enabled()) {
             // Add id attribute to the container tag.
             $this->config->container = str_ireplace(
@@ -83,16 +93,16 @@ class Honeypot
 
         $prepField = $this->prepareTemplate($this->config->template);
 
-        $body = $response->getBody();
-        $body = str_ireplace('</form>', $prepField . '</form>', $body);
+        $bodyBefore = $response->getBody();
+        $bodyAfter  = str_ireplace('</form>', $prepField . '</form>', $bodyBefore);
 
-        if ($response->getCSP()->enabled()) {
+        if ($response->getCSP()->enabled() && ($bodyBefore !== $bodyAfter)) {
             // Add style tag for the container tag in the head tag.
-            $style = '<style ' . csp_style_nonce() . '>#' . $this->config->containerId . ' { display:none }</style>';
-            $body  = str_ireplace('</head>', $style . '</head>', $body);
+            $style     = '<style ' . csp_style_nonce() . '>#' . $this->config->containerId . ' { display:none }</style>';
+            $bodyAfter = str_ireplace('</head>', $style . '</head>', $bodyAfter);
         }
 
-        $response->setBody($body);
+        $response->setBody($bodyAfter);
     }
 
     /**

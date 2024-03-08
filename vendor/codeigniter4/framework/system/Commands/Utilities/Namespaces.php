@@ -20,6 +20,8 @@ use Config\Services;
  * Lists namespaces set in Config\Autoload with their
  * full server path. Helps you to verify that you have
  * the namespaces setup correctly.
+ *
+ * @see \CodeIgniter\Commands\Utilities\NamespacesTest
  */
 class Namespaces extends BaseCommand
 {
@@ -55,14 +57,14 @@ class Namespaces extends BaseCommand
     /**
      * the Command's Arguments
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $arguments = [];
 
     /**
      * the Command's Options
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $options = [
         '-c' => 'Show only CodeIgniter config namespaces.',

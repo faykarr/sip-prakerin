@@ -96,7 +96,7 @@ trait ControllerTester
     protected function setUpControllerTester(): void
     {
         if (empty($this->appConfig)) {
-            $this->appConfig = config('App');
+            $this->appConfig = config(App::class);
         }
 
         if (! $this->uri instanceof URI) {
@@ -108,7 +108,7 @@ trait ControllerTester
             $tempUri = Services::uri();
             Services::injectMock('uri', $this->uri);
 
-            $this->withRequest(Services::request($this->appConfig, false)->setBody($this->body));
+            $this->withRequest(Services::incomingrequest($this->appConfig, false)->setBody($this->body));
 
             // Restore the URI service
             Services::injectMock('uri', $tempUri);

@@ -19,6 +19,8 @@ use InvalidArgumentException;
 
 /**
  * Load a response into a DOMDocument for testing assertions based on that
+ *
+ * @see \CodeIgniter\Test\DOMParserTest
  */
 class DOMParser
 {
@@ -101,9 +103,6 @@ class DOMParser
 
     /**
      * Checks to see if the text is found within the result.
-     *
-     * @param string $search
-     * @param string $element
      */
     public function see(?string $search = null, ?string $element = null): bool
     {
@@ -121,8 +120,6 @@ class DOMParser
 
     /**
      * Checks to see if the text is NOT found within the result.
-     *
-     * @param string $search
      */
     public function dontSee(?string $search = null, ?string $element = null): bool
     {
@@ -192,23 +189,23 @@ class DOMParser
         $path = '';
 
         // By ID
-        if (! empty($selector['id'])) {
-            $path = empty($selector['tag'])
+        if (isset($selector['id'])) {
+            $path = ($selector['tag'] === '')
                 ? "id(\"{$selector['id']}\")"
                 : "//{$selector['tag']}[@id=\"{$selector['id']}\"]";
         }
         // By Class
-        elseif (! empty($selector['class'])) {
-            $path = empty($selector['tag'])
+        elseif (isset($selector['class'])) {
+            $path = ($selector['tag'] === '')
                 ? "//*[@class=\"{$selector['class']}\"]"
                 : "//{$selector['tag']}[@class=\"{$selector['class']}\"]";
         }
         // By tag only
-        elseif (! empty($selector['tag'])) {
+        elseif ($selector['tag'] !== '') {
             $path = "//{$selector['tag']}";
         }
 
-        if (! empty($selector['attr'])) {
+        if (isset($selector['attr'])) {
             foreach ($selector['attr'] as $key => $value) {
                 $path .= "[@{$key}=\"{$value}\"]";
             }
@@ -216,7 +213,7 @@ class DOMParser
 
         // $paths might contain a number of different
         // ready to go xpath portions to tack on.
-        if (! empty($paths) && is_array($paths)) {
+        if ($paths !== [] && is_array($paths)) {
             foreach ($paths as $extra) {
                 $path .= $extra;
             }
@@ -234,7 +231,7 @@ class DOMParser
     /**
      * Look for the a selector  in the passed text.
      *
-     * @return array
+     * @return array{tag: string, id: string|null, class: string|null, attr: array<string, string>|null}
      */
     public function parseSelector(string $selector)
     {

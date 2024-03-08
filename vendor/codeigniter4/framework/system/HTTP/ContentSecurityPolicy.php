@@ -11,6 +11,7 @@
 
 namespace CodeIgniter\HTTP;
 
+use Config\App;
 use Config\ContentSecurityPolicy as ContentSecurityPolicyConfig;
 
 /**
@@ -21,6 +22,7 @@ use Config\ContentSecurityPolicy as ContentSecurityPolicyConfig;
  * @see http://www.html5rocks.com/en/tutorials/security/content-security-policy/
  * @see http://content-security-policy.com/
  * @see https://www.owasp.org/index.php/Content_Security_Policy
+ * @see \CodeIgniter\HTTP\ContentSecurityPolicyTest
  */
 class ContentSecurityPolicy
 {
@@ -241,7 +243,7 @@ class ContentSecurityPolicy
      */
     public function __construct(ContentSecurityPolicyConfig $config)
     {
-        $appConfig        = config('App');
+        $appConfig        = config(App::class);
         $this->CSPEnabled = $appConfig->CSPEnabled;
 
         foreach (get_object_vars($config) as $setting => $value) {
@@ -297,6 +299,8 @@ class ContentSecurityPolicy
      * Compiles and sets the appropriate headers in the request.
      *
      * Should be called just prior to sending the response to the user agent.
+     *
+     * @return void
      */
     public function finalize(ResponseInterface $response)
     {
@@ -326,7 +330,7 @@ class ContentSecurityPolicy
     /**
      * Adds a new base_uri value. Can be either a URI class or a simple string.
      *
-     * base_uri restricts the URLs that can appear in a page’s <base> element.
+     * base_uri restricts the URLs that can appear in a page's <base> element.
      *
      * @see http://www.w3.org/TR/CSP/#directive-base-uri
      *
@@ -640,6 +644,8 @@ class ContentSecurityPolicy
      * DRY method to add an string or array to a class property.
      *
      * @param array|string $options
+     *
+     * @return void
      */
     protected function addOption($options, string $target, ?bool $explicitReporting = null)
     {
@@ -661,6 +667,8 @@ class ContentSecurityPolicy
      * Scans the body of the request message and replaces any nonce
      * placeholders with actual nonces, that we'll then add to our
      * headers.
+     *
+     * @return void
      */
     protected function generateNonces(ResponseInterface $response)
     {
@@ -687,6 +695,8 @@ class ContentSecurityPolicy
      * Based on the current state of the elements, will add the appropriate
      * Content-Security-Policy and Content-Security-Policy-Report-Only headers
      * with their values to the response object.
+     *
+     * @return void
      */
     protected function buildHeaders(ResponseInterface $response)
     {
@@ -767,6 +777,8 @@ class ContentSecurityPolicy
      * reportOnly header, since it's viable to have both simultaneously.
      *
      * @param array|string|null $values
+     *
+     * @return void
      */
     protected function addToHeader(string $name, $values = null)
     {
@@ -778,7 +790,7 @@ class ContentSecurityPolicy
         $reportSources = [];
 
         foreach ($values as $value => $reportOnly) {
-            if (is_numeric($value) && is_string($reportOnly) && ! empty($reportOnly)) {
+            if (is_numeric($value) && is_string($reportOnly) && ($reportOnly !== '')) {
                 $value      = $reportOnly;
                 $reportOnly = $this->reportOnly;
             }
@@ -794,11 +806,11 @@ class ContentSecurityPolicy
             }
         }
 
-        if (! empty($sources)) {
+        if ($sources !== []) {
             $this->tempHeaders[$name] = implode(' ', $sources);
         }
 
-        if (! empty($reportSources)) {
+        if ($reportSources !== []) {
             $this->reportOnlyHeaders[$name] = implode(' ', $reportSources);
         }
     }

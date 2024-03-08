@@ -13,9 +13,9 @@ namespace CodeIgniter\HTTP;
 
 use CodeIgniter\Cookie\Cookie;
 use CodeIgniter\Cookie\CookieStore;
-use CodeIgniter\Cookie\Exceptions\CookieException;
 use CodeIgniter\HTTP\Exceptions\HTTPException;
 use Config\App;
+use Config\Cookie as CookieConfig;
 use Config\Services;
 
 /**
@@ -28,6 +28,8 @@ use Config\Services;
  * - Status code and reason phrase
  * - Headers
  * - Message body
+ *
+ * @see \CodeIgniter\HTTP\ResponseTest
  */
 class Response extends Message implements ResponseInterface
 {
@@ -156,31 +158,11 @@ class Response extends Message implements ResponseInterface
 
         $this->CSPEnabled = $config->CSPEnabled;
 
-        // DEPRECATED COOKIE MANAGEMENT
-
-        $this->cookiePrefix   = $config->cookiePrefix;
-        $this->cookieDomain   = $config->cookieDomain;
-        $this->cookiePath     = $config->cookiePath;
-        $this->cookieSecure   = $config->cookieSecure;
-        $this->cookieHTTPOnly = $config->cookieHTTPOnly;
-        $this->cookieSameSite = $config->cookieSameSite ?? Cookie::SAMESITE_LAX;
-
-        $config->cookieSameSite ??= Cookie::SAMESITE_LAX;
-
-        if (! in_array(strtolower($config->cookieSameSite ?: Cookie::SAMESITE_LAX), Cookie::ALLOWED_SAMESITE_VALUES, true)) {
-            throw CookieException::forInvalidSameSite($config->cookieSameSite);
-        }
-
         $this->cookieStore = new CookieStore([]);
-        Cookie::setDefaults(config('Cookie') ?? [
-            // @todo Remove this fallback when deprecated `App` members are removed
-            'prefix'   => $config->cookiePrefix,
-            'path'     => $config->cookiePath,
-            'domain'   => $config->cookieDomain,
-            'secure'   => $config->cookieSecure,
-            'httponly' => $config->cookieHTTPOnly,
-            'samesite' => $config->cookieSameSite ?? Cookie::SAMESITE_LAX,
-        ]);
+
+        $cookie = config(CookieConfig::class);
+
+        Cookie::setDefaults($cookie);
 
         // Default to an HTML Content-Type. Devs can override if needed.
         $this->setContentType('text/html');
