@@ -136,21 +136,21 @@
             font-size: 18px;
             position: absolute;
             left: 250;
-            bottom: 40;
+            bottom: 65;
         }
 
         .sign {
             font-family: 'Agency FB';
             font-size: 18px;
             position: absolute;
-            bottom: -10;
+            bottom: 5;
             right: 75;
             text-align: right;
         }
 
         .ttd-belakang {
             position: absolute;
-            bottom: 0;
+            bottom: 15;
             right: 55;
             /* width kecilkan sedikit */
             width: 200px;
@@ -187,6 +187,24 @@
         $pdf->add_object($watermark, "all");
       }
     </script>
+
+    <?php
+        // Make function to set huruf nilai
+        function set_huruf_nilai($nilai)
+        {
+            if ($nilai >= 85) {
+                return 'A';
+            } elseif ($nilai >= 75) {
+                return 'B';
+            } elseif ($nilai >= 65) {
+                return 'C';
+            } elseif ($nilai >= 55) {
+                return 'D';
+            } else {
+                return 'E';
+            }
+        }
+    ?>
     <div class="container">
         <div id="sertifikat_depan" class="page-break">
             <h1>
@@ -234,8 +252,10 @@
                     <tr>
                         <td>Nama Lengkap</td>
                         <td>:</td>
-                        <td>Eka Adhi Purnomo</td>
-                        <td style="width:300px;"></td>
+                        <td style="width:420px;">
+                            <?= $nilai['nama_siswa']; ?>
+                        </td>
+                        <td></td>
                         <td>Tempat Prakerin</td>
                         <td>:</td>
                         <td>STMIK WIDYA PRATAMA PEKALONGAN</td>
@@ -243,15 +263,22 @@
                     <tr>
                         <td>Sekolah</td>
                         <td>:</td>
-                        <td colspan="2">SMK Negeri 2 Pekalongan</td>
+                        <td colspan="2">
+                            <?= $nilai['nama_sekolah']; ?>
+                        </td>
                         <td>Periode / Waktu</td>
                         <td>:</td>
-                        <td>01 Januari 2021 - 01 Februari 2021</td>
+                        <td>
+                            <?= str_replace('-', ' ', date('d-F-Y', strtotime($nilai['periode_awal']))) ?> -
+                            <?= str_replace('-', ' ', date('d-F-Y', strtotime($nilai['periode_akhir']))) ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>Kompetensi Keahlian</td>
                         <td>:</td>
-                        <td colspan="5">Teknik Komputer dan Jaringan</td>
+                        <td colspan="5">
+                            <?= $nilai['jurusan']; ?>
+                        </td>
                     </tr>
                 </table>
 
@@ -268,56 +295,70 @@
                     <tr>
                         <td>1</td>
                         <td>Kedisiplinan</td>
-                        <td>90</td>
-                        <td>A</td>
+                        <td>
+                            <?= $nilai['disiplin']; ?>
+                        </td>
+                        <td><?= set_huruf_nilai($nilai['disiplin']); ?></td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>Kedisiplinan</td>
-                        <td>90</td>
-                        <td>A</td>
+                        <td>Etos Kerja & Motivasi</td>
+                        <td>
+                            <?= $nilai['kerja_motivasi']; ?>
+                        </td>
+                        <td><?= set_huruf_nilai($nilai['kerja_motivasi']); ?></td>
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td>Kedisiplinan</td>
-                        <td>90</td>
-                        <td>A</td>
+                        <td>Kehadiran</td>
+                        <td>
+                            <?= $nilai['kehadiran']; ?>
+                        </td>
+                        <td><?= set_huruf_nilai($nilai['kehadiran']); ?></td>
                     </tr>
                     <tr>
                         <td>4</td>
-                        <td>Kedisiplinan</td>
-                        <td>90</td>
-                        <td>A</td>
+                        <td>Inisiatif & Kreatifitas</td>
+                        <td>
+                            <?= $nilai['inisiatif_kreatif']; ?>
+                        </td>
+                        <td><?= set_huruf_nilai($nilai['inisiatif_kreatif']); ?></td>
                     </tr>
                     <tr>
                         <td>5</td>
-                        <td>Kedisiplinan</td>
-                        <td>90</td>
-                        <td>A</td>
+                        <td>Kejujuran & Tanggung Jawab</td>
+                        <td>
+                            <?= $nilai['kejujuran_tanggung_jawab']; ?>
+                        </td>
+                        <td><?= set_huruf_nilai($nilai['kejujuran_tanggung_jawab']); ?></td>
                     </tr>
                     <tr>
                         <td>6</td>
-                        <td>Kedisiplinan</td>
-                        <td>90</td>
-                        <td>A</td>
+                        <td>Etika & Kesopanan</td>
+                        <td>
+                            <?= $nilai['kesopanan']; ?>
+                        </td>
+                        <td><?= set_huruf_nilai($nilai['kesopanan']); ?></td>
                     </tr>
                     <tr>
                         <td>7</td>
-                        <td>Kedisiplinan</td>
-                        <td>90</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: left; padding-left: 25px;">JUMLAH NILAI</td>
-                        <td colspan="2" style="text-align: center;">90</td>
+                        <td>Kerjasama</td>
+                        <td>
+                            <?= $nilai['kerjasama']; ?>
+                        </td>
+                        <td><?= set_huruf_nilai($nilai['kerjasama']); ?></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left; padding-left: 25px;">NILAI RATA-RATA</td>
-                        <td colspan="2" style="text-align: center;">90</td>
+                        <td colspan="2" style="text-align: center;">
+                            <?= $nilai['rata_rata']; ?>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left; padding-left: 25px;">PREDIKAT</td>
-                        <td colspan="2" style="text-align: center;">BAIK SEKALI</td>
+                        <td colspan="2" style="text-align: center;">
+                            <?= strtoupper($nilai['predikat']) ?>
+                        </td>
                     </tr>
                 </table>
             </section>
@@ -338,7 +379,8 @@
                 </div>
                 <div class="sign">
                     <p>
-                        Pekalongan, <?= date('d F Y', strtotime($nilai['periode_akhir'] . ' +4 day')); ?> <br>
+                        Pekalongan,
+                        <?= date('d F Y', strtotime($nilai['periode_akhir'] . ' +4 day')); ?> <br>
                         Instruktur IDUKA STMIK Widya Pratama <br> <br>
 
                         <b><u>Widiyono, S.T., M.Kom</u></b> <br>

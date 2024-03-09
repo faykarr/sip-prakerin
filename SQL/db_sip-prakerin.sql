@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2024 at 02:48 PM
+-- Generation Time: Mar 09, 2024 at 06:58 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -59,7 +59,7 @@ INSERT INTO `tb_asisten` (`id_asisten`, `nama_asisten`, `nim`, `no_hp`, `email`,
 (19, 'Dwi Priyono', '22.240.0165', '087876', 'dwi@uptkomp.com', 'Wiradesa', 'Asisten', 'Aktif'),
 (20, 'Fina Nikmatul Kamelia', '22.230.0044', '0879798', 'meli@uptkomp.com', 'Kurang tau', 'Asisten', 'Aktif'),
 (21, 'Muhammad Nailul Author', '22.240.0056', '088769', 'author@uptkomp.com', 'Kurang tau', 'Asisten', 'Aktif'),
-(22, 'Wanadya Harsari', '22.230.0092', '0868687', 'nadya@uptkomp.com', 'Batang', 'Asisten', 'Aktif'),
+(22, 'Wanadya Harsari', '22.230.0092', '0868687', 'nadya@uptkomp.com', 'Batang', 'Administrator', 'Aktif'),
 (23, 'Jauza Gama Zaidaan', '22.240.0095', '08698798', 'zidan@uptkomp.com', 'Kurang tau', 'Asisten', 'Aktif'),
 (24, 'Bahrur Rizky', '21.230.0046', '0969878', 'bahrur@uptkomp.com', 'Kauman', 'Koordinator', 'Aktif'),
 (25, 'Khani Fatun Nifullaili', '22.230.0046', '088097986', 'nippa@uptkomp.com', 'Batang', 'Koordinator', 'Aktif'),
@@ -133,7 +133,7 @@ CREATE TABLE `tb_kegiatan` (
 --
 
 INSERT INTO `tb_kegiatan` (`id_kegiatan`, `id_asisten`, `asisten_pembantu`, `tanggal`, `waktu`, `ruang_lab`, `detail_kegiatan`) VALUES
-(3, 1, 'Muhammad Fadli', '2023-10-10', '20:39:00', 'Lab Komputer 3', 'Membuat game menggunakan construct 2');
+(3, 1, 'Tidak Ada', '2023-10-10', '12:00:00', 'Lab Komputer 3', 'Membuat game menggunakan construct 2');
 
 -- --------------------------------------------------------
 
@@ -164,26 +164,27 @@ CREATE TABLE `tb_nilai` (
 INSERT INTO `tb_nilai` (`id_nilai`, `id_prakerin`, `disiplin`, `kerja_motivasi`, `kehadiran`, `inisiatif_kreatif`, `kejujuran_tanggung_jawab`, `kesopanan`, `kerjasama`, `jumlah_nilai`, `rata_rata`, `predikat`, `status_nilai`) VALUES
 (4, 11, 89, 98, 80, 90, 93, 98, 87, 635, 90.7, 'Sempurna', 'Dinilai'),
 (7, 18, 89, 87, 80, 65, 90, 78, 90, 579, 82.7, 'Pujian', 'Dinilai'),
-(8, 20, 12, 98, 89, 78, 87, 56, 89, 509, 72.7, 'Pujian', 'Dinilai'),
+(8, 20, 12, 98, 89, 78, 87, 56, 89, 509, 72.7, 'Baik', 'Dinilai'),
 (9, 21, 80, 80, 80, 80, 80, 80, 80, 560, 80.0, 'Pujian', 'Dinilai'),
-(10, 22, 90, 90, 78, 89, 78, 78, 95, 598, 85.4, 'Pujian', 'Dinilai'),
-(11, 23, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Belum Dinilai'),
-(12, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Belum Dinilai');
+(10, 22, 90, 90, 78, 89, 78, 78, 95, 598, 85.4, 'Sempurna', 'Dinilai'),
+(11, 23, 89, 12, 87, 89, 87, 89, 78, 531, 75.9, 'Pujian', 'Dinilai'),
+(12, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Belum Dinilai'),
+(13, 25, 90, 90, 90, 90, 90, 90, 90, 630, 90.0, 'Sempurna', 'Dinilai');
 
 --
 -- Triggers `tb_nilai`
 --
 DELIMITER $$
 CREATE TRIGGER `set_predikat` BEFORE INSERT ON `tb_nilai` FOR EACH ROW BEGIN
-    IF NEW.rata_rata BETWEEN 86 AND 100 THEN
+    IF NEW.rata_rata BETWEEN 85 AND 100 THEN
         SET NEW.predikat = 'Sempurna';
-    ELSEIF NEW.rata_rata BETWEEN 70 AND 85 THEN
+    ELSEIF NEW.rata_rata BETWEEN 75 AND 84 THEN
         SET NEW.predikat = 'Pujian';
-    ELSEIF NEW.rata_rata BETWEEN 60 AND 69 THEN
+    ELSEIF NEW.rata_rata BETWEEN 65 AND 74 THEN
         SET NEW.predikat = 'Baik';
-    ELSEIF NEW.rata_rata BETWEEN 50 AND 59 THEN
+    ELSEIF NEW.rata_rata BETWEEN 55 AND 64 THEN
         SET NEW.predikat = 'Cukup';
-    ELSEIF NEW.rata_rata BETWEEN 30 AND 49 THEN
+    ELSEIF NEW.rata_rata BETWEEN 0 AND 54 THEN
         SET NEW.predikat = 'Kurang';
     END IF;
 END
@@ -191,15 +192,15 @@ $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `set_predikat_before_update` BEFORE UPDATE ON `tb_nilai` FOR EACH ROW BEGIN
-    IF NEW.rata_rata BETWEEN 86 AND 100 THEN
+    IF NEW.rata_rata BETWEEN 85 AND 100 THEN
         SET NEW.predikat = 'Sempurna';
-    ELSEIF NEW.rata_rata BETWEEN 70 AND 85 THEN
+    ELSEIF NEW.rata_rata BETWEEN 75 AND 84 THEN
         SET NEW.predikat = 'Pujian';
-    ELSEIF NEW.rata_rata BETWEEN 60 AND 69 THEN
+    ELSEIF NEW.rata_rata BETWEEN 65 AND 74 THEN
         SET NEW.predikat = 'Baik';
-    ELSEIF NEW.rata_rata BETWEEN 50 AND 59 THEN
+    ELSEIF NEW.rata_rata BETWEEN 55 AND 64 THEN
         SET NEW.predikat = 'Cukup';
-    ELSEIF NEW.rata_rata BETWEEN 30 AND 49 THEN
+    ELSEIF NEW.rata_rata BETWEEN 0 AND 54 THEN
         SET NEW.predikat = 'Kurang';
     END IF;
 END
@@ -277,7 +278,8 @@ INSERT INTO `tb_prakerin` (`id_prakerin`, `nisn`, `npsn`, `nama_siswa`, `tempat_
 (21, 2147483647, 89898786, 'Julyan Rico Saputra', 'Pekalongan', '2004-01-01', 'Laki-laki', 'Pekalongan', 'XII', 'RPL', '085695685452', '2023/2024', 'Wildan VK', '085674569856', '2023-07-23', '2024-04-30', 'Aktif'),
 (22, 2147483647, 67687675, 'Naila Azqiya', 'Pemalang', '2004-01-15', 'Perempuan', 'Jalan KH Ahmad Dahlan Tirto Gg. 7 No.31', 'X', 'TKJ', '088806923500', '2023/2024', 'Aminah', '08880678', '2023-10-03', '2023-10-31', 'Aktif'),
 (23, 1234567890, 67687675, 'Haikal Syarif', 'Pekalongan', '2004-01-01', 'Laki-laki', 'Bendan', 'XII', 'RPL', '0888787578755', '2023/2024', 'Sodikin', '080878696788', '2023-10-01', '2023-10-09', 'Pencabutan'),
-(24, 12345123, 12676587, 'Jumadi Awaliyah', 'Bali', '2002-01-25', 'Laki-laki', 'Tirto', 'XII', 'RPL', '08886768768', '2023/2024', 'Awaliyah', '0989768465', '2023-10-19', '2023-11-30', 'Aktif');
+(24, 12345123, 12676587, 'Jumadi Awaliyah', 'Bali', '2002-01-25', 'Laki-laki', 'Tirto', 'XII', 'RPL', '08886768768', '2023/2024', 'Awaliyah', '0989768465', '2023-10-19', '2023-11-30', 'Aktif'),
+(25, 123123, 12345678, 'asdads', 'asdasd', '2004-01-01', 'Laki-laki', 'asdasdasf', 'X', 'TKJ', '1243123', '2024/2025', 'asdasd', '23534', '2024-03-09', '2024-03-09', 'Aktif');
 
 --
 -- Triggers `tb_prakerin`
@@ -332,6 +334,7 @@ CREATE TABLE `tb_smk` (
 --
 
 INSERT INTO `tb_smk` (`npsn`, `nama_sekolah`, `status_sekolah`, `pembimbing_prakerin`, `no_hp_pembimbing`, `jurusan_terdaftar`, `alamat_sekolah`, `status_aktif`) VALUES
+(12345678, 'Tseting', 'Negeri', 'asfdas', '09798789', 'asd', 'afasd', 'Aktif'),
 (12676587, 'SMK 1 Tirto Pekalongan', 'Negeri', 'Kurniati', '078789868787', 'PPLG, TKJ', 'Jalan KH Ahmad Dahlan Tirto Gg. 7 No.31', 'Aktif'),
 (67687675, 'SMK Baitussalam', 'Negeri', 'Astika Devy Paramitha', '088806923500', 'TKJ, RPL', 'Jalan KH Ahmad Dahlan Tirto Gg. 7 No.31, Pekalongan', 'Aktif'),
 (87879098, 'SMK Negeri 1 Batang', 'Negeri', 'Ilham Yusuf Maulana', '098986897', 'TKJ, RPL', 'Batang Alun-alun', 'Aktif'),
@@ -374,7 +377,7 @@ INSERT INTO `tb_user` (`id_user`, `id_asisten`, `username`, `password`, `level`)
 (20, 19, '22.240.0165', '1b9bf57703978d67a635d805be37b6dd', 'user'),
 (21, 20, '22.230.0044', '794f3a3d00d0402563b98e2d12135655', 'user'),
 (22, 21, '22.240.0056', 'a37f859cc24f20bf7c78fd402ad52c74', 'user'),
-(23, 22, '22.230.0092', 'fd7931a768cbce2fc5c8e904e3f2203a', 'user'),
+(23, 22, '22.230.0092', 'fd7931a768cbce2fc5c8e904e3f2203a', 'admin'),
 (24, 23, '22.240.0095', 'abd8d1a59da403d39ded0015b022e2ea', 'user'),
 (25, 24, '21.230.0046', '88a956e97bdbf40d07a0fcf4c760d7c2', 'admin'),
 (26, 25, '22.230.0046', '46ce7ebec7a4f552c69eb87dd3eb4e4b', 'admin'),
@@ -453,13 +456,13 @@ ALTER TABLE `tb_kegiatan`
 -- AUTO_INCREMENT for table `tb_nilai`
 --
 ALTER TABLE `tb_nilai`
-  MODIFY `id_nilai` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_nilai` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tb_prakerin`
 --
 ALTER TABLE `tb_prakerin`
-  MODIFY `id_prakerin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_prakerin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
