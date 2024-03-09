@@ -98,6 +98,31 @@
             font-family: 'Agency FB';
             font-size: 20px;
         }
+
+        .table-nilai {
+            width: 100%;
+            margin-top: 10px;
+            font-family: 'Agency FB';
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .table-nilai,
+        .table-nilai th,
+        .table-nilai td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        /* Make all td in class table-nilai text-center but td in 2nd are not*/
+        .table-nilai td {
+            text-align: center;
+        }
+
+        .table-nilai td:nth-child(2) {
+            text-align: left;
+            padding-left: 10px;
+        }
     </style>
 </head>
 
@@ -170,6 +195,7 @@
                     DAFTAR NILAI HASIL PRAKTIK KERJA INDUSTRI <br>
                     <?= strtoupper($nilai['nama_sekolah']); ?>
                 </h2>
+
                 <table>
                     <tr>
                         <td>Nama Lengkap</td>
@@ -194,7 +220,73 @@
                         <td colspan="5">Teknik Komputer dan Jaringan</td>
                     </tr>
                 </table>
+
             </header>
+
+            <section>
+                <table class="table-nilai">
+                    <tr>
+                        <th>NO</th>
+                        <th>ASPEK / KOMPONEN NILAI</th>
+                        <th>NILAI</th>
+                        <th>HURUF</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Kedisiplinan</td>
+                        <td>90</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Kedisiplinan</td>
+                        <td>90</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Kedisiplinan</td>
+                        <td>90</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Kedisiplinan</td>
+                        <td>90</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Kedisiplinan</td>
+                        <td>90</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Kedisiplinan</td>
+                        <td>90</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Kedisiplinan</td>
+                        <td>90</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left; padding-left: 25px;">JUMLAH NILAI</td>
+                        <td colspan="2" style="text-align: center;">90</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left; padding-left: 25px;">NILAI RATA-RATA</td>
+                        <td colspan="2" style="text-align: center;">90</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left; padding-left: 25px;">PREDIKAT</td>
+                        <td colspan="2" style="text-align: center;">BAIK SEKALI</td>
+                    </tr>
+                </table>
+            </section>
         </div>
     </div>
 </body>
