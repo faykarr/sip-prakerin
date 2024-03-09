@@ -123,6 +123,40 @@
             text-align: left;
             padding-left: 10px;
         }
+
+        .ket-nilai {
+            font-family: 'Agency FB';
+            font-size: 18px;
+            margin-top: -5px;
+            margin-left: 50px;
+        }
+
+        .ket-nilai-2 {
+            font-family: 'Agency FB';
+            font-size: 18px;
+            position: absolute;
+            left: 250;
+            bottom: 40;
+        }
+
+        .sign {
+            font-family: 'Agency FB';
+            font-size: 18px;
+            position: absolute;
+            bottom: -10;
+            right: 75;
+            text-align: right;
+        }
+
+        .ttd-belakang {
+            position: absolute;
+            bottom: 0;
+            right: 55;
+            /* width kecilkan sedikit */
+            width: 200px;
+            /* z-index top */
+            z-index: 10;
+        }
     </style>
 </head>
 
@@ -196,7 +230,7 @@
                     <?= strtoupper($nilai['nama_sekolah']); ?>
                 </h2>
 
-                <table>
+                <table cellspacing="0">
                     <tr>
                         <td>Nama Lengkap</td>
                         <td>:</td>
@@ -287,6 +321,34 @@
                     </tr>
                 </table>
             </section>
+
+            <footer>
+                <div class="ket-nilai">
+                    <!-- Keterangan Predikat Huruf Nilai -->
+                    <p>
+                        <span><b>Keterangan Nilai :</b></span> <br>
+                        <span>Huruf A = 85 - 100 (Sempurna)</span> <br>
+                        <span>Huruf B = 75 - 84 (Pujian)</span> <br>
+                        <span>Huruf C = 65 - 74 (Baik)</span>
+                    </p>
+                </div>
+                <div class="ket-nilai-2">
+                    <span>Huruf D = 55 - 64 (Cukup)</span> <br>
+                    <span>Huruf E = 0 - 54 (Kurang)</span>
+                </div>
+                <div class="sign">
+                    <p>
+                        Pekalongan, <?= date('d F Y', strtotime($nilai['periode_akhir'] . ' +4 day')); ?> <br>
+                        Instruktur IDUKA STMIK Widya Pratama <br> <br>
+
+                        <b><u>Widiyono, S.T., M.Kom</u></b> <br>
+                        <b>NPPY 160401.750314.219</b>
+                    </p>
+                </div>
+
+                <img src="data:image/png;base64,<?php echo base64_encode(file_get_contents('assets/static/images/logo/ttd.png')); ?>"
+                    alt="Tanda tangan pak widi" class="ttd-belakang">
+            </footer>
         </div>
     </div>
 </body>
