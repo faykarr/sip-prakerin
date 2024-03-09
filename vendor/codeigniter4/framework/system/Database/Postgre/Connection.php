@@ -55,7 +55,7 @@ class Connection extends BaseConnection
     /**
      * Connect to the database.
      *
-     * @return false|resource
+     * @return         false|resource
      * @phpstan-return false|PgSqlConnection
      */
     public function connect(bool $persistent = false)
@@ -64,13 +64,10 @@ class Connection extends BaseConnection
             $this->buildDSN();
         }
 
-        // Strip pgsql if exists
+        // Convert DSN string
         if (mb_strpos($this->DSN, 'pgsql:') === 0) {
-            $this->DSN = mb_substr($this->DSN, 6);
+            $this->convertDSN();
         }
-
-        // Convert semicolons to spaces.
-        $this->DSN = str_replace(';', ' ', $this->DSN);
 
         $this->connID = $persistent === true ? pg_pconnect($this->DSN) : pg_connect($this->DSN);
 
@@ -90,6 +87,44 @@ class Connection extends BaseConnection
         }
 
         return $this->connID;
+    }
+
+    /**
+     * Converts the DSN with semicolon syntax.
+     */
+    private function convertDSN()
+    {
+        // Strip pgsql
+        $this->DSN = mb_substr($this->DSN, 6);
+
+        // Convert semicolons to spaces in DSN format like:
+        // pgsql:host=localhost;port=5432;dbname=database_name
+        // https://www.php.net/manual/en/function.pg-connect.php
+        $allowedParams = ['host', 'port', 'dbname', 'user', 'password', 'connect_timeout', 'options', 'sslmode', 'service'];
+
+        $parameters = explode(';', $this->DSN);
+
+        $output            = '';
+        $previousParameter = '';
+
+        foreach ($parameters as $parameter) {
+            [$key, $value] = explode('=', $parameter, 2);
+            if (in_array($key, $allowedParams, true)) {
+                if ($previousParameter !== '') {
+                    if (array_search($key, $allowedParams, true) < array_search($previousParameter, $allowedParams, true)) {
+                        $output .= ';';
+                    } else {
+                        $output .= ' ';
+                    }
+                }
+                $output .= $parameter;
+                $previousParameter = $key;
+            } else {
+                $output .= ';' . $parameter;
+            }
+        }
+
+        $this->DSN = $output;
     }
 
     /**
@@ -143,7 +178,7 @@ class Connection extends BaseConnection
     /**
      * Executes the query against the database.
      *
-     * @return false|resource
+     * @return         false|resource
      * @phpstan-return false|PgSqlResult
      */
     protected function execute(string $sql)
@@ -184,7 +219,7 @@ class Connection extends BaseConnection
      *
      * @param array|bool|float|int|object|string|null $str
      *
-     * @return array|float|int|string
+     * @return         array|float|int|string
      * @phpstan-return ($str is array ? array : float|int|string)
      */
     public function escape($str)
@@ -283,9 +318,9 @@ class Connection extends BaseConnection
 
             $retVal[$i]->name       = $query[$i]->column_name;
             $retVal[$i]->type       = $query[$i]->data_type;
+            $retVal[$i]->max_length = $query[$i]->character_maximum_length > 0 ? $query[$i]->character_maximum_length : $query[$i]->numeric_precision;
             $retVal[$i]->nullable   = $query[$i]->is_nullable === 'YES';
             $retVal[$i]->default    = $query[$i]->column_default;
-            $retVal[$i]->max_length = $query[$i]->character_maximum_length > 0 ? $query[$i]->character_maximum_length : $query[$i]->numeric_precision;
         }
 
         return $retVal;

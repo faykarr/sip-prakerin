@@ -20,6 +20,8 @@ use SplFileInfo;
 
 /**
  * Wrapper for PHP's built-in SplFileInfo, with goodies.
+ *
+ * @see \CodeIgniter\Files\FileTest
  */
 class File extends SplFileInfo
 {
@@ -138,7 +140,7 @@ class File extends SplFileInfo
     public function move(string $targetPath, ?string $name = null, bool $overwrite = false)
     {
         $targetPath = rtrim($targetPath, '/') . '/';
-        $name ??= $this->getBaseName();
+        $name ??= $this->getBasename();
         $destination = $overwrite ? $targetPath . $name : $this->getDestination($targetPath . $name);
 
         $oldName = $this->getRealPath() ?: $this->__toString();

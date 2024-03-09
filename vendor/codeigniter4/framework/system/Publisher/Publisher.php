@@ -15,6 +15,7 @@ use CodeIgniter\Autoloader\FileLocator;
 use CodeIgniter\Files\FileCollection;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\Publisher\Exceptions\PublisherException;
+use Config\Publisher as PublisherConfig;
 use RuntimeException;
 use Throwable;
 
@@ -162,7 +163,7 @@ class Publisher extends FileCollection
         $this->replacer = new ContentReplacer();
 
         // Restrictions are intentionally not injected to prevent overriding
-        $this->restrictions = config('Publisher')->restrictions;
+        $this->restrictions = config(PublisherConfig::class)->restrictions;
 
         // Make sure the destination is allowed
         foreach (array_keys($this->restrictions) as $directory) {
@@ -465,7 +466,7 @@ class Publisher extends FileCollection
     /**
      * Verify this is an allowed file for its destination.
      */
-    private function verifyAllowed(string $from, string $to)
+    private function verifyAllowed(string $from, string $to): void
     {
         // Verify this is an allowed file for its destination
         foreach ($this->restrictions as $directory => $pattern) {

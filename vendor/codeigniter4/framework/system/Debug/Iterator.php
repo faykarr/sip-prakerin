@@ -38,6 +38,8 @@ class Iterator
      * Tests are simply closures that the user can define any sequence of
      * things to happen during the test.
      *
+     * @param Closure(): mixed $closure
+     *
      * @return $this
      */
     public function add(string $name, Closure $closure)
@@ -91,7 +93,7 @@ class Iterator
      */
     public function getReport(): string
     {
-        if (empty($this->results)) {
+        if ($this->results === []) {
             return 'No results to display.';
         }
 

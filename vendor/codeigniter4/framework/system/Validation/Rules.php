@@ -16,15 +16,18 @@ use InvalidArgumentException;
 
 /**
  * Validation Rules.
+ *
+ * @see \CodeIgniter\Validation\RulesTest
  */
 class Rules
 {
     /**
      * The value does not match another field in $data.
      *
-     * @param array $data Other field/value pairs
+     * @param string|null $str
+     * @param array       $data Other field/value pairs
      */
-    public function differs(?string $str, string $field, array $data): bool
+    public function differs($str, string $field, array $data): bool
     {
         if (strpos($field, '.') !== false) {
             return $str !== dot_array_search($field, $data);
@@ -102,7 +105,8 @@ class Rules
             ->limit(1);
 
         if (
-            ! empty($whereField) && ! empty($whereValue)
+            $whereField !== null && $whereField !== ''
+            && $whereValue !== null && $whereValue !== ''
             && ! preg_match('/^\{(\w+)\}$/', $whereValue)
         ) {
             $row = $row->where($whereField, $whereValue);
@@ -147,7 +151,8 @@ class Rules
             ->limit(1);
 
         if (
-            ! empty($ignoreField) && ! empty($ignoreValue)
+            $ignoreField !== null && $ignoreField !== ''
+            && $ignoreValue !== null && $ignoreValue !== ''
             && ! preg_match('/^\{(\w+)\}$/', $ignoreValue)
         ) {
             $row = $row->where("{$ignoreField} !=", $ignoreValue);
@@ -175,15 +180,16 @@ class Rules
     /**
      * Matches the value of another field in $data.
      *
-     * @param array $data Other field/value pairs
+     * @param string|null $str
+     * @param array       $data Other field/value pairs
      */
-    public function matches(?string $str, string $field, array $data): bool
+    public function matches($str, string $field, array $data): bool
     {
         if (strpos($field, '.') !== false) {
             return $str === dot_array_search($field, $data);
         }
 
-        return array_key_exists($field, $data) && $str === $data[$field];
+        return isset($data[$field]) && $str === $data[$field];
     }
 
     /**
@@ -204,8 +210,6 @@ class Rules
 
     /**
      * Does not equal the static value provided.
-     *
-     * @param string $str
      */
     public function not_equals(?string $str, string $val): bool
     {
@@ -214,8 +218,6 @@ class Rules
 
     /**
      * Value should not be within an array of values.
-     *
-     * @param string $value
      */
     public function not_in_list(?string $value, string $list): bool
     {
@@ -256,14 +258,13 @@ class Rules
      */
     public function required_with($str = null, ?string $fields = null, array $data = []): bool
     {
-        if ($fields === null || empty($data)) {
+        if ($fields === null || $data === []) {
             throw new InvalidArgumentException('You must supply the parameters: fields, data.');
         }
 
         // If the field is present we can safely assume that
         // the field is here, no matter whether the corresponding
         // search field is present or not.
-        $fields  = explode(',', $fields);
         $present = $this->required($str ?? '');
 
         if ($present) {
@@ -272,20 +273,25 @@ class Rules
 
         // Still here? Then we fail this test if
         // any of the fields are present in $data
-        // as $fields is the lis
+        // as $fields is the list
         $requiredFields = [];
 
-        foreach ($fields as $field) {
-            if ((array_key_exists($field, $data) && ! empty($data[$field])) || (strpos($field, '.') !== false && ! empty(dot_array_search($field, $data)))) {
+        foreach (explode(',', $fields) as $field) {
+            if (
+                (array_key_exists($field, $data)
+                    && ! empty($data[$field]))  // @phpstan-ignore-line Use empty()
+                || (strpos($field, '.') !== false
+                    && ! empty(dot_array_search($field, $data)))  // @phpstan-ignore-line Use empty()
+            ) {
                 $requiredFields[] = $field;
             }
         }
 
-        return empty($requiredFields);
+        return $requiredFields === [];
     }
 
     /**
-     * The field is required when all of the other fields are present
+     * The field is required when all the other fields are present
      * in the data but not required.
      *
      * Example (field is required when the id or email field is missing):
@@ -296,17 +302,21 @@ class Rules
      * @param string|null $otherFields The param fields of required_without[].
      * @param string|null $field       This rule param fields aren't present, this field is required.
      */
-    public function required_without($str = null, ?string $otherFields = null, array $data = [], ?string $error = null, ?string $field = null): bool
-    {
-        if ($otherFields === null || empty($data)) {
+    public function required_without(
+        $str = null,
+        ?string $otherFields = null,
+        array $data = [],
+        ?string $error = null,
+        ?string $field = null
+    ): bool {
+        if ($otherFields === null || $data === []) {
             throw new InvalidArgumentException('You must supply the parameters: otherFields, data.');
         }
 
         // If the field is present we can safely assume that
         // the field is here, no matter whether the corresponding
         // search field is present or not.
-        $otherFields = explode(',', $otherFields);
-        $present     = $this->required($str ?? '');
+        $present = $this->required($str ?? '');
 
         if ($present) {
             return true;
@@ -314,10 +324,15 @@ class Rules
 
         // Still here? Then we fail this test if
         // any of the fields are not present in $data
-        foreach ($otherFields as $otherField) {
-            if ((strpos($otherField, '.') === false) && (! array_key_exists($otherField, $data) || empty($data[$otherField]))) {
+        foreach (explode(',', $otherFields) as $otherField) {
+            if (
+                (strpos($otherField, '.') === false)
+                && (! array_key_exists($otherField, $data)
+                    || empty($data[$otherField])) // @phpstan-ignore-line Use empty()
+            ) {
                 return false;
             }
+
             if (strpos($otherField, '.') !== false) {
                 if ($field === null) {
                     throw new InvalidArgumentException('You must supply the parameters: field.');
@@ -328,7 +343,7 @@ class Rules
                 $fieldKey        = $fieldSplitArray[1];
 
                 if (is_array($fieldData)) {
-                    return ! empty(dot_array_search($otherField, $data)[$fieldKey]);
+                    return ! empty(dot_array_search($otherField, $data)[$fieldKey]);  // @phpstan-ignore-line Use empty()
                 }
                 $nowField      = str_replace('*', $fieldKey, $otherField);
                 $nowFieldVaule = dot_array_search($nowField, $data);

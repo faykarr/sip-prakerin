@@ -21,7 +21,7 @@ abstract class Migration
     /**
      * The name of the database group to use.
      *
-     * @var string
+     * @var string|null
      */
     protected $DBGroup;
 
@@ -39,22 +39,21 @@ abstract class Migration
      */
     protected $forge;
 
-    /**
-     * Constructor.
-     *
-     * @param Forge $forge
-     */
     public function __construct(?Forge $forge = null)
     {
-        $this->forge = $forge ?? Database::forge($this->DBGroup ?? config('Database')->defaultGroup);
+        if (isset($this->DBGroup)) {
+            $this->forge = Database::forge($this->DBGroup);
+        } elseif ($forge !== null) {
+            $this->forge = $forge;
+        } else {
+            $this->forge = Database::forge(config(Database::class)->defaultGroup);
+        }
 
         $this->db = $this->forge->getConnection();
     }
 
     /**
      * Returns the database group name this migration uses.
-     *
-     * @return string
      */
     public function getDBGroup(): ?string
     {

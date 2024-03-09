@@ -1,26 +1,20 @@
 {
     "bell mt": {
-        "normal": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELL",
-        "bold": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELLb",
-        "italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELLi",
-        "bold_italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELL"
-    },
-    "chiller": {
-        "normal": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/CHILLER",
-        "bold": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/CHILLER",
-        "italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/CHILLER",
-        "bold_italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/CHILLER"
+        "normal": "D:\\FAYKAR\\0 STMIK Widya Pratama\\UPT Komputer\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELL",
+        "bold": "D:\\FAYKAR\\0 STMIK Widya Pratama\\UPT Komputer\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELLb",
+        "italic": "D:\\FAYKAR\\0 STMIK Widya Pratama\\UPT Komputer\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELLi",
+        "bold_italic": "D:\\FAYKAR\\0 STMIK Widya Pratama\\UPT Komputer\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELL"
     },
     "agency fb": {
-        "normal": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCY",
-        "bold": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCYb",
-        "italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCY",
-        "bold_italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCY"
+        "normal": "D:\\FAYKAR\\0 STMIK Widya Pratama\\UPT Komputer\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCY",
+        "bold": "D:\\FAYKAR\\0 STMIK Widya Pratama\\UPT Komputer\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCYb",
+        "italic": "D:\\FAYKAR\\0 STMIK Widya Pratama\\UPT Komputer\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCY",
+        "bold_italic": "D:\\FAYKAR\\0 STMIK Widya Pratama\\UPT Komputer\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCY"
     },
     "bookman old style": {
-        "normal": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOS",
-        "bold": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOSb",
-        "italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOSi",
-        "bold_italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOSbi"
+        "normal": "D:\\FAYKAR\\0 STMIK Widya Pratama\\UPT Komputer\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOS",
+        "bold": "D:\\FAYKAR\\0 STMIK Widya Pratama\\UPT Komputer\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOSb",
+        "italic": "D:\\FAYKAR\\0 STMIK Widya Pratama\\UPT Komputer\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOSi",
+        "bold_italic": "D:\\FAYKAR\\0 STMIK Widya Pratama\\UPT Komputer\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOSbi"
     }
 }

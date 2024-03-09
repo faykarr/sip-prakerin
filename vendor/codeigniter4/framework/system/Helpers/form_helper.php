@@ -10,7 +10,9 @@
  */
 
 use CodeIgniter\Validation\Exceptions\ValidationException;
+use Config\App;
 use Config\Services;
+use Config\Validation;
 
 // CodeIgniter Form Helpers
 
@@ -50,7 +52,7 @@ if (! function_exists('form_open')) {
             $attributes .= ' method="post"';
         }
         if (stripos($attributes, 'accept-charset=') === false) {
-            $config = config('App');
+            $config = config(App::class);
             $attributes .= ' accept-charset="' . strtolower($config->charset) . '"';
         }
 
@@ -286,7 +288,7 @@ if (! function_exists('form_dropdown')) {
         }
 
         // If no selected state was submitted we will attempt to set it automatically
-        if (empty($selected)) {
+        if ($selected === []) {
             if (is_array($data)) {
                 if (isset($data['name'], $_POST[$data['name']])) {
                     $selected = [$_POST[$data['name']]];
@@ -310,7 +312,7 @@ if (! function_exists('form_dropdown')) {
             $key = (string) $key;
 
             if (is_array($val)) {
-                if (empty($val)) {
+                if ($val === []) {
                     continue;
                 }
 
@@ -627,8 +629,11 @@ if (! function_exists('set_checkbox')) {
             return '';
         }
 
+        $session     = Services::session();
+        $hasOldInput = $session->has('_ci_old_input');
+
         // Unchecked checkbox and radio inputs are not even submitted by browsers ...
-        if ((string) $input === '0' || ! empty($request->getPost()) || ! empty(old($field))) {
+        if ((string) $input === '0' || ! empty($request->getPost()) || $hasOldInput) {
             return ($input === $value) ? ' checked="checked"' : '';
         }
 
@@ -651,13 +656,7 @@ if (! function_exists('set_radio')) {
 
         $postInput = $request->getPost($field);
 
-        if ($oldInput !== null) {
-            $input = $oldInput;
-        } elseif ($postInput !== null) {
-            $input = $postInput;
-        } else {
-            $input = $default;
-        }
+        $input = $oldInput ?? $postInput ?? $default;
 
         if (is_array($input)) {
             // Note: in_array('', array(0)) returns TRUE, do not use it
@@ -696,12 +695,12 @@ if (! function_exists('validation_errors')) {
      */
     function validation_errors()
     {
-        session();
+        $errors = session('_ci_validation_errors');
 
         // Check the session to see if any were
         // passed along from a redirect withErrors() request.
-        if (isset($_SESSION['_ci_validation_errors']) && (ENVIRONMENT === 'testing' || ! is_cli())) {
-            return $_SESSION['_ci_validation_errors'];
+        if ($errors !== null && (ENVIRONMENT === 'testing' || ! is_cli())) {
+            return $errors;
         }
 
         $validation = Services::validation();
@@ -718,7 +717,7 @@ if (! function_exists('validation_list_errors')) {
      */
     function validation_list_errors(string $template = 'list'): string
     {
-        $config = config('Validation');
+        $config = config(Validation::class);
         $view   = Services::renderer();
 
         if (! array_key_exists($template, $config->templates)) {
@@ -738,7 +737,7 @@ if (! function_exists('validation_show_error')) {
      */
     function validation_show_error(string $field, string $template = 'single'): string
     {
-        $config = config('Validation');
+        $config = config(Validation::class);
         $view   = Services::renderer();
 
         $errors = array_filter(validation_errors(), static fn ($key) => preg_match(
@@ -779,7 +778,7 @@ if (! function_exists('parse_form_attributes')) {
                     unset($attributes[$key]);
                 }
             }
-            if (! empty($attributes)) {
+            if ($attributes !== []) {
                 $default = array_merge($default, $attributes);
             }
         }

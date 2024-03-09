@@ -14,6 +14,7 @@ namespace CodeIgniter\Test;
 use CodeIgniter\Exceptions\FrameworkException;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Model;
+use Config\App;
 use Faker\Factory;
 use Faker\Generator;
 use InvalidArgumentException;
@@ -24,6 +25,8 @@ use RuntimeException;
  *
  * Bridge class for using Faker to create example data based on
  * model specifications.
+ *
+ * @see \CodeIgniter\Test\FabricatorTest
  */
 class Fabricator
 {
@@ -114,7 +117,7 @@ class Fabricator
 
         // If no locale was specified then use the App default
         if ($locale === null) {
-            $locale = config('App')->defaultLocale;
+            $locale = config(App::class)->defaultLocale;
         }
 
         // There is no easy way to retrieve the locale from Faker so we will store it
@@ -125,7 +128,7 @@ class Fabricator
 
         // Determine eligible date fields
         foreach (['createdField', 'updatedField', 'deletedField'] as $field) {
-            if (! empty($this->model->{$field})) {
+            if (isset($this->model->{$field})) {
                 $this->dateFields[] = $this->model->{$field};
             }
         }
@@ -149,7 +152,7 @@ class Fabricator
      */
     public static function getCount(string $table): int
     {
-        return empty(self::$tableCounts[$table]) ? 0 : self::$tableCounts[$table];
+        return ! isset(self::$tableCounts[$table]) ? 0 : self::$tableCounts[$table];
     }
 
     /**
@@ -279,7 +282,7 @@ class Fabricator
     {
         $this->formatters = [];
 
-        if (! empty($this->model->allowedFields)) {
+        if (isset($this->model->allowedFields)) {
             foreach ($this->model->allowedFields as $field) {
                 $this->formatters[$field] = $this->guessFormatter($field);
             }
@@ -510,12 +513,12 @@ class Fabricator
         // Determine which fields we will need
         $fields = [];
 
-        if (! empty($this->model->useTimestamps)) {
+        if ($this->model->useTimestamps) {
             $fields[$this->model->createdField] = $datetime;
             $fields[$this->model->updatedField] = $datetime;
         }
 
-        if (! empty($this->model->useSoftDeletes)) {
+        if ($this->model->useSoftDeletes) {
             $fields[$this->model->deletedField] = null;
         }
 
