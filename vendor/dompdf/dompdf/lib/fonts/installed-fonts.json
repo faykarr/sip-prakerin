@@ -1,9 +1,9 @@
 {
     "bell mt": {
-        "normal": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELL",
-        "bold": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELLb",
-        "italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELLi",
-        "bold_italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELL"
+        "normal": "C:\\xampp\\htdocs\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELL",
+        "bold": "C:\\xampp\\htdocs\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELLb",
+        "italic": "C:\\xampp\\htdocs\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELLi",
+        "bold_italic": "C:\\xampp\\htdocs\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BELL"
     },
     "chiller": {
         "normal": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/CHILLER",
@@ -12,15 +12,15 @@
         "bold_italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/CHILLER"
     },
     "agency fb": {
-        "normal": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCY",
-        "bold": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCYb",
-        "italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCY",
-        "bold_italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCY"
+        "normal": "C:\\xampp\\htdocs\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCY",
+        "bold": "C:\\xampp\\htdocs\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCYb",
+        "italic": "C:\\xampp\\htdocs\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCY",
+        "bold_italic": "C:\\xampp\\htdocs\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/AGENCY"
     },
     "bookman old style": {
-        "normal": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOS",
-        "bold": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOSb",
-        "italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOSi",
-        "bold_italic": "D:\\Desktop\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOSbi"
+        "normal": "C:\\xampp\\htdocs\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOS",
+        "bold": "C:\\xampp\\htdocs\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOSb",
+        "italic": "C:\\xampp\\htdocs\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOSi",
+        "bold_italic": "C:\\xampp\\htdocs\\sip-prakerin\\vendor\\dompdf\\dompdf\/lib\/fonts\/BOOKOSbi"
     }
 }

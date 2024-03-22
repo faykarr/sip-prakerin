@@ -113,10 +113,16 @@
                                 <a href="<?= base_url("/cetak-data/kegiatan") ?>" class="submenu-link">Cetak Laporan Kegiatan</a>
                             </li>
 
+                            <!-- <li
+                                class="submenu-item <?= ($uri->getSegment(1) === 'cetak-data' && $uri->getSegment(2) === 'sertifikat') ? 'active' : '' ?>">
+                                <a href="<?= base_url("/cetak-data/sertifikat") ?>" class="submenu-link">Cetak Data Prakerin</a>
+                            </li> -->
+                            
                             <li
                                 class="submenu-item <?= ($uri->getSegment(1) === 'cetak-data' && $uri->getSegment(2) === 'nilai') ? 'active' : '' ?>">
-                                <a href="<?= base_url("/cetak-data/nilai") ?>" class="submenu-link">Cetak Nilai Siswa</a>
+                                <a href="<?= base_url("/cetak-data/nilai") ?>" class="submenu-link">Cetak Nilai Prakerin</a>
                             </li>
+
 
                             <li
                                 class="submenu-item <?= ($uri->getSegment(1) === 'cetak-data' && $uri->getSegment(2) === 'sertifikat') ? 'active' : '' ?>">
