@@ -77,7 +77,7 @@ class ImageMagickHandler extends BaseHandler
     /**
      * Crops the image.
      *
-     * @return bool|\CodeIgniter\Images\Handlers\ImageMagickHandler
+     * @return bool|ImageMagickHandler
      *
      * @throws Exception
      */
@@ -223,11 +223,13 @@ class ImageMagickHandler extends BaseHandler
      * Example:
      *    $image->resize(100, 200, true)
      *          ->save();
+     *
+     * @param non-empty-string|null $target
      */
     public function save(?string $target = null, int $quality = 90): bool
     {
         $original = $target;
-        $target   = empty($target) ? $this->image()->getPathname() : $target;
+        $target   = ($target === null || $target === '') ? $this->image()->getPathname() : $target;
 
         // If no new resource has been created, then we're
         // simply copy the existing one.
@@ -290,6 +292,8 @@ class ImageMagickHandler extends BaseHandler
     /**
      * Make the image resource object if needed
      *
+     * @return void
+     *
      * @throws Exception
      */
     protected function ensureResource()
@@ -301,6 +305,8 @@ class ImageMagickHandler extends BaseHandler
 
     /**
      * Check if given image format is supported
+     *
+     * @return void
      *
      * @throws ImageException
      */
@@ -318,6 +324,8 @@ class ImageMagickHandler extends BaseHandler
     /**
      * Handler-specific method for overlaying text on an image.
      *
+     * @return void
+     *
      * @throws Exception
      */
     protected function _text(string $text, array $options = [])
@@ -334,11 +342,11 @@ class ImageMagickHandler extends BaseHandler
         // invert the offset. Note: The horizontal
         // offset flips itself automatically
         if ($options['vAlign'] === 'bottom') {
-            $options['vOffset'] = $options['vOffset'] * -1;
+            $options['vOffset'] *= -1;
         }
 
         if ($options['hAlign'] === 'right') {
-            $options['hOffset'] = $options['hOffset'] * -1;
+            $options['hOffset'] *= -1;
         }
 
         // Font

@@ -108,6 +108,23 @@ class AsistenTable extends Migration
             INSERT INTO tb_user (username, password, level, id_asisten)
             VALUES (NEW.nim, password_val, level_val, NEW.id_asisten);
         END');
+        
+        // Create trigger update when update jabatan
+        $this->db->query('CREATE TRIGGER update_user AFTER UPDATE ON tb_asisten
+        FOR EACH ROW
+        BEGIN
+            DECLARE level_val VARCHAR(50);
+        
+            IF NEW.jabatan IN (\'Koordinator\', \'Administrator\') THEN
+                SET level_val = \'admin\';
+            ELSE
+                SET level_val = \'user\';
+            END IF;
+        
+            UPDATE tb_user
+            SET level = level_val
+            WHERE id_asisten = NEW.id_asisten;
+        END');
     }
 
     public function down()

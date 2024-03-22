@@ -156,6 +156,8 @@ abstract class BaseHandler implements ImageHandlerInterface
 
     /**
      * Make the image resource object if needed
+     *
+     * @return void
      */
     abstract protected function ensureResource();
 
@@ -422,6 +424,8 @@ abstract class BaseHandler implements ImageHandlerInterface
 
     /**
      * Handler-specific method for overlaying text on an image.
+     *
+     * @return void
      */
     abstract protected function _text(string $text, array $options = []);
 
@@ -544,8 +548,6 @@ abstract class BaseHandler implements ImageHandlerInterface
      *  - bottom-left
      *  - bottom
      *  - bottom-right
-     *
-     * @param int $height
      *
      * @return BaseHandler
      */
@@ -689,6 +691,8 @@ abstract class BaseHandler implements ImageHandlerInterface
      *    $image->resize(100, 200, true)
      *          ->save($target);
      *
+     * @param non-empty-string|null $target
+     *
      * @return bool
      */
     abstract public function save(?string $target = null, int $quality = 90);
@@ -722,6 +726,8 @@ abstract class BaseHandler implements ImageHandlerInterface
      *
      * This function lets us re-proportion the width/height
      * if users choose to maintain the aspect ratio when resizing.
+     *
+     * @return void
      */
     protected function reproportion()
     {

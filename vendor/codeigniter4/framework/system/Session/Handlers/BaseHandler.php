@@ -11,7 +11,6 @@
 
 namespace CodeIgniter\Session\Handlers;
 
-use Config\App as AppConfig;
 use Config\Cookie as CookieConfig;
 use Config\Session as SessionConfig;
 use Psr\Log\LoggerAwareTrait;
@@ -42,7 +41,7 @@ abstract class BaseHandler implements SessionHandlerInterface
      * Cookie prefix
      *
      * The Config\Cookie::$prefix setting is completely ignored.
-     * See https://codeigniter4.github.io/CodeIgniter4/libraries/sessions.html#session-preferences
+     * See https://codeigniter.com/user_guide/libraries/sessions.html#session-preferences
      *
      * @var string
      */
@@ -105,39 +104,19 @@ abstract class BaseHandler implements SessionHandlerInterface
      */
     protected $ipAddress;
 
-    public function __construct(AppConfig $config, string $ipAddress)
+    public function __construct(SessionConfig $config, string $ipAddress)
     {
-        /** @var SessionConfig|null $session */
-        $session = config('Session');
-
         // Store Session configurations
-        if ($session instanceof SessionConfig) {
-            $this->cookieName = $session->cookieName;
-            $this->matchIP    = $session->matchIP;
-            $this->savePath   = $session->savePath;
-        } else {
-            // `Config/Session.php` is absence
-            $this->cookieName = $config->sessionCookieName;
-            $this->matchIP    = $config->sessionMatchIP;
-            $this->savePath   = $config->sessionSavePath;
-        }
+        $this->cookieName = $config->cookieName;
+        $this->matchIP    = $config->matchIP;
+        $this->savePath   = $config->savePath;
 
-        /** @var CookieConfig|null $cookie */
-        $cookie = config('Cookie');
+        $cookie = config(CookieConfig::class);
 
-        if ($cookie instanceof CookieConfig) {
-            // Session cookies have no prefix.
-            $this->cookieDomain = $cookie->domain;
-            $this->cookiePath   = $cookie->path;
-            $this->cookieSecure = $cookie->secure;
-        } else {
-            // @TODO Remove this fallback when deprecated `App` members are removed.
-            // `Config/Cookie.php` is absence
-            // Session cookies have no prefix.
-            $this->cookieDomain = $config->cookieDomain;
-            $this->cookiePath   = $config->cookiePath;
-            $this->cookieSecure = $config->cookieSecure;
-        }
+        // Session cookies have no prefix.
+        $this->cookieDomain = $cookie->domain;
+        $this->cookiePath   = $cookie->path;
+        $this->cookieSecure = $cookie->secure;
 
         $this->ipAddress = $ipAddress;
     }

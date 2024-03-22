@@ -11,7 +11,9 @@
 
 namespace CodeIgniter\Router;
 
+use Closure;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\ResponseInterface;
 
 /**
  * Router for Auto-Routing
@@ -19,11 +21,11 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 final class AutoRouter implements AutoRouterInterface
 {
     /**
-     * List of controllers registered for the CLI verb that should not be accessed in the web.
+     * List of CLI routes that do not contain '*' routes.
      *
-     * @var class-string[]
+     * @var array<string, (Closure(mixed...): (ResponseInterface|string|void))|string> [routeKey => handler]
      */
-    private array $protectedControllers;
+    private array $cliRoutes;
 
     /**
      * Sub-directory that contains the requested controller class.
@@ -58,17 +60,17 @@ final class AutoRouter implements AutoRouterInterface
     private string $defaultNamespace;
 
     public function __construct(
-        array $protectedControllers,
+        array $cliRoutes,
         string $defaultNamespace,
         string $defaultController,
         string $defaultMethod,
         bool $translateURIDashes,
         string $httpVerb
     ) {
-        $this->protectedControllers = $protectedControllers;
-        $this->defaultNamespace     = $defaultNamespace;
-        $this->translateURIDashes   = $translateURIDashes;
-        $this->httpVerb             = $httpVerb;
+        $this->cliRoutes          = $cliRoutes;
+        $this->defaultNamespace   = $defaultNamespace;
+        $this->translateURIDashes = $translateURIDashes;
+        $this->httpVerb           = $httpVerb;
 
         $this->controller = $defaultController;
         $this->method     = $defaultMethod;
@@ -80,7 +82,7 @@ final class AutoRouter implements AutoRouterInterface
      *
      * @return array [directory_name, controller_name, controller_method, params]
      */
-    public function getRoute(string $uri): array
+    public function getRoute(string $uri, string $httpVerb): array
     {
         $segments = explode('/', $uri);
 
@@ -89,7 +91,7 @@ final class AutoRouter implements AutoRouterInterface
 
         // If we don't have any segments left - use the default controller;
         // If not empty, then the first segment should be the controller
-        if (! empty($segments)) {
+        if ($segments !== []) {
             $this->controller = ucfirst(array_shift($segments));
         }
 
@@ -102,7 +104,7 @@ final class AutoRouter implements AutoRouterInterface
         // Use the method name if it exists.
         // If it doesn't, no biggie - the default method name
         // has already been set.
-        if (! empty($segments)) {
+        if ($segments !== []) {
             $this->method = array_shift($segments) ?: $this->method;
         }
 
@@ -114,7 +116,7 @@ final class AutoRouter implements AutoRouterInterface
         /** @var array $params An array of params to the controller method. */
         $params = [];
 
-        if (! empty($segments)) {
+        if ($segments !== []) {
             $params = $segments;
         }
 
@@ -126,18 +128,31 @@ final class AutoRouter implements AutoRouterInterface
             $controller .= $controllerName;
 
             $controller = strtolower($controller);
+            $methodName = strtolower($this->methodName());
 
-            foreach ($this->protectedControllers as $controllerInRoute) {
-                if (! is_string($controllerInRoute)) {
-                    continue;
-                }
-                if (strtolower($controllerInRoute) !== $controller) {
-                    continue;
-                }
+            foreach ($this->cliRoutes as $handler) {
+                if (is_string($handler)) {
+                    $handler = strtolower($handler);
 
-                throw new PageNotFoundException(
-                    'Cannot access the controller in a CLI Route. Controller: ' . $controllerInRoute
-                );
+                    // Like $routes->cli('hello/(:segment)', 'Home::$1')
+                    if (strpos($handler, '::$') !== false) {
+                        throw new PageNotFoundException(
+                            'Cannot access CLI Route: ' . $uri
+                        );
+                    }
+
+                    if (strpos($handler, $controller . '::' . $methodName) === 0) {
+                        throw new PageNotFoundException(
+                            'Cannot access CLI Route: ' . $uri
+                        );
+                    }
+
+                    if ($handler === $controller) {
+                        throw new PageNotFoundException(
+                            'Cannot access CLI Route: ' . $uri
+                        );
+                    }
+                }
             }
         }
 
@@ -240,10 +255,12 @@ final class AutoRouter implements AutoRouterInterface
      * @param bool $validate if true, checks to make sure $dir consists of only PSR4 compliant segments
      *
      * @deprecated This method should be removed.
+     *
+     * @return void
      */
     public function setDirectory(?string $dir = null, bool $append = false, bool $validate = true)
     {
-        if (empty($dir)) {
+        if ($dir === null || $dir === '') {
             $this->directory = null;
 
             return;
@@ -259,7 +276,7 @@ final class AutoRouter implements AutoRouterInterface
             }
         }
 
-        if ($append !== true || empty($this->directory)) {
+        if ($append !== true || ($this->directory === null || $this->directory === '')) {
             $this->directory = trim($dir, '/') . '/';
         } else {
             $this->directory .= trim($dir, '/') . '/';
@@ -274,7 +291,7 @@ final class AutoRouter implements AutoRouterInterface
      */
     public function directory(): string
     {
-        return ! empty($this->directory) ? $this->directory : '';
+        return ($this->directory !== null && $this->directory !== '') ? $this->directory : '';
     }
 
     private function controllerName(): string

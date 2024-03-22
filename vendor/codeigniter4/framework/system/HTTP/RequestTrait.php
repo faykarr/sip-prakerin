@@ -13,6 +13,7 @@ namespace CodeIgniter\HTTP;
 
 use CodeIgniter\Exceptions\ConfigException;
 use CodeIgniter\Validation\FormatRules;
+use Config\App;
 
 /**
  * Request Trait
@@ -34,10 +35,9 @@ trait RequestTrait
     protected $ipAddress = '';
 
     /**
-     * Stores values we've retrieved from
-     * PHP globals.
+     * Stores values we've retrieved from PHP globals.
      *
-     * @var array
+     * @var array{get?: array, post?: array, request?: array, cookie?: array, server?: array}
      */
     protected $globals = [];
 
@@ -59,12 +59,8 @@ trait RequestTrait
             'valid_ip',
         ];
 
-        /**
-         * @deprecated $this->proxyIPs property will be removed in the future
-         */
-        // @phpstan-ignore-next-line
-        $proxyIPs = $this->proxyIPs ?? config('App')->proxyIPs;
-        // @phpstan-ignore-next-line
+        $proxyIPs = config(App::class)->proxyIPs;
+
         if (! empty($proxyIPs) && (! is_array($proxyIPs) || is_int(array_key_first($proxyIPs)))) {
             throw new ConfigException(
                 'You must set an array with Proxy IP address key and HTTP header name value in Config\App::$proxyIPs.'
@@ -78,76 +74,74 @@ trait RequestTrait
             return $this->ipAddress = '0.0.0.0';
         }
 
-        if ($proxyIPs) {
-            // @TODO Extract all this IP address logic to another class.
-            foreach ($proxyIPs as $proxyIP => $header) {
-                // Check if we have an IP address or a subnet
-                if (strpos($proxyIP, '/') === false) {
-                    // An IP address (and not a subnet) is specified.
-                    // We can compare right away.
-                    if ($proxyIP === $this->ipAddress) {
-                        $spoof = $this->getClientIP($header);
-
-                        if ($spoof !== null) {
-                            $this->ipAddress = $spoof;
-                            break;
-                        }
-                    }
-
-                    continue;
-                }
-
-                // We have a subnet ... now the heavy lifting begins
-                if (! isset($separator)) {
-                    $separator = $ipValidator($this->ipAddress, 'ipv6') ? ':' : '.';
-                }
-
-                // If the proxy entry doesn't match the IP protocol - skip it
-                if (strpos($proxyIP, $separator) === false) {
-                    continue;
-                }
-
-                // Convert the REMOTE_ADDR IP address to binary, if needed
-                if (! isset($ip, $sprintf)) {
-                    if ($separator === ':') {
-                        // Make sure we're having the "full" IPv6 format
-                        $ip = explode(':', str_replace('::', str_repeat(':', 9 - substr_count($this->ipAddress, ':')), $this->ipAddress));
-
-                        for ($j = 0; $j < 8; $j++) {
-                            $ip[$j] = intval($ip[$j], 16);
-                        }
-
-                        $sprintf = '%016b%016b%016b%016b%016b%016b%016b%016b';
-                    } else {
-                        $ip      = explode('.', $this->ipAddress);
-                        $sprintf = '%08b%08b%08b%08b';
-                    }
-
-                    $ip = vsprintf($sprintf, $ip);
-                }
-
-                // Split the netmask length off the network address
-                sscanf($proxyIP, '%[^/]/%d', $netaddr, $masklen);
-
-                // Again, an IPv6 address is most likely in a compressed form
-                if ($separator === ':') {
-                    $netaddr = explode(':', str_replace('::', str_repeat(':', 9 - substr_count($netaddr, ':')), $netaddr));
-
-                    for ($i = 0; $i < 8; $i++) {
-                        $netaddr[$i] = intval($netaddr[$i], 16);
-                    }
-                } else {
-                    $netaddr = explode('.', $netaddr);
-                }
-
-                // Convert to binary and finally compare
-                if (strncmp($ip, vsprintf($sprintf, $netaddr), $masklen) === 0) {
+        // @TODO Extract all this IP address logic to another class.
+        foreach ($proxyIPs as $proxyIP => $header) {
+            // Check if we have an IP address or a subnet
+            if (strpos($proxyIP, '/') === false) {
+                // An IP address (and not a subnet) is specified.
+                // We can compare right away.
+                if ($proxyIP === $this->ipAddress) {
                     $spoof = $this->getClientIP($header);
 
                     if ($spoof !== null) {
                         $this->ipAddress = $spoof;
                         break;
                     }
+                }
+
+                continue;
+            }
+
+            // We have a subnet ... now the heavy lifting begins
+            if (! isset($separator)) {
+                $separator = $ipValidator($this->ipAddress, 'ipv6') ? ':' : '.';
+            }
+
+            // If the proxy entry doesn't match the IP protocol - skip it
+            if (strpos($proxyIP, $separator) === false) {
+                continue;
+            }
+
+            // Convert the REMOTE_ADDR IP address to binary, if needed
+            if (! isset($ip, $sprintf)) {
+                if ($separator === ':') {
+                    // Make sure we're having the "full" IPv6 format
+                    $ip = explode(':', str_replace('::', str_repeat(':', 9 - substr_count($this->ipAddress, ':')), $this->ipAddress));
+
+                    for ($j = 0; $j < 8; $j++) {
+                        $ip[$j] = intval($ip[$j], 16);
+                    }
+
+                    $sprintf = '%016b%016b%016b%016b%016b%016b%016b%016b';
+                } else {
+                    $ip      = explode('.', $this->ipAddress);
+                    $sprintf = '%08b%08b%08b%08b';
+                }
+
+                $ip = vsprintf($sprintf, $ip);
+            }
+
+            // Split the netmask length off the network address
+            sscanf($proxyIP, '%[^/]/%d', $netaddr, $masklen);
+
+            // Again, an IPv6 address is most likely in a compressed form
+            if ($separator === ':') {
+                $netaddr = explode(':', str_replace('::', str_repeat(':', 9 - substr_count($netaddr, ':')), $netaddr));
+
+                for ($i = 0; $i < 8; $i++) {
+                    $netaddr[$i] = intval($netaddr[$i], 16);
+                }
+            } else {
+                $netaddr = explode('.', $netaddr);
+            }
+
+            // Convert to binary and finally compare
+            if (strncmp($ip, vsprintf($sprintf, $netaddr), $masklen) === 0) {
+                $spoof = $this->getClientIP($header);
+
+                if ($spoof !== null) {
+                    $this->ipAddress = $spoof;
+                    break;
                 }
             }
         }
@@ -209,22 +203,27 @@ trait RequestTrait
      * @param array|int|null    $flags
      *
      * @return mixed
+     *
+     * @deprecated 4.4.4 This method does not work from the beginning. Use `env()`.
      */
     public function getEnv($index = null, $filter = null, $flags = null)
     {
+        // @phpstan-ignore-next-line
         return $this->fetchGlobal('env', $index, $filter, $flags);
     }
 
     /**
      * Allows manually setting the value of PHP global, like $_GET, $_POST, etc.
      *
-     * @param mixed $value
+     * @param         string                                   $name  Supergrlobal name (lowercase)
+     * @phpstan-param 'get'|'post'|'request'|'cookie'|'server' $name
+     * @param         mixed                                    $value
      *
      * @return $this
      */
-    public function setGlobal(string $method, $value)
+    public function setGlobal(string $name, $value)
     {
-        $this->globals[$method] = $value;
+        $this->globals[$name] = $value;
 
         return $this;
     }
@@ -239,19 +238,18 @@ trait RequestTrait
      *
      * http://php.net/manual/en/filter.filters.sanitize.php
      *
-     * @param string            $method Input filter constant
-     * @param array|string|null $index
-     * @param int|null          $filter Filter constant
-     * @param array|int|null    $flags  Options
+     * @param         string                                   $name   Supergrlobal name (lowercase)
+     * @phpstan-param 'get'|'post'|'request'|'cookie'|'server' $name
+     * @param         array|string|null                        $index
+     * @param         int|null                                 $filter Filter constant
+     * @param         array|int|null                           $flags  Options
      *
      * @return array|bool|float|int|object|string|null
      */
-    public function fetchGlobal(string $method, $index = null, ?int $filter = null, $flags = null)
+    public function fetchGlobal(string $name, $index = null, ?int $filter = null, $flags = null)
     {
-        $method = strtolower($method);
-
-        if (! isset($this->globals[$method])) {
-            $this->populateGlobals($method);
+        if (! isset($this->globals[$name])) {
+            $this->populateGlobals($name);
         }
 
         // Null filters cause null values to return.
@@ -262,9 +260,9 @@ trait RequestTrait
         if ($index === null) {
             $values = [];
 
-            foreach ($this->globals[$method] as $key => $value) {
+            foreach ($this->globals[$name] as $key => $value) {
                 $values[$key] = is_array($value)
-                    ? $this->fetchGlobal($method, $key, $filter, $flags)
+                    ? $this->fetchGlobal($name, $key, $filter, $flags)
                     : filter_var($value, $filter, $flags);
             }
 
@@ -276,7 +274,7 @@ trait RequestTrait
             $output = [];
 
             foreach ($index as $key) {
-                $output[$key] = $this->fetchGlobal($method, $key, $filter, $flags);
+                $output[$key] = $this->fetchGlobal($name, $key, $filter, $flags);
             }
 
             return $output;
@@ -284,7 +282,7 @@ trait RequestTrait
 
         // Does the index contain array notation?
         if (($count = preg_match_all('/(?:^[^\[]+)|\[[^]]*\]/', $index, $matches)) > 1) {
-            $value = $this->globals[$method];
+            $value = $this->globals[$name];
 
             for ($i = 0; $i < $count; $i++) {
                 $key = trim($matches[0][$i], '[]');
@@ -302,7 +300,7 @@ trait RequestTrait
         }
 
         if (! isset($value)) {
-            $value = $this->globals[$method][$index] ?? null;
+            $value = $this->globals[$name][$index] ?? null;
         }
 
         if (is_array($value)
@@ -331,18 +329,23 @@ trait RequestTrait
     }
 
     /**
-     * Saves a copy of the current state of one of several PHP globals
+     * Saves a copy of the current state of one of several PHP globals,
      * so we can retrieve them later.
+     *
+     * @param         string                                   $name Superglobal name (lowercase)
+     * @phpstan-param 'get'|'post'|'request'|'cookie'|'server' $name
+     *
+     * @return void
      */
-    protected function populateGlobals(string $method)
+    protected function populateGlobals(string $name)
     {
-        if (! isset($this->globals[$method])) {
-            $this->globals[$method] = [];
+        if (! isset($this->globals[$name])) {
+            $this->globals[$name] = [];
         }
 
         // Don't populate ENV as it might contain
         // sensitive data that we don't want to get logged.
-        switch ($method) {
+        switch ($name) {
             case 'get':
                 $this->globals['get'] = $_GET;
                 break;

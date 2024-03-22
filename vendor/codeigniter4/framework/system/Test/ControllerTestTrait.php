@@ -96,19 +96,20 @@ trait ControllerTestTrait
         helper('url');
 
         if (empty($this->appConfig)) {
-            $this->appConfig = config('App');
+            $this->appConfig = config(App::class);
         }
 
         if (! $this->uri instanceof URI) {
-            $this->uri = Services::uri($this->appConfig->baseURL ?? 'http://example.com/', false);
+            $factory   = Services::siteurifactory($this->appConfig, Services::superglobals(), false);
+            $this->uri = $factory->createFromGlobals();
         }
 
         if (empty($this->request)) {
-            // Do some acrobatics so we can use the Request service with our own URI
+            // Do some acrobatics, so we can use the Request service with our own URI
             $tempUri = Services::uri();
             Services::injectMock('uri', $this->uri);
 
-            $this->withRequest(Services::request($this->appConfig, false));
+            $this->withRequest(Services::incomingrequest($this->appConfig, false));
 
             // Restore the URI service
             Services::injectMock('uri', $tempUri);
@@ -214,7 +215,7 @@ trait ControllerTestTrait
     /**
      * Set controller's config, with method chaining.
      *
-     * @param mixed $appConfig
+     * @param App $appConfig
      *
      * @return $this
      */
@@ -228,7 +229,7 @@ trait ControllerTestTrait
     /**
      * Set controller's request, with method chaining.
      *
-     * @param mixed $request
+     * @param IncomingRequest $request
      *
      * @return $this
      */
@@ -259,7 +260,7 @@ trait ControllerTestTrait
     /**
      * Set controller's logger, with method chaining.
      *
-     * @param mixed $logger
+     * @param LoggerInterface $logger
      *
      * @return $this
      */
@@ -277,7 +278,13 @@ trait ControllerTestTrait
      */
     public function withUri(string $uri)
     {
-        $this->uri = new URI($uri);
+        $factory   = Services::siteurifactory();
+        $this->uri = $factory->createFromString($uri);
+        Services::injectMock('uri', $this->uri);
+
+        // Update the Request instance, because Request has the SiteURI instance.
+        $this->request = Services::incomingrequest(null, false);
+        Services::injectMock('request', $this->request);
 
         return $this;
     }

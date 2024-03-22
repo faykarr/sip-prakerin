@@ -98,7 +98,7 @@ class Connection extends BaseConnection
     public $lastInsertedTableName;
 
     /**
-     * confirm DNS format.
+     * confirm DSN format.
      */
     private function isValidDSN(): bool
     {
@@ -315,12 +315,8 @@ class Connection extends BaseConnection
 
             $retval[$i]->max_length = $length;
 
-            $default = $query[$i]->DATA_DEFAULT;
-            if ($default === null && $query[$i]->NULLABLE === 'N') {
-                $default = '';
-            }
-            $retval[$i]->default  = $default;
             $retval[$i]->nullable = $query[$i]->NULLABLE === 'Y';
+            $retval[$i]->default  = $query[$i]->DATA_DEFAULT;
         }
 
         return $retval;
@@ -602,7 +598,7 @@ class Connection extends BaseConnection
             }
         }
 
-        if (! $primaryColumnName) {
+        if ($primaryColumnName === '') {
             return 0;
         }
 

@@ -78,6 +78,8 @@ class Commands
     /**
      * Discovers all commands in the framework and within user code,
      * and collects instances of them to work with.
+     *
+     * @return void
      */
     public function discoverCommands()
     {
@@ -144,7 +146,8 @@ class Commands
 
         $message = lang('CLI.commandNotFound', [$command]);
 
-        if ($alternatives = $this->getCommandAlternatives($command, $commands)) {
+        $alternatives = $this->getCommandAlternatives($command, $commands);
+        if ($alternatives !== []) {
             if (count($alternatives) === 1) {
                 $message .= "\n\n" . lang('CLI.altCommandSingular') . "\n    ";
             } else {

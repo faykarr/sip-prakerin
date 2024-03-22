@@ -15,6 +15,8 @@ use DateTime;
 
 /**
  * Format validation Rules.
+ *
+ * @see \CodeIgniter\Validation\FormatRulesTest
  */
 class FormatRules
 {
@@ -176,8 +178,6 @@ class FormatRules
      * timezone_identifiers_list function.
      *
      * @see http://php.net/manual/en/datetimezone.listidentifiers.php
-     *
-     * @param string $str
      */
     public function timezone(?string $str = null): bool
     {
@@ -189,8 +189,6 @@ class FormatRules
      *
      * Tests a string for characters outside of the Base64 alphabet
      * as defined by RFC 2045 http://www.faqs.org/rfcs/rfc2045
-     *
-     * @param string $str
      */
     public function valid_base64(?string $str = null): bool
     {
@@ -203,8 +201,6 @@ class FormatRules
 
     /**
      * Valid JSON
-     *
-     * @param string $str
      */
     public function valid_json(?string $str = null): bool
     {
@@ -215,8 +211,6 @@ class FormatRules
 
     /**
      * Checks for a correctly formatted email address
-     *
-     * @param string $str
      */
     public function valid_email(?string $str = null): bool
     {
@@ -233,8 +227,6 @@ class FormatRules
      *
      * Example:
      *     valid_emails[one@example.com,two@example.com]
-     *
-     * @param string $str
      */
     public function valid_emails(?string $str = null): bool
     {
@@ -260,7 +252,7 @@ class FormatRules
      */
     public function valid_ip(?string $ip = null, ?string $which = null): bool
     {
-        if (empty($ip)) {
+        if ($ip === null || $ip === '') {
             return false;
         }
 
@@ -289,7 +281,7 @@ class FormatRules
      */
     public function valid_url(?string $str = null): bool
     {
-        if (empty($str)) {
+        if ($str === null || $str === '') {
             return false;
         }
 
@@ -313,7 +305,7 @@ class FormatRules
      */
     public function valid_url_strict(?string $str = null, ?string $validSchemes = null): bool
     {
-        if (empty($str)) {
+        if ($str === null || $str === '' || $str === '0') {
             return false;
         }
 
@@ -330,6 +322,8 @@ class FormatRules
 
     /**
      * Checks for a valid date and matches a given date format
+     *
+     * @param non-empty-string|null $format
      */
     public function valid_date(?string $str = null, ?string $format = null): bool
     {
@@ -337,7 +331,7 @@ class FormatRules
             return false;
         }
 
-        if (empty($format)) {
+        if ($format === null || $format === '') {
             return strtotime($str) !== false;
         }
 

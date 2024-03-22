@@ -53,6 +53,40 @@ class NilaiTable extends Migration
         // Membuat table tb_nilai
         $this->forge->createTable('tb_nilai');
 
+        // Add trigger
+        $this->db->query('CREATE TRIGGER `set_predikat` BEFORE INSERT ON `tb_nilai`
+        FOR EACH ROW
+        BEGIN
+            IF NEW.rata_rata BETWEEN 85 AND 100 THEN
+                SET NEW.predikat = \'Sempurna\';
+            ELSEIF NEW.rata_rata BETWEEN 75 AND 84 THEN
+                SET NEW.predikat = \'Pujian\';
+            ELSEIF NEW.rata_rata BETWEEN 65 AND 74 THEN
+                SET NEW.predikat = \'Baik\';
+            ELSEIF NEW.rata_rata BETWEEN 55 AND 64 THEN
+                SET NEW.predikat = \'Cukup\';
+            ELSEIF NEW.rata_rata BETWEEN 0 AND 54 THEN
+                SET NEW.predikat = \'Kurang\';
+            END IF;
+        END');
+
+        // Add trigger
+        $this->db->query('CREATE TRIGGER `update_predikat` BEFORE UPDATE ON `tb_nilai`
+        FOR EACH ROW
+        BEGIN
+            IF NEW.rata_rata BETWEEN 85 AND 100 THEN
+                SET NEW.predikat = \'Sempurna\';
+            ELSEIF NEW.rata_rata BETWEEN 75 AND 84 THEN
+                SET NEW.predikat = \'Pujian\';
+            ELSEIF NEW.rata_rata BETWEEN 65 AND 74 THEN
+                SET NEW.predikat = \'Baik\';
+            ELSEIF NEW.rata_rata BETWEEN 55 AND 64 THEN
+                SET NEW.predikat = \'Cukup\';
+            ELSEIF NEW.rata_rata BETWEEN 0 AND 54 THEN
+                SET NEW.predikat = \'Kurang\';
+            END IF;
+        END');
+
     }
 
     public function down()

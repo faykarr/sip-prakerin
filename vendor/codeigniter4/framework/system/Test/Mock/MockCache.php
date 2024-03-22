@@ -22,7 +22,7 @@ class MockCache extends BaseHandler implements CacheInterface
     /**
      * Mock cache storage.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected $cache = [];
 
@@ -42,6 +42,8 @@ class MockCache extends BaseHandler implements CacheInterface
 
     /**
      * Takes care of any handler-specific setup that must be done.
+     *
+     * @return void
      */
     public function initialize()
     {
@@ -153,7 +155,7 @@ class MockCache extends BaseHandler implements CacheInterface
         $key  = static::validateKey($key, $this->prefix);
         $data = $this->cache[$key] ?: null;
 
-        if (empty($data)) {
+        if ($data === null) {
             $data = 0;
         } elseif (! is_int($data)) {
             return false;
@@ -173,7 +175,7 @@ class MockCache extends BaseHandler implements CacheInterface
 
         $data = $this->cache[$key] ?: null;
 
-        if (empty($data)) {
+        if ($data === null) {
             $data = 0;
         } elseif (! is_int($data)) {
             return false;
@@ -279,9 +281,9 @@ class MockCache extends BaseHandler implements CacheInterface
     {
         $item = $this->get($key);
 
-        // Let assertHas handle throwing the error for consistency
+        // Let assertHas() handle throwing the error for consistency
         // if the key is not found
-        if (empty($item)) {
+        if ($item === null) {
             $this->assertHas($key);
         }
 

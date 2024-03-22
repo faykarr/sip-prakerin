@@ -18,6 +18,8 @@ use InvalidArgumentException;
 
 /**
  * A lightweight HTTP client for sending synchronous HTTP requests via cURL.
+ *
+ * @see \CodeIgniter\HTTP\CURLRequestTest
  */
 class CURLRequest extends OutgoingRequest
 {
@@ -112,12 +114,12 @@ class CURLRequest extends OutgoingRequest
 
         parent::__construct('GET', $uri);
 
-        $this->responseOrig   = $response ?? new Response(config('App'));
+        $this->responseOrig   = $response ?? new Response(config(App::class));
         $this->baseURI        = $uri->useRawQueryString();
         $this->defaultOptions = $options;
 
         /** @var ConfigCURLRequest|null $configCURLRequest */
-        $configCURLRequest  = config('CURLRequest');
+        $configCURLRequest  = config(ConfigCURLRequest::class);
         $this->shareOptions = $configCURLRequest->shareOptions ?? true;
 
         $this->config = $this->defaultConfig;
@@ -151,6 +153,8 @@ class CURLRequest extends OutgoingRequest
 
     /**
      * Reset all options to default.
+     *
+     * @return void
      */
     protected function resetOptions()
     {
@@ -263,7 +267,7 @@ class CURLRequest extends OutgoingRequest
     /**
      * Set JSON data to be sent.
      *
-     * @param mixed $data
+     * @param array|bool|float|int|object|string|null $data
      *
      * @return $this
      */
@@ -277,6 +281,8 @@ class CURLRequest extends OutgoingRequest
     /**
      * Sets the correct settings based on the options array
      * passed in.
+     *
+     * @return void
      */
     protected function parseOptions(array $options)
     {
@@ -383,7 +389,11 @@ class CURLRequest extends OutgoingRequest
         // Set the string we want to break our response from
         $breakString = "\r\n\r\n";
 
-        if (strpos($output, 'HTTP/1.1 100 Continue') === 0) {
+        while (strpos($output, 'HTTP/1.1 100 Continue') === 0) {
+            $output = substr($output, strpos($output, $breakString) + 4);
+        }
+
+        if (strpos($output, 'HTTP/1.1 200 Connection established') === 0) {
             $output = substr($output, strpos($output, $breakString) + 4);
         }
 
@@ -475,6 +485,8 @@ class CURLRequest extends OutgoingRequest
     /**
      * Parses the header retrieved from the cURL response into
      * our Response object.
+     *
+     * @return void
      */
     protected function setResponseHeaders(array $headers = [])
     {
@@ -537,17 +549,25 @@ class CURLRequest extends OutgoingRequest
         // SSL Verification
         if (isset($config['verify'])) {
             if (is_string($config['verify'])) {
-                $file = realpath($config['ssl_key']) ?: $config['ssl_key'];
+                $file = realpath($config['verify']) ?: $config['verify'];
 
                 if (! is_file($file)) {
-                    throw HTTPException::forInvalidSSLKey($config['ssl_key']);
+                    throw HTTPException::forInvalidSSLKey($config['verify']);
                 }
 
                 $curlOptions[CURLOPT_CAINFO]         = $file;
-                $curlOptions[CURLOPT_SSL_VERIFYPEER] = 1;
+                $curlOptions[CURLOPT_SSL_VERIFYPEER] = true;
+                $curlOptions[CURLOPT_SSL_VERIFYHOST] = 2;
             } elseif (is_bool($config['verify'])) {
                 $curlOptions[CURLOPT_SSL_VERIFYPEER] = $config['verify'];
+                $curlOptions[CURLOPT_SSL_VERIFYHOST] = $config['verify'] ? 2 : 0;
             }
+        }
+
+        // Proxy
+        if (isset($config['proxy'])) {
+            $curlOptions[CURLOPT_HTTPPROXYTUNNEL] = true;
+            $curlOptions[CURLOPT_PROXY]           = $config['proxy'];
         }
 
         // Debug
@@ -560,7 +580,7 @@ class CURLRequest extends OutgoingRequest
         if (! empty($config['decode_content'])) {
             $accept = $this->getHeaderLine('Accept-Encoding');
 
-            if ($accept) {
+            if ($accept !== '') {
                 $curlOptions[CURLOPT_ENCODING] = $accept;
             } else {
                 $curlOptions[CURLOPT_ENCODING]   = '';

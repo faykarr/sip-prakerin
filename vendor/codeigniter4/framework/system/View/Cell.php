@@ -43,6 +43,8 @@ use ReflectionMethod;
  *         class Class {
  *             function method(array $params=null)
  *         }
+ *
+ * @see \CodeIgniter\View\CellTest
  */
 class Cell
 {
@@ -64,7 +66,10 @@ class Cell
     /**
      * Render a cell, returning its body as a string.
      *
-     * @param array|string|null $params
+     * @param string            $library   Cell class and method name.
+     * @param array|string|null $params    Parameters to pass to the method.
+     * @param int               $ttl       Number of seconds to cache the cell.
+     * @param string|null       $cacheName Cache item name.
      *
      * @throws ReflectionException
      */
@@ -76,12 +81,12 @@ class Cell
             ? get_class($instance)
             : null;
 
-        // Is the output cached?
-        $cacheName = ! empty($cacheName)
-            ? $cacheName
-            : str_replace(['\\', '/'], '', $class) . $method . md5(serialize($params));
+        $params = $this->prepareParams($params);
 
-        if (! empty($this->cache) && $output = $this->cache->get($cacheName)) {
+        // Is the output cached?
+        $cacheName ??= str_replace(['\\', '/'], '', $class) . $method . md5(serialize($params));
+
+        if ($output = $this->cache->get($cacheName)) {
             return $output;
         }
 
@@ -93,14 +98,12 @@ class Cell
             throw ViewException::forInvalidCellMethod($class, $method);
         }
 
-        $params = $this->prepareParams($params);
-
         $output = $instance instanceof BaseCell
             ? $this->renderCell($instance, $method, $params)
             : $this->renderSimpleClass($instance, $method, $params, $class);
 
         // Can we cache it?
-        if (! empty($this->cache) && $ttl !== 0) {
+        if ($ttl !== 0) {
             $this->cache->save($cacheName, $output, $ttl);
         }
 
@@ -114,11 +117,14 @@ class Cell
      *
      * @param array|string|null $params
      *
-     * @return array|null
+     * @return array
      */
     public function prepareParams($params)
     {
-        if (empty($params) || (! is_string($params) && ! is_array($params))) {
+        if (
+            ($params === null || $params === '' || $params === [])
+            || (! is_string($params) && ! is_array($params))
+        ) {
             return [];
         }
 
@@ -134,7 +140,7 @@ class Cell
             unset($separator);
 
             foreach ($params as $p) {
-                if (! empty($p)) {
+                if ($p !== '') {
                     [$key, $val] = explode('=', $p);
 
                     $newParams[trim($key)] = trim($val, ', ');
@@ -170,23 +176,23 @@ class Cell
 
         [$class, $method] = explode(':', $library);
 
-        if (empty($class)) {
+        if ($class === '') {
             throw ViewException::forNoCellClass();
         }
 
         // locate and return an instance of the cell
-        $class = Factories::cells($class);
+        $object = Factories::cells($class, ['getShared' => false]);
 
-        if (! is_object($class)) {
+        if (! is_object($object)) {
             throw ViewException::forInvalidCellClass($class);
         }
 
-        if (empty($method)) {
+        if ($method === '') {
             $method = 'index';
         }
 
         return [
-            $class,
+            $object,
             $method,
         ];
     }
@@ -230,7 +236,7 @@ class Cell
      * for a method, in the order they are defined. This allows
      * them to be passed directly into the method.
      */
-    private function getMethodParams(BaseCell $instance, string $method, array $params)
+    private function getMethodParams(BaseCell $instance, string $method, array $params): array
     {
         $mountParams = [];
 
@@ -268,7 +274,7 @@ class Cell
         $refParams  = $refMethod->getParameters();
 
         if ($paramCount === 0) {
-            if (! empty($params)) {
+            if ($params !== []) {
                 throw ViewException::forMissingCellParameters($class, $method);
             }
 

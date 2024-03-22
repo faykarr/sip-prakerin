@@ -21,12 +21,11 @@ use CodeIgniter\Debug\Timer;
 use CodeIgniter\Files\Exceptions\FileNotFoundException;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\Exceptions\HTTPException;
+use CodeIgniter\HTTP\Exceptions\RedirectException;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\RequestInterface;
-use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\HTTP\URI;
 use CodeIgniter\Model;
 use CodeIgniter\Session\Session;
 use CodeIgniter\Test\TestLogger;
@@ -65,8 +64,8 @@ if (! function_exists('cache')) {
      *    cache()->save('foo', 'bar');
      *    $foo = cache('bar');
      *
-     * @return CacheInterface|mixed
-     * @phpstan-return ($key is null ? CacheInterface : mixed)
+     * @return         array|bool|CacheInterface|float|int|object|string|null
+     * @phpstan-return ($key is null ? CacheInterface : array|bool|float|int|object|string|null)
      */
     function cache(?string $key = null)
     {
@@ -208,7 +207,7 @@ if (! function_exists('config')) {
      *
      * @param class-string<ConfigTemplate>|string $name
      *
-     * @return ConfigTemplate|null
+     * @return         ConfigTemplate|null
      * @phpstan-return ($name is class-string<ConfigTemplate> ? ConfigTemplate : object|null)
      */
     function config(string $name, bool $getShared = true)
@@ -289,20 +288,24 @@ if (! function_exists('csrf_hash')) {
 if (! function_exists('csrf_field')) {
     /**
      * Generates a hidden input field for use within manually generated forms.
+     *
+     * @param non-empty-string|null $id
      */
     function csrf_field(?string $id = null): string
     {
-        return '<input type="hidden"' . (! empty($id) ? ' id="' . esc($id, 'attr') . '"' : '') . ' name="' . csrf_token() . '" value="' . csrf_hash() . '"' . _solidus() . '>';
+        return '<input type="hidden"' . ($id !== null ? ' id="' . esc($id, 'attr') . '"' : '') . ' name="' . csrf_token() . '" value="' . csrf_hash() . '"' . _solidus() . '>';
     }
 }
 
 if (! function_exists('csrf_meta')) {
     /**
      * Generates a meta tag for use within javascript calls.
+     *
+     * @param non-empty-string|null $id
      */
     function csrf_meta(?string $id = null): string
     {
-        return '<meta' . (! empty($id) ? ' id="' . esc($id, 'attr') . '"' : '') . ' name="' . csrf_header() . '" content="' . csrf_hash() . '"' . _solidus() . '>';
+        return '<meta' . ($id !== null ? ' id="' . esc($id, 'attr') . '"' : '') . ' name="' . csrf_header() . '" content="' . csrf_hash() . '"' . _solidus() . '>';
     }
 }
 
@@ -411,11 +414,11 @@ if (! function_exists('esc')) {
      * If $data is an array, then it loops over it, escaping each
      * 'value' of the key/value pairs.
      *
-     * @param array|string $data
+     * @param         array|string                         $data
      * @phpstan-param 'html'|'js'|'css'|'url'|'attr'|'raw' $context
-     * @param string|null $encoding Current encoding for escaping.
-     *                              If not UTF-8, we convert strings from this encoding
-     *                              pre-escaping and back to this encoding post-escaping.
+     * @param         string|null                          $encoding Current encoding for escaping.
+     *                                                               If not UTF-8, we convert strings from this encoding
+     *                                                               pre-escaping and back to this encoding post-escaping.
      *
      * @return array|string
      *
@@ -470,63 +473,48 @@ if (! function_exists('force_https')) {
      *
      * @see https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
      *
-     * @param int               $duration How long should the SSL header be set for? (in seconds)
-     *                                    Defaults to 1 year.
-     * @param RequestInterface  $request
-     * @param ResponseInterface $response
+     * @param int $duration How long should the SSL header be set for? (in seconds)
+     *                      Defaults to 1 year.
      *
      * @throws HTTPException
+     * @throws RedirectException
      */
-    function force_https(int $duration = 31_536_000, ?RequestInterface $request = null, ?ResponseInterface $response = null)
-    {
-        if ($request === null) {
-            $request = Services::request(null, true);
-        }
+    function force_https(
+        int $duration = 31_536_000,
+        ?RequestInterface $request = null,
+        ?ResponseInterface $response = null
+    ): void {
+        $request ??= Services::request();
 
         if (! $request instanceof IncomingRequest) {
             return;
         }
 
-        if ($response === null) {
-            $response = Services::response(null, true);
-        }
+        $response ??= Services::response();
 
-        if ((ENVIRONMENT !== 'testing' && (is_cli() || $request->isSecure())) || (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'test')) {
+        if ((ENVIRONMENT !== 'testing' && (is_cli() || $request->isSecure()))
+            || $request->getServer('HTTPS') === 'test'
+        ) {
             return; // @codeCoverageIgnore
         }
 
         // If the session status is active, we should regenerate
         // the session ID for safety sake.
         if (ENVIRONMENT !== 'testing' && session_status() === PHP_SESSION_ACTIVE) {
-            Services::session(null, true)->regenerate(); // @codeCoverageIgnore
+            Services::session()->regenerate(); // @codeCoverageIgnore
         }
 
-        $baseURL = config(App::class)->baseURL;
-
-        if (strpos($baseURL, 'https://') === 0) {
-            $authority = substr($baseURL, strlen('https://'));
-        } elseif (strpos($baseURL, 'http://') === 0) {
-            $authority = substr($baseURL, strlen('http://'));
-        } else {
-            $authority = $baseURL;
-        }
-
-        $uri = URI::createURIString(
-            'https',
-            $authority,
-            $request->getUri()->getPath(), // Absolute URIs should use a "/" for an empty path
-            $request->getUri()->getQuery(),
-            $request->getUri()->getFragment()
-        );
+        $uri = $request->getUri()->withScheme('https');
 
         // Set an HSTS header
-        $response->setHeader('Strict-Transport-Security', 'max-age=' . $duration);
-        $response->redirect($uri);
-        $response->sendHeaders();
+        $response->setHeader('Strict-Transport-Security', 'max-age=' . $duration)
+            ->redirect((string) $uri)
+            ->setStatusCode(307)
+            ->setBody('')
+            ->getCookieStore()
+            ->clear();
 
-        if (ENVIRONMENT !== 'testing') {
-            exit(); // @codeCoverageIgnore
-        }
+        throw new RedirectException($response);
     }
 }
 
@@ -577,7 +565,7 @@ if (! function_exists('function_usable')) {
 if (! function_exists('helper')) {
     /**
      * Loads a helper file into memory. Supports namespaced helpers,
-     * both in and out of the 'helpers' directory of a namespaced directory.
+     * both in and out of the 'Helpers' directory of a namespaced directory.
      *
      * Will load ALL helpers of the matching name, in the following order:
      *   1. app/Helpers
@@ -588,7 +576,7 @@ if (! function_exists('helper')) {
      *
      * @throws FileNotFoundException
      */
-    function helper($filenames)
+    function helper($filenames): void
     {
         static $loaded = [];
 
@@ -744,11 +732,7 @@ if (! function_exists('is_windows')) {
             $mocked = $mock;
         }
 
-        if (isset($mocked)) {
-            return $mocked;
-        }
-
-        return DIRECTORY_SEPARATOR === '\\';
+        return $mocked ?? DIRECTORY_SEPARATOR === '\\';
     }
 }
 
@@ -757,7 +741,7 @@ if (! function_exists('lang')) {
      * A convenience method to translate a string or array of them and format
      * the result with the intl extension's MessageFormatter.
      *
-     * @return string
+     * @return list<string>|string
      */
     function lang(string $line, array $args = [], ?string $locale = null)
     {
@@ -821,7 +805,7 @@ if (! function_exists('model')) {
      *
      * @param class-string<ModelTemplate>|string $name
      *
-     * @return ModelTemplate|null
+     * @return         ModelTemplate|null
      * @phpstan-return ($name is class-string<ModelTemplate> ? ModelTemplate : object|null)
      */
     function model(string $name, bool $getShared = true, ?ConnectionInterface &$conn = null)
@@ -835,8 +819,8 @@ if (! function_exists('old')) {
      * Provides access to "old input" that was set in the session
      * during a redirect()->withInput().
      *
-     * @param string|null  $default
-     * @param false|string $escape
+     * @param         string|null                                $default
+     * @param         false|string                               $escape
      * @phpstan-param false|'attr'|'css'|'html'|'js'|'raw'|'url' $escape
      *
      * @return array|string|null
@@ -870,13 +854,13 @@ if (! function_exists('redirect')) {
      *
      * If more control is needed, you must use $response->redirect explicitly.
      *
-     * @param string|null $route Route name or Controller::method
+     * @param non-empty-string|null $route Route name or Controller::method
      */
     function redirect(?string $route = null): RedirectResponse
     {
         $response = Services::redirectresponse(null, true);
 
-        if (! empty($route)) {
+        if ($route !== null) {
             return $response->route($route);
         }
 
@@ -888,11 +872,21 @@ if (! function_exists('_solidus')) {
     /**
      * Generates the solidus character (`/`) depending on the HTML5 compatibility flag in `Config\DocTypes`
      *
+     * @param DocTypes|null $docTypesConfig New config. For testing purpose only.
+     *
      * @internal
      */
-    function _solidus(): string
+    function _solidus(?DocTypes $docTypesConfig = null): string
     {
-        if (config(DocTypes::class)->html5 ?? false) {
+        static $docTypes = null;
+
+        if ($docTypesConfig !== null) {
+            $docTypes = $docTypesConfig;
+        }
+
+        $docTypes ??= new DocTypes();
+
+        if ($docTypes->html5 ?? false) {
             return '';
         }
 
@@ -980,7 +974,7 @@ if (! function_exists('session')) {
      *    session()->set('foo', 'bar');
      *    $foo = session('bar');
      *
-     * @return array|bool|float|int|object|Session|string|null
+     * @return         array|bool|float|int|object|Session|string|null
      * @phpstan-return ($val is null ? Session : array|bool|float|int|object|string|null)
      */
     function session(?string $val = null)
@@ -1007,11 +1001,9 @@ if (! function_exists('service')) {
      *  - $timer = service('timer')
      *  - $timer = \CodeIgniter\Config\Services::timer();
      *
-     * @param mixed ...$params
-     *
-     * @return object
+     * @param array|bool|float|int|object|string|null ...$params
      */
-    function service(string $name, ...$params)
+    function service(string $name, ...$params): ?object
     {
         return Services::$name(...$params);
     }
@@ -1021,11 +1013,9 @@ if (! function_exists('single_service')) {
     /**
      * Always returns a new instance of the class.
      *
-     * @param mixed ...$params
-     *
-     * @return object|null
+     * @param array|bool|float|int|object|string|null ...$params
      */
-    function single_service(string $name, ...$params)
+    function single_service(string $name, ...$params): ?object
     {
         $service = Services::serviceExists($name);
 
@@ -1135,13 +1125,17 @@ if (! function_exists('timer')) {
      * returns its return value if any.
      * Otherwise will start or stop the timer intelligently.
      *
-     * @return Timer
+     * @param non-empty-string|null    $name
+     * @param (callable(): mixed)|null $callable
+     *
+     * @return         mixed|Timer
+     * @phpstan-return ($name is null ? Timer : ($callable is (callable(): mixed) ? mixed : Timer))
      */
     function timer(?string $name = null, ?callable $callable = null)
     {
         $timer = Services::timer();
 
-        if (empty($name)) {
+        if ($name === null) {
             return $timer;
         }
 

@@ -59,7 +59,7 @@ trait MessageTrait
     /**
      * Appends data to the body of the current message.
      *
-     * @param mixed $data
+     * @param string $data
      *
      * @return $this
      */
@@ -229,7 +229,7 @@ trait MessageTrait
         $version = number_format((float) $version, 1);
 
         if (! in_array($version, $this->validProtocolVersions, true)) {
-            throw HTTPException::forInvalidHTTPProtocol(implode(', ', $this->validProtocolVersions));
+            throw HTTPException::forInvalidHTTPProtocol($version);
         }
 
         $this->protocolVersion = $version;
