@@ -54,6 +54,9 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 
 ## Some Screenshot of the Program
 
+- Dashboard view.
+  <img src="./public/assets/static/images/bg/dashboard.jpeg"> <br>
+
 - Master Data SMK view.
   <img src="./public/assets/static/images/bg/master-smk.png"> <br>
 
