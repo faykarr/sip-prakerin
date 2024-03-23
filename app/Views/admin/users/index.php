@@ -64,7 +64,7 @@
                                     <?php if ($value['status'] == 'Aktif'): ?>
                                         <span class="badge bg-success">Aktif</span>
                                     <?php else: ?>
-                                        <span class="badge bg-danger">Belum Dinilai</span>
+                                        <span class="badge bg-danger">Tidak Aktif</span>
                                     <?php endif; ?>
                                 </td>
                                 <td>
