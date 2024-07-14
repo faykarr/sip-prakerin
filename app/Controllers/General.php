@@ -278,7 +278,7 @@ class General extends BaseController
     public function nilai()
     {
         $data = [
-            'title' => 'Input Kegiatan',
+            'title' => 'Input Nilai',
             // Get first_name from session
             'first_name' => session()->get('first_name'),
             // Get last_name from session

@@ -20,11 +20,45 @@ Sistem yang saya buat sedang dalam tahap pengembangan untuk memenuhi tugas mata 
 
 ## Cara Penggunaan
 
-Go to project destination & run `composer install` in terminal to start this project. <br>
-Note : `The migration is currently error!, do the importing SQL in database instead of migration.` <br>
-`The SQL file is in the SQL directory of this project.` <br>
+1. Clone repository ini
+```
+git clone https://github.com/faykarr/sip-prakerin.git
+```
 
-Cara menjalankan project ini adalah dengan menjalankan perintah `php spark serve` di terminal. <br>
+2. Masuk ke direktori proyek
+```
+cd sip-prakerin
+```
+
+3. Install dependencies
+```
+composer install
+```
+
+4. Copy file `.env` dan sesuaikan konfigurasi database
+```
+cp env .env
+```
+
+5. Buat database baru di MySQL
+```
+CREATE DATABASE db_sip-prakerin;
+```
+
+6. Migrasi database
+```
+php spark migrate
+```
+
+7. Run database seeder
+```
+php spark db:seed DefaultUserSeeder
+```
+
+8. Jalankan aplikasi
+```
+php spark serve
+```
 
 ## Setup
 
@@ -41,7 +75,7 @@ MySQL Server extra extension configuration `my.ini` or `my.cnf` is required, som
 `[mysqld]` <br>
 `1. event_scheduler=ON`
 
-PHP version 7.4 or higher is required, with the following extensions installed:
+PHP version 8.0 or higher is required, with the following extensions installed:
 
 - [intl](http://php.net/manual/en/intl.requirements.php)
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)

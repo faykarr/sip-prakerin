@@ -18,6 +18,7 @@ class UserTable extends Migration
             'id_asisten' => [
                 'type' => 'INT',
                 'constraint' => 11,
+                'null' => true,
             ],
             'username' => [
                 'type' => 'VARCHAR',
@@ -45,25 +46,47 @@ class UserTable extends Migration
         // Create table user
         $this->forge->createTable('tb_user');
 
+        // Call addTrigger() function
+        $this->addTrigger();
+    }
 
-        // Add default user
+    // Add trigger
+    public function addTrigger()
+    {
+        $this->db->query('CREATE TRIGGER tambah_user AFTER INSERT ON tb_asisten
+        FOR EACH ROW
+        BEGIN
+            DECLARE level_val VARCHAR(50);
+            DECLARE password_val VARCHAR(32);
+        
+            IF NEW.jabatan IN (\'Koordinator\', \'Administrator\') THEN
+                SET level_val = \'admin\';
+            ELSE
+                SET level_val = \'user\';
+            END IF;
+        
+            SET password_val = MD5(NEW.nim);
+        
+            INSERT INTO tb_user (username, password, level, id_asisten)
+            VALUES (NEW.nim, password_val, level_val, NEW.id_asisten);
+        END');
 
-        // $this->db->table('tb_user')->insert([
-        //     'id_user' => 1,
-        //     'username' => '21.230.0194',
-        //     'password' => md5('21.230.0194'),
-        //     'first_name' => 'Nasyath Faykar',
-        //     'last_name' => 'UPT Komputer',
-        //     'level' => 'admin',
-        // ]);
-
-        // $this->db->table('tb_user')->insert([
-        //     'username' => 'user',
-        //     'password' => md5('user'),
-        //     'first_name' => 'User',
-        //     'last_name' => 'UPT Komputer',
-        //     'level' => 'user',
-        // ]);
+        // Create trigger update when update jabatan
+        $this->db->query('CREATE TRIGGER update_user AFTER UPDATE ON tb_asisten
+        FOR EACH ROW
+        BEGIN
+            DECLARE level_val VARCHAR(50);
+        
+            IF NEW.jabatan IN (\'Koordinator\', \'Administrator\') THEN
+                SET level_val = \'admin\';
+            ELSE
+                SET level_val = \'user\';
+            END IF;
+        
+            UPDATE tb_user
+            SET level = level_val
+            WHERE id_asisten = NEW.id_asisten;
+        END');
     }
 
     public function down()

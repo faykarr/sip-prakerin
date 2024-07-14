@@ -70,61 +70,18 @@ class AsistenTable extends Migration
         // }
 
         // Insert 1 default Koordinator asisten
-        $data = [
-            'nama_asisten' => 'Nasyath Faykar',
-            'nim' => '21.230.0194',
-            'no_hp' => '08123456789',
-            'email' => 'koor@uptkomp.com',
-            'alamat' => 'Jl. Jalan',
-            'jabatan' => 'Koordinator',
-            'id_user' => 1,
-            'status' => 'Aktif',
-        ];
-        $this->db->table('tb_asisten')->insert($data);
-        // Call addTrigger() function
-        $this->addTrigger();
+        // $data = [
+        //     'nama_asisten' => 'Akun Admin',
+        //     'nim' => 'akun_admin',
+        //     'no_hp' => '08123456789',
+        //     'email' => 'koor@uptkomp.com',
+        //     'alamat' => 'Jl. Jalan',
+        //     'jabatan' => 'Koordinator',
+        //     'status' => 'Aktif',
+        // ];
+        // $this->db->table('tb_asisten')->insert($data);
 
 
-
-    }
-
-    // Add trigger
-    public function addTrigger()
-    {
-        $this->db->query('CREATE TRIGGER tambah_user AFTER INSERT ON tb_asisten
-        FOR EACH ROW
-        BEGIN
-            DECLARE level_val VARCHAR(50);
-            DECLARE password_val VARCHAR(32);
-        
-            IF NEW.jabatan IN (\'Koordinator\', \'Administrator\') THEN
-                SET level_val = \'admin\';
-            ELSE
-                SET level_val = \'user\';
-            END IF;
-        
-            SET password_val = MD5(NEW.nim);
-        
-            INSERT INTO tb_user (username, password, level, id_asisten)
-            VALUES (NEW.nim, password_val, level_val, NEW.id_asisten);
-        END');
-        
-        // Create trigger update when update jabatan
-        $this->db->query('CREATE TRIGGER update_user AFTER UPDATE ON tb_asisten
-        FOR EACH ROW
-        BEGIN
-            DECLARE level_val VARCHAR(50);
-        
-            IF NEW.jabatan IN (\'Koordinator\', \'Administrator\') THEN
-                SET level_val = \'admin\';
-            ELSE
-                SET level_val = \'user\';
-            END IF;
-        
-            UPDATE tb_user
-            SET level = level_val
-            WHERE id_asisten = NEW.id_asisten;
-        END');
     }
 
     public function down()

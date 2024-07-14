@@ -20,40 +20,62 @@ class NilaiTable extends Migration
                 'type' => 'INT',
                 'constraint' => 11,
             ],
-            'nilai_absensi' => [
+            'disiplin' => [
                 'type' => 'INT',
                 'constraint' => 11,
             ],
-            'nilai_sikap' => [
+            'kerja_motivasi' => [
                 'type' => 'INT',
                 'constraint' => 11,
             ],
-            'nilai_pengetahuan' => [
+            'kehadiran' => [
                 'type' => 'INT',
                 'constraint' => 11,
             ],
-            'nilai_keterampilan' => [
+            'inisiatif_kreatif' => [
                 'type' => 'INT',
                 'constraint' => 11,
             ],
-            'nilai_akhir' => [
+            'kejujuran_tanggung_jawab' => [
                 'type' => 'INT',
                 'constraint' => 11,
             ],
-            'nilai_rata_rata' => [
+            'kesopanan' => [
                 'type' => 'INT',
                 'constraint' => 11,
+            ],
+            'kerjasama' => [
+                'type' => 'INT',
+                'constraint' => 11,
+            ],
+            'jumlah_nilai' => [
+                'type' => 'INT',
+                'constraint' => 11,
+            ],
+            'rata_rata' => [
+                'type' => 'DECIMAL',
+                'constraint' => '10,1',
+            ],
+            'predikat' => [
+                'type' => 'ENUM',
+                'constraint' => ['Sempurna', 'Pujian', 'Baik', 'Cukup', 'Kurang'],
+                'default' => 'Kurang',
+            ],
+            'status_nilai' => [
+                'type' => 'ENUM',
+                'constraint' => ['Dinilai', 'Belum Dinilai'],
+                'default' => 'Belum Dinilai',
             ],
         ]);
 
         // Membuat primary key
         $this->forge->addKey('id_nilai', TRUE);
         // Membuat foreign key
-        // $this->forge->addForeignKey('id_prakerin', 'prakerin', 'id_prakerin', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_prakerin', 'tb_prakerin', 'id_prakerin', 'CASCADE', 'CASCADE');
         // Membuat table tb_nilai
         $this->forge->createTable('tb_nilai');
 
-        // Add trigger
+        // Add trigger for set predikat before insert
         $this->db->query('CREATE TRIGGER `set_predikat` BEFORE INSERT ON `tb_nilai`
         FOR EACH ROW
         BEGIN
@@ -70,7 +92,7 @@ class NilaiTable extends Migration
             END IF;
         END');
 
-        // Add trigger
+        // Add trigger for update predikat before update
         $this->db->query('CREATE TRIGGER `update_predikat` BEFORE UPDATE ON `tb_nilai`
         FOR EACH ROW
         BEGIN
@@ -84,6 +106,28 @@ class NilaiTable extends Migration
                 SET NEW.predikat = \'Cukup\';
             ELSEIF NEW.rata_rata BETWEEN 0 AND 54 THEN
                 SET NEW.predikat = \'Kurang\';
+            END IF;
+        END');
+
+        // Add trigger for update status nilai before insert
+        $this->db->query('CREATE TRIGGER `update_status_nilai` BEFORE INSERT ON `tb_nilai`
+        FOR EACH ROW
+        BEGIN
+            IF NEW.rata_rata BETWEEN 0 AND 100 THEN
+                SET NEW.status_nilai = \'Dinilai\';
+            ELSE
+                SET NEW.status_nilai = \'Belum Dinilai\';
+            END IF;
+        END');
+
+        // Add trigger for update status nilai before update
+        $this->db->query('CREATE TRIGGER `update_status_nilai_update` BEFORE UPDATE ON `tb_nilai`
+        FOR EACH ROW
+        BEGIN
+            IF NEW.rata_rata BETWEEN 0 AND 100 THEN
+                SET NEW.status_nilai = \'Dinilai\';
+            ELSE
+                SET NEW.status_nilai = \'Belum Dinilai\';
             END IF;
         END');
 

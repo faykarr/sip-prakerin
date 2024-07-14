@@ -189,21 +189,21 @@
     </script>
 
     <?php
-        // Make function to set huruf nilai
-        function set_huruf_nilai($nilai)
-        {
-            if ($nilai >= 85) {
-                return 'A';
-            } elseif ($nilai >= 75) {
-                return 'B';
-            } elseif ($nilai >= 65) {
-                return 'C';
-            } elseif ($nilai >= 55) {
-                return 'D';
-            } else {
-                return 'E';
-            }
+    // Make function to set huruf nilai
+    function set_huruf_nilai($nilai)
+    {
+        if ($nilai >= 85) {
+            return 'A';
+        } elseif ($nilai >= 75) {
+            return 'B';
+        } elseif ($nilai >= 65) {
+            return 'C';
+        } elseif ($nilai >= 55) {
+            return 'D';
+        } else {
+            return 'E';
         }
+    }
     ?>
     <div class="container">
         <div id="sertifikat_depan" class="page-break">
@@ -277,7 +277,15 @@
                         <td>Kompetensi Keahlian</td>
                         <td>:</td>
                         <td colspan="5">
-                            <?= $nilai['jurusan']; ?>
+                            <?php
+                            if ($nilai['jurusan'] == 'TKJ') {
+                                echo 'Teknik Komputer dan Jaringan (TKJ)';
+                            } elseif ($nilai['jurusan'] == 'RPL') {
+                                echo 'Rekayasa Perangkat Lunak (RPL)';
+                            } else {
+                                echo 'Multimedia';
+                            }
+                            ?>
                         </td>
                     </tr>
                 </table>

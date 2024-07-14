@@ -43,7 +43,7 @@
                     <button type="button" data-bs-toggle="modal" data-bs-target="#tambahAsistenModal"
                         class="btn btn-success col-lg-2 align-items-center">
                         <i class="fa-solid fa-user-plus"></i>
-                        <span class="ms-1">Tambah User</span>
+                        <span class="ms-1">Tambah Asisten</span>
                     </button>
                 </div>
             </div>

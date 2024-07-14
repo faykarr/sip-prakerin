@@ -212,8 +212,8 @@
                             <img src="./assets/compiled/jpg/1.jpg" alt="Face 1" />
                         </div>
                         <div class="ms-3 name">
-                            <h5 class="font-bold">Nasyath Faykar</h5>
-                            <h6 class="text-muted mb-0">@nasyathfaykar</h6>
+                            <h5 class="font-bold"><?= $first_name?></h5>
+                            <h6 class="text-muted mb-0">@<?= $first_name?></h6>
                         </div>
                     </div>
                 </div>

@@ -16,10 +16,10 @@ class Auth extends BaseController
     {
         // Get data from form
         $username = $this->request->getPost('username');
-
+    
         // Get MD5 password from form
         $password = md5($this->request->getPost('password'));
-
+    
         // Validation rules
         $valid = $this->validate([
             'username' => [
@@ -37,16 +37,16 @@ class Auth extends BaseController
                 ]
             ]
         ]);
-
+    
         // Validation instance
         $validation = \Config\Services::validation();
-
+    
         // Create instance of UserModel
         $userModel = new UserModel();
-
+    
         // Get data from database
         $user = $userModel->getAsistenByUsername($username);
-
+    
         // Check if validation fails
         if (!$valid) {
             $errorMessage = [
@@ -56,46 +56,46 @@ class Auth extends BaseController
             session()->setFlashdata($errorMessage);
             session()->setFlashdata('error', 'Login failed!');
             return redirect()->to('/login');
-        } else {
-            // Check if user exist
-            if ($user) {
-                // Check password
-                if ($password == $user['password']) {
-                    // Create session
-                    $data = [
-                        'id_user' => $user['id_user'],
-                        'username' => $user['username'],
-                        'first_name' => $user['nama_asisten'],
-                        'level' => $user['level'],
-                        'jabatan' => $user['jabatan'],
-                        'id_asisten' => $user['id_asisten'],
-                    ];
-
-                    // Set session
-                    session()->set($data);
-
-                    // Set flash data success login
-                    session()->setFlashdata('success', 'Login successfully!');
-
-                    // Redirect to dashboard
-                    return redirect()->to('/dashboard');
-                } else {
-                    // Set flashdata
-                    session()->setFlashdata('password', 'Password is wrong');
-                    session()->setFlashdata('error', 'Login failed!');
-
-                    // Redirect to login page
-                    return redirect()->to('/login')->withInput();
-                }
-            } else {
-                // Set flashdata
-                session()->setFlashdata('username', 'Username is not registered');
-                session()->setFlashdata('error', 'Login failed!');
-
-                // Redirect to login page
-                return redirect()->to('/login')->withInput();
-            }
         }
+    
+        // Check if user exist
+        if ($user) {
+            // Check password
+            if ($password == $user['password']) {
+                // Create session
+                $data = [
+                    'id_user' => $user['id_user'],
+                    'username' => $user['username'],
+                    'first_name' => $user['nama_asisten'] ?? $user['username'],
+                    'level' => $user['level'],
+                    'jabatan' => $user['jabatan'] ?? $user['username'],
+                    'id_asisten' => $user['id_asisten'],
+                ];
+    
+                // Set session
+                session()->set($data);
+    
+                // Set flash data success login
+                session()->setFlashdata('success', 'Login successfully!');
+    
+                // Redirect to dashboard
+                return redirect()->to('/dashboard');
+            }
+    
+            // Set flashdata
+            session()->setFlashdata('password', 'Password is wrong');
+            session()->setFlashdata('error', 'Login failed!');
+    
+            // Redirect to login page
+            return redirect()->to('/login')->withInput();
+        }
+    
+        // Set flashdata
+        session()->setFlashdata('username', 'Username is not registered');
+        session()->setFlashdata('error', 'Login failed!');
+    
+        // Redirect to login page
+        return redirect()->to('/login')->withInput();
     }
 
     // logout method
