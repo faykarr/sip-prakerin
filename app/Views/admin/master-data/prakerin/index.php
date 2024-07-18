@@ -46,11 +46,18 @@
             <div class="card-header">
                 <div class="row justify-content-between">
                     <h4 class="card-title col-lg-4">List Siswa Terdaftar</h4>
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#tambahSiswaModal"
-                        class="btn btn-success col-lg-2 align-items-center">
-                        <i class="fa-solid fa-file-circle-plus"></i>
-                        <span class="ms-1">Tambah Data</span>
-                    </button>
+                    <div class="d-flex flex-column flex-sm-row justify-content-end col-lg-4">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#tambahSiswaModal"
+                            class="btn btn-success align-items-center me-2 me-sm-2 mb-2 mb-sm-0">
+                            <i class="fa-solid fa-file-excel"></i>
+                            <span class="ms-1">Export Excel</span>
+                        </button>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#tambahSiswaModal"
+                            class="btn btn-success align-items-center">
+                            <i class="fa-solid fa-file-circle-plus"></i>
+                            <span class="ms-1">Tambah Data</span>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="card-body">

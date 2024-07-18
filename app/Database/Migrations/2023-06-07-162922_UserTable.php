@@ -34,6 +34,11 @@ class UserTable extends Migration
                 'constraint' => ['admin', 'user'],
                 'default' => 'user',
             ],
+            'photo' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'default' => 'default-profile.jpg',
+            ],
         ]);
 
         // Add primary key

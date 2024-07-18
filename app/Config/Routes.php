@@ -35,16 +35,16 @@ $routes->set404Override(function ($message = null) {
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-// $routes->get('/errors_403', 'General::error_403');
+
+// Authentication Routes 
 $routes->get('/', 'Auth::login');
 $routes->get('/login', 'Auth::login');
 $routes->post('/login/process', 'Auth::loginProcess');
 $routes->get('/logout', 'Auth::logout');
+
+// User Admin Routes
 $routes->get('/users/list', 'Admin::listUsers');
 $routes->get('/users/reset/(:segment)', 'Admin::resetPassword/$1');
-$routes->get('/profile', 'General::profile');
-$routes->post('/profile/changePassword', 'General::changePassword');
-$routes->get('/dashboard', 'Dashboard::index');
 $routes->get('/master-data/asisten', 'Admin::listAsisten');
 $routes->post('/master-data/asisten/addAsisten', 'Admin::addAsisten');
 $routes->post('/master-data/asisten/updateAsisten', 'Admin::updateAsisten');
@@ -58,12 +58,6 @@ $routes->post('/master-data/prakerin/addPrakerin', 'Admin::addPrakerin');
 $routes->get('/master-data/prakerin/deletePrakerin/(:segment)', 'Admin::deletePrakerin/$1');
 $routes->get('/master-data/prakerin/showPrakerin/(:segment)', 'Admin::showPrakerin/$1');
 $routes->post('/master-data/prakerin/updatePrakerin', 'Admin::updatePrakerin');
-$routes->get('/input-data/kegiatan', 'General::kegiatan');
-$routes->post('/input-data/kegiatan/addKegiatan', 'General::addKegiatan');
-$routes->get('/input-data/kegiatan/deleteKegiatan/(:segment)', 'General::deleteKegiatan/$1');
-$routes->post('/input-data/kegiatan/updateKegiatan', 'General::updateKegiatan');
-$routes->get('/input-data/nilai', 'General::nilai');
-$routes->post('/input-data/nilai/saveNilai', 'General::saveNilai');
 $routes->get('/cetak-data/kegiatan', 'Admin::cetakKegiatan');
 $routes->get('/cetak-data/kegiatan/print/', 'Admin::printKegiatan');
 $routes->get('/cetak-data/kegiatan/print/(:any)', 'Admin::printKegiatan/$1');
@@ -71,6 +65,20 @@ $routes->get('/cetak-data/nilai', 'Admin::cetakNilai');
 $routes->get('/cetak-data/nilai/print/(:any)', 'Admin::printNilai/$1');
 $routes->get('/cetak-data/sertifikat', 'Admin::cetakSertifikat');
 $routes->get('/cetak-data/sertifikat/print/(:any)', 'Admin::printSertifikat/$1');
+
+// User General Routes
+$routes->get('/profile', 'General::profile');
+$routes->post('/profile/changePassword', 'General::changePassword');
+$routes->post('/profile/changePhoto', 'General::changePhoto');
+$routes->get('/dashboard', 'Dashboard::index');
+$routes->get('/input-data/kegiatan', 'General::kegiatan');
+$routes->post('/input-data/kegiatan/addKegiatan', 'General::addKegiatan');
+$routes->get('/input-data/kegiatan/deleteKegiatan/(:segment)', 'General::deleteKegiatan/$1');
+$routes->post('/input-data/kegiatan/updateKegiatan', 'General::updateKegiatan');
+$routes->get('/input-data/nilai', 'General::nilai');
+$routes->post('/input-data/nilai/saveNilai', 'General::saveNilai');
+
+
 // Show the api data
 $routes->get('/prakerin/api', 'ApiController::index');
 
