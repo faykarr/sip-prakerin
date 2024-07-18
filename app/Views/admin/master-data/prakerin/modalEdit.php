@@ -133,8 +133,15 @@
                                     Kelas
                                 </label>
                                 <?php $kelas = (session()->getFlashdata('kelas')) ? 'is-invalid' : '' ?>
-                                <input type="text" id="kelas" class="form-control kelas <?= $kelas ?>"
-                                    placeholder="Kelas" name="kelas" value="<?= old('kelas') ?>">
+                                <select name="kelas" id="kelas" class="form-select kelas <?= $kelas ?>">
+                                    <option value="">-- Pilih Kelas --</option>
+                                    <option <?= (old('kelas') == 'X' ? 'selected' : '') ?> value="X">X
+                                    </option>
+                                    <option <?= (old('kelas') == 'XI' ? 'selected' : '') ?> value="XI">XI
+                                    </option>
+                                    <option <?= (old('kelas') == 'XII' ? 'selected' : '') ?> value="XII">XII
+                                    </option>
+                                </select>
                                 <?php if (session()->getFlashdata('kelas')): ?>
                                     <div class="invalid-feedback">
                                         <?= session()->getFlashdata('kelas') ?>

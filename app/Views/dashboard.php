@@ -212,8 +212,8 @@
                             <img src="<?= base_url("/assets/compiled/jpg/default-profile.jpg") ?>" alt="Profile Picture" />
                         </div>
                         <div class="ms-3 name">
-                            <h5 class="font-bold"><?= $first_name?></h5>
-                            <h6 class="text-muted mb-0">@<?= $first_name?></h6>
+                            <h5 class="font-bold"><?= $first_name; ?></h5>
+                            <h6 class="text-muted mb-0">@<?= strtolower(str_replace(' ', '', trim($first_name))); ?></h6>
                         </div>
                     </div>
                 </div>

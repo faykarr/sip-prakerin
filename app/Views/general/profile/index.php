@@ -9,7 +9,7 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Change Password</h3>
+                <h3>Account Profile</h3>
                 <p class="text-subtitle text-muted">
                     Hello, Welcome
                     <?= $first_name . " " . $last_name ?> !
@@ -19,7 +19,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item" aria-current="page">
-                            <a href="<?= base_url("/dashboard") ?>">Dashboard</a>
+                            <a href="<?= base_url("/profile") ?>">Profile</a>
                         </li>
                     </ol>
                 </nav>
@@ -47,15 +47,27 @@
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel18">Upload Photo Here</h4>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <i data-feather="x"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="file" class="image-crop-filepond" image-crop-aspect-ratio="1:1">
-                    </div>
+                    <form action="<?= base_url('/profile/changePhoto'); ?>" method="post" enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel18">Upload Photo Here</h4>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <i data-feather="x"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="file" name="photo" class="image-crop-filepond" image-crop-aspect-ratio="1:1">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                <i class="bx bx-x d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Cancel</span>
+                            </button>
+                            <button type="submit" class="btn btn-primary ms-1" data-bs-dismiss="modal">
+                                <i class="bx bx-check d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Submit</span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

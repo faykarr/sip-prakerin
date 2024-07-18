@@ -110,10 +110,10 @@ class General extends BaseController
     // Method untuk mengganti foto profil
     public function changePhoto()
     {
-        // Get id_asisten from session
-        $id_asisten = session()->get('id_asisten');
-        // Get asisten from model user
-        $asisten = $this->userModel->getAsistenById($id_asisten);
+        // Get id_user from session
+        $id_user = session()->get('id_user');
+        // Get user from model user
+        $asisten = $this->userModel->find($id_user);
 
         // Get file from input
         $file = $this->request->getFile('photo');

@@ -69,7 +69,7 @@
                                 </td>
                                 <td>
                                     <!-- Button to reset password same as username -->
-                                    <a href="<?= base_url("/users/reset/") ?><?= $value['id_asisten']; ?>" type="button"
+                                    <a href="<?= base_url("/users/reset/") ?><?= $value['id_user']; ?>" type="button"
                                         class="btn btn-danger btn-sm reset">
                                         Reset
                                         <i class="fa-solid fa-lock"></i>
