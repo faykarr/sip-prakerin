@@ -107,6 +107,68 @@ class General extends BaseController
         }
     }
 
+    // Method untuk mengganti foto profil
+    public function changePhoto()
+    {
+        // Get id_asisten from session
+        $id_asisten = session()->get('id_asisten');
+        // Get asisten from model user
+        $asisten = $this->userModel->getAsistenById($id_asisten);
+
+        // Get file from input
+        $file = $this->request->getFile('photo');
+
+        // Validation rules
+        $valid = $this->validate([
+            'photo' => [
+                'label' => 'Photo',
+                'rules' => 'uploaded[photo]|max_size[photo,2048]|is_image[photo]|mime_in[photo,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'uploaded' => '{field} is required',
+                    'max_size' => 'Max size of {field} is 2MB',
+                    'is_image' => '{field} must be an image',
+                    'mime_in' => '{field} must be jpg, jpeg, or png'
+                ]
+            ]
+        ]);
+
+        // Validation instance
+        $validation = \Config\Services::validation();
+
+        // Check if validation fails
+        if (!$valid) {
+            $errorMessage = [
+                'photo' => $validation->getError('photo'),
+                'error' => 'Change photo failed!'
+            ];
+            session()->setFlashdata($errorMessage);
+            return redirect()->to('/profile');
+        } else {
+            // Check if file exists
+            if ($file) {
+                // Check if file is image
+                if ($file->isValid() && !$file->hasMoved()) {
+                    // Get random name for file
+                    $newName = $file->getRandomName();
+                    // Move file to folder
+                    $file->move('assets/img', $newName);
+                    // Update photo in database
+                    $this->userModel->update($asisten['id_user'], ['photo' => $newName]);
+                    session()->setFlashdata('success', 'Change photo success!');
+                    return redirect()->to('/profile');
+                } else {
+                    session()->setFlashdata('error', 'Change photo failed!');
+                    session()->setFlashdata('photo', 'Photo is not valid');
+                    return redirect()->to('/profile');
+                }
+            } else {
+                session()->setFlashdata('error', 'Change photo failed!');
+                session()->setFlashdata('photo', 'Photo is required');
+                return redirect()->to('/profile');
+            }
+        }
+    }
+
     // Method untuk menampilkan halaman input kegiatan harian prakerin
     public function kegiatan()
     {

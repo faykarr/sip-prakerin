@@ -30,15 +30,36 @@
     <!-- Section -->
     <section class="row section justify-content-around">
         <div class="col-sm-3 d-flex flex-column mb-3">
-            <img src="<?= base_url("/assets/compiled/jpg/2.jpg") ?>" alt="Profile Picture" class="rounded-4 shadow" width="100%" />
+            <img src="<?= base_url("/assets/compiled/jpg/default-profile.jpg") ?>" alt="Profile Picture"
+                class="rounded-4 shadow" width="100%" />
             <!-- Change profile pciture button -->
             <div class="d-flex justify-content-center mt-3">
-                <button type="button" class="btn btn-outline-primary btn-sm text-muted" disabled>
+                <button type="button" class="btn btn-outline-primary btn-sm text-muted" data-bs-toggle="modal"
+                    data-bs-target="#cropImageModal">
                     <i class="fa-solid fa-camera"></i>
-                    Under development
+                    Change Photo
                 </button>
             </div>
         </div>
+
+        <!-- Modal for change picture -->
+        <div class="modal fade" id="cropImageModal" tabindex="-1" aria-labelledby="cropImageModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel18">Upload Photo Here</h4>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <i data-feather="x"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="file" class="image-crop-filepond" image-crop-aspect-ratio="1:1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal for change picture -->
 
         <div class="col-sm-7">
             <div class="card">

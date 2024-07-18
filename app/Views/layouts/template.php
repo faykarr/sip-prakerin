@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="<?= base_url("/assets/compiled/css/iconly.css") ?>" />
     <link rel="stylesheet" href="<?= base_url("/assets/extensions/flatpickr/flatpickr.min.css") ?>" />
     <link rel="stylesheet" href="<?= base_url("/assets/extensions/sweetalert2/sweetalert2.min.css") ?>">
+    <link rel="stylesheet" href="<?= base_url("/assets/extensions/filepond/filepond.css") ?>">
+    <link rel="stylesheet" href="<?= base_url("/assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.css") ?>">
 
     <script src="https://kit.fontawesome.com/712e5f8866.js" crossorigin="anonymous"></script>
     <script src="<?= base_url("/assets/extensions/jquery/jquery.min.js") ?>"></script>
@@ -56,7 +58,7 @@
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="<?= base_url("/assets/compiled/jpg/2.jpg") ?>"
+                                                <img src="<?= base_url("/assets/compiled/jpg/default-profile.jpg") ?>"
                                                     alt="Profile Picture" />
                                             </div>
                                         </div>
@@ -121,6 +123,7 @@
 
     <script src="<?= base_url("/assets/extensions/simple-datatables/umd/simple-datatables.js") ?>"></script>
     <script src="<?= base_url("/assets/extensions/moment/moment.min.js") ?>"></script>
+
     <?php
     $uri = service('uri');
     // Check if the segment 1 is not cetak-data
@@ -129,8 +132,15 @@
     } elseif ($uri->getSegment(1) == 'cetak-data') {
         echo '<script src="' . base_url('assets/static/js/pages/date-filter.js') . '"></script>';
     }
-    ?>
 
+    // Check if the segment 1 is profile 
+    if ($uri->getSegment(1) == 'profile') {
+        echo '<script src="' . base_url('assets/extensions/filepond-plugin-image-crop/filepond-plugin-image-crop.min.js') . '"></script>';
+        echo '<script src="' . base_url('assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js') . '"></script>';
+        echo '<script src="' . base_url('assets/extensions/filepond/filepond.js') . '"></script>';
+        echo '<script src="' . base_url('assets/static/js/pages/crop-image.js') . '"></script>';
+    }
+    ?>
 
     <script src="<?= base_url("/assets/extensions/flatpickr/flatpickr.min.js") ?>"></script>
     <script src="<?= base_url("/assets/static/js/pages/date-picker.js") ?>"></script>
