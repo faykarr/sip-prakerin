@@ -10,7 +10,7 @@ class UserModel extends Model
     protected $primaryKey = 'id_user';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['username', 'password', 'level', 'id_asisten'];
+    protected $allowedFields = ['username', 'password', 'level', 'id_asisten', 'photo'];
 
     // Join tb_asisten
     public function getAsisten()

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset=" UTF-8" />
@@ -58,7 +58,7 @@
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="<?= base_url("/assets/compiled/jpg/default-profile.jpg") ?>"
+                                                <img src="<?= base_url("/assets/compiled/jpg/" . $photo) ?>"
                                                     alt="Profile Picture" />
                                             </div>
                                         </div>
@@ -135,9 +135,10 @@
 
     // Check if the segment 1 is profile 
     if ($uri->getSegment(1) == 'profile') {
+        echo '<script src="' . base_url('assets/extensions/filepond/filepond.js') . '"></script>';
         echo '<script src="' . base_url('assets/extensions/filepond-plugin-image-crop/filepond-plugin-image-crop.min.js') . '"></script>';
         echo '<script src="' . base_url('assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js') . '"></script>';
-        echo '<script src="' . base_url('assets/extensions/filepond/filepond.js') . '"></script>';
+        echo '<script src="' . base_url('assets/extensions/filepond-plugin-image-transform/filepond-plugin-image-transform.min.js') . '"></script>';
         echo '<script src="' . base_url('assets/static/js/pages/crop-image.js') . '"></script>';
     }
     ?>

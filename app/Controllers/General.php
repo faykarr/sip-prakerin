@@ -24,6 +24,8 @@ class General extends BaseController
             'jabatan' => session()->get('jabatan'),
             // Get level from session
             'level' => session()->get('level'),
+            // Get photo from session
+            'photo' => session()->get('photo'),
             // Get asisten from model
             'asisten' => $asisten,
         ];
@@ -113,11 +115,11 @@ class General extends BaseController
         // Get id_user from session
         $id_user = session()->get('id_user');
         // Get user from model user
-        $asisten = $this->userModel->find($id_user);
-
+        $user = $this->userModel->find($id_user);
+    
         // Get file from input
         $file = $this->request->getFile('photo');
-
+    
         // Validation rules
         $valid = $this->validate([
             'photo' => [
@@ -131,14 +133,13 @@ class General extends BaseController
                 ]
             ]
         ]);
-
+    
         // Validation instance
         $validation = \Config\Services::validation();
-
+    
         // Check if validation fails
         if (!$valid) {
             $errorMessage = [
-                'photo' => $validation->getError('photo'),
                 'error' => 'Change photo failed!'
             ];
             session()->setFlashdata($errorMessage);
@@ -148,22 +149,28 @@ class General extends BaseController
             if ($file) {
                 // Check if file is image
                 if ($file->isValid() && !$file->hasMoved()) {
+                    // Delete old photo if it exists
+                    $oldPhoto = $user['photo'];
+                    if ($oldPhoto && file_exists('assets/compiled/jpg/' . $oldPhoto)) {
+                        unlink('assets/compiled/jpg/' . $oldPhoto);
+                    }
+    
                     // Get random name for file
                     $newName = $file->getRandomName();
                     // Move file to folder
-                    $file->move('assets/img', $newName);
+                    $file->move('assets/compiled/jpg', $newName);
                     // Update photo in database
-                    $this->userModel->update($asisten['id_user'], ['photo' => $newName]);
+                    $this->userModel->update($user['id_user'], ['photo' => $newName]);
                     session()->setFlashdata('success', 'Change photo success!');
+                    // Set session photo
+                    session()->set('photo', $newName);
                     return redirect()->to('/profile');
                 } else {
                     session()->setFlashdata('error', 'Change photo failed!');
-                    session()->setFlashdata('photo', 'Photo is not valid');
                     return redirect()->to('/profile');
                 }
             } else {
                 session()->setFlashdata('error', 'Change photo failed!');
-                session()->setFlashdata('photo', 'Photo is required');
                 return redirect()->to('/profile');
             }
         }
@@ -189,6 +196,8 @@ class General extends BaseController
             'jabatan' => session()->get('jabatan'),
             // Get level from session
             'level' => session()->get('level'),
+            // Get photo from session
+            'photo' => session()->get('photo'),
             // Get smk from model
             'asisten' => $this->asistenModel->where('status', 'Aktif')->findAll(),
             // Get kegiatan from model
@@ -349,6 +358,8 @@ class General extends BaseController
             'jabatan' => session()->get('jabatan'),
             // Get level from session
             'level' => session()->get('level'),
+            // Get photo from session
+            'photo' => session()->get('photo'),
             // Get smk from model
             'nilai' => $this->nilaiModel->getAllNilai(),
         ];
