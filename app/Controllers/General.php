@@ -116,10 +116,10 @@ class General extends BaseController
         $id_user = session()->get('id_user');
         // Get user from model user
         $user = $this->userModel->find($id_user);
-
+    
         // Get file from input
         $file = $this->request->getFile('photo');
-
+    
         // Validation rules
         $valid = $this->validate([
             'photo' => [
@@ -133,14 +133,13 @@ class General extends BaseController
                 ]
             ]
         ]);
-
+    
         // Validation instance
         $validation = \Config\Services::validation();
-
+    
         // Check if validation fails
         if (!$valid) {
             $errorMessage = [
-                'photo' => $validation->getError('photo'),
                 'error' => 'Change photo failed!'
             ];
             session()->setFlashdata($errorMessage);
@@ -150,22 +149,28 @@ class General extends BaseController
             if ($file) {
                 // Check if file is image
                 if ($file->isValid() && !$file->hasMoved()) {
+                    // Delete old photo if it exists
+                    $oldPhoto = $user['photo'];
+                    if ($oldPhoto && file_exists('assets/compiled/jpg/' . $oldPhoto)) {
+                        unlink('assets/compiled/jpg/' . $oldPhoto);
+                    }
+    
                     // Get random name for file
                     $newName = $file->getRandomName();
                     // Move file to folder
-                    $file->move('assets/img', $newName);
+                    $file->move('assets/compiled/jpg', $newName);
                     // Update photo in database
                     $this->userModel->update($user['id_user'], ['photo' => $newName]);
                     session()->setFlashdata('success', 'Change photo success!');
+                    // Set session photo
+                    session()->set('photo', $newName);
                     return redirect()->to('/profile');
                 } else {
                     session()->setFlashdata('error', 'Change photo failed!');
-                    session()->setFlashdata('photo', 'Photo is not valid');
                     return redirect()->to('/profile');
                 }
             } else {
                 session()->setFlashdata('error', 'Change photo failed!');
-                session()->setFlashdata('photo', 'Photo is required');
                 return redirect()->to('/profile');
             }
         }

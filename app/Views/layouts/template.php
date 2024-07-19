@@ -135,9 +135,10 @@
 
     // Check if the segment 1 is profile 
     if ($uri->getSegment(1) == 'profile') {
+        echo '<script src="' . base_url('assets/extensions/filepond/filepond.js') . '"></script>';
         echo '<script src="' . base_url('assets/extensions/filepond-plugin-image-crop/filepond-plugin-image-crop.min.js') . '"></script>';
         echo '<script src="' . base_url('assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js') . '"></script>';
-        echo '<script src="' . base_url('assets/extensions/filepond/filepond.js') . '"></script>';
+        echo '<script src="' . base_url('assets/extensions/filepond-plugin-image-transform/filepond-plugin-image-transform.min.js') . '"></script>';
         echo '<script src="' . base_url('assets/static/js/pages/crop-image.js') . '"></script>';
     }
     ?>
