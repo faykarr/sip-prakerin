@@ -69,6 +69,7 @@ class Auth extends BaseController
                     'first_name' => $user['nama_asisten'] ?? $user['username'],
                     'level' => $user['level'],
                     'jabatan' => $user['jabatan'] ?? $user['username'],
+                    'photo' => $user['photo'],
                     'id_asisten' => $user['id_asisten'],
                 ];
     

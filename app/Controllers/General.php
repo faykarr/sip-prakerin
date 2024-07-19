@@ -24,6 +24,8 @@ class General extends BaseController
             'jabatan' => session()->get('jabatan'),
             // Get level from session
             'level' => session()->get('level'),
+            // Get photo from session
+            'photo' => session()->get('photo'),
             // Get asisten from model
             'asisten' => $asisten,
         ];
@@ -113,7 +115,7 @@ class General extends BaseController
         // Get id_user from session
         $id_user = session()->get('id_user');
         // Get user from model user
-        $asisten = $this->userModel->find($id_user);
+        $user = $this->userModel->find($id_user);
 
         // Get file from input
         $file = $this->request->getFile('photo');
@@ -153,7 +155,7 @@ class General extends BaseController
                     // Move file to folder
                     $file->move('assets/img', $newName);
                     // Update photo in database
-                    $this->userModel->update($asisten['id_user'], ['photo' => $newName]);
+                    $this->userModel->update($user['id_user'], ['photo' => $newName]);
                     session()->setFlashdata('success', 'Change photo success!');
                     return redirect()->to('/profile');
                 } else {
@@ -189,6 +191,8 @@ class General extends BaseController
             'jabatan' => session()->get('jabatan'),
             // Get level from session
             'level' => session()->get('level'),
+            // Get photo from session
+            'photo' => session()->get('photo'),
             // Get smk from model
             'asisten' => $this->asistenModel->where('status', 'Aktif')->findAll(),
             // Get kegiatan from model
@@ -349,6 +353,8 @@ class General extends BaseController
             'jabatan' => session()->get('jabatan'),
             // Get level from session
             'level' => session()->get('level'),
+            // Get photo from session
+            'photo' => session()->get('photo'),
             // Get smk from model
             'nilai' => $this->nilaiModel->getAllNilai(),
         ];

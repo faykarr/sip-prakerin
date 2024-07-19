@@ -30,7 +30,7 @@
     <!-- Section -->
     <section class="row section justify-content-around">
         <div class="col-sm-3 d-flex flex-column mb-3">
-            <img src="<?= base_url("/assets/compiled/jpg/default-profile.jpg") ?>" alt="Profile Picture"
+            <img src="<?= base_url("/assets/compiled/jpg/". $photo) ?>" alt="Profile Picture"
                 class="rounded-4 shadow" width="100%" />
             <!-- Change profile pciture button -->
             <div class="d-flex justify-content-center mt-3">

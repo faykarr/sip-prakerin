@@ -209,7 +209,7 @@
                 <div class="card-body py-4 px-4">
                     <div class="d-flex align-items-center">
                         <div class="avatar avatar-xl">
-                            <img src="<?= base_url("/assets/compiled/jpg/default-profile.jpg") ?>" alt="Profile Picture" />
+                            <img src="<?= base_url("/assets/compiled/jpg/" . $photo) ?>" alt="Profile Picture" />
                         </div>
                         <div class="ms-3 name">
                             <h5 class="font-bold"><?= $first_name; ?></h5>
@@ -234,7 +234,7 @@
                     </div>
                     <div class="recent-message d-flex px-4 py-3">
                         <div class="avatar avatar-lg">
-                            <img src="./assets/compiled/jpg/5.jpg" />
+                            <img src="./assets/compiled/jpg/7.jpg" />
                         </div>
                         <div class="name ms-4">
                             <h5 class="mb-1">Mumtaza</h5>

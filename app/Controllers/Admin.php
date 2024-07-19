@@ -23,6 +23,8 @@ class Admin extends BaseController
             'level' => session()->get('level'),
             // Get jabatan from session
             'jabatan' => session()->get('jabatan'),
+            // Get photo from session
+            'photo' => session()->get('photo'),
             // Get data from model
             'users' => $this->userModel->getAsisten()
         ];
@@ -65,6 +67,8 @@ class Admin extends BaseController
             'level' => session()->get('level'),
             // Get jabatan from session
             'jabatan' => session()->get('jabatan'),
+            // Get photo from session
+            'photo' => session()->get('photo'),
             // Get smk from model
             'smk' => $this->smkModel->getCountSiswaPrakerin()
         ];
@@ -314,6 +318,8 @@ class Admin extends BaseController
             'jabatan' => session()->get('jabatan'),
             // Get level from session
             'level' => session()->get('level'),
+            // Get photo from session
+            'photo' => session()->get('photo'),
             // Get SMK data from database
             'sekolah' => $this->smkModel->where('status_aktif', 'Aktif')->findAll(),
             // Get data from database
@@ -713,6 +719,8 @@ class Admin extends BaseController
             'jabatan' => session()->get('jabatan'),
             // Get level from session
             'level' => session()->get('level'),
+            // Get photo from session
+            'photo' => session()->get('photo'),
             // Get all data from table asisten order by jabatan ASC
             'asisten' => $this->asistenModel->orderBy('jabatan', 'ASC')->findAll()
         ];
@@ -903,6 +911,8 @@ class Admin extends BaseController
             'jabatan' => session()->get('jabatan'),
             // Get level from session
             'level' => session()->get('level'),
+            // Get photo from session
+            'photo' => session()->get('photo'),
             // Get kegiatan from model
             'kegiatan' => $this->kegiatanModel->getKegiatan(),
         ];
@@ -980,6 +990,8 @@ class Admin extends BaseController
             'jabatan' => session()->get('jabatan'),
             // Get level from session
             'level' => session()->get('level'),
+            // Get photo from session
+            'photo' => session()->get('photo'),
             // Get nilai from model
             'nilai' => $this->nilaiModel->getAllNilai(),
         ];
@@ -1033,6 +1045,8 @@ class Admin extends BaseController
             'jabatan' => session()->get('jabatan'),
             // Get level from session
             'level' => session()->get('level'),
+            // Get photo from session
+            'photo' => session()->get('photo'),
             // Get nilai from model
             'nilai' => $this->nilaiModel->getAllNilai(),
         ];
